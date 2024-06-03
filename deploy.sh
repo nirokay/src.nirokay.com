@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source env-init.sh
+source env.sh
 
 cd "$OUTPUT_LN" || exit 1
 git add .
