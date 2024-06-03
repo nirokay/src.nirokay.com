@@ -1,0 +1,8 @@
+# Binaries:
+*
+!*.*
+*.exe
+*.out
+
+# SymLink to repo:
+nirokay.com
