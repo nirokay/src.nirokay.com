@@ -23,7 +23,7 @@ if htmlPages.len() != 0:
     for i, page in htmlPages:
         stdout.write("\rGenerating '" & page.file & "' (" & i / htmlPages & ")                   ")
         stdout.flushFile()
-        page.writeFile()
+        page.generatePage()
     stdout.write("\rGenerated " & $htmlPages.len() & " html files                              \n")
     stdout.flushFile()
 

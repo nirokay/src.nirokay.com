@@ -27,18 +27,35 @@ proc newHtmlPage*(title, description, path: string, cssPath: string = ""): HtmlD
         ],
         title(title),
         og("title", title),
-        og("description", description)
-    )
-
-    # Css:
-    var css: string = (
-        if cssPath != "": cssPath
-        else: "/styles.css"
-    )
-    if css == "": css = "/styles.css"
-    result.addToHead(
+        og("description", description),
         "link"[
             "rel" => "stylesheet",
-            "href" => css
+            "href" => "/styles.css",
+            "title" => "Absolute path to global css"
+        ],
+        "link"[
+            "rel" => "stylesheet",
+            "href" => "styles.css",
+            "title" => "Relative path to global css" # Used for local debugging/test builds
         ]
     )
+
+    if cssPath != "":
+        result.addToHead(
+            "link"[
+                "rel" => "stylesheet",
+                "href" => cssPath # Local stylesheet (will not work when testing out locally :/)
+            ]
+        )
+
+proc generatePage*(page: HtmlDocument) =
+    ## Alternative for `writeFile(html)`, adding some final touches before generating the document
+    var html: HtmlDocument = page
+    html.body = @[
+        `div`(
+            `div`(
+                `div`(html.body).setClass(".div-centering-inner")
+            ).setClass(".div-centering-middle")
+        ).setClass(".div-centering-outer")
+    ]
+    html.writeFile()
