@@ -1,5 +1,6 @@
 import websitegenerator
 export websitegenerator except newHtmlDocument, newDocument, writeFile
+import resources
 
 var
     htmlPages*: seq[HtmlDocument] ## Global variable for all html pages to be generated
@@ -28,6 +29,7 @@ proc newHtmlPage*(title, description, path: string, cssPath: string = ""): HtmlD
         title(title),
         og("title", title),
         og("description", description),
+        icon(pathImages & "/favicon.gif", imageGif, "32x32"),
         "link"[
             "rel" => "stylesheet",
             "href" => "/styles.css",

@@ -12,6 +12,9 @@ globalCssTemplate.add(
     "h1, h2"{
         "text-align" := "center"
     },
+    "h3, h4, h5, h6"{
+        "text-align" := "left"
+    },
     "header > p"{
         "text-align" := "center"
     },
@@ -20,7 +23,9 @@ globalCssTemplate.add(
     },
     "img"{
         "border-radius" := "10px"
-    }
+    },
+    classClickableImage,
+    classContainerLinks
 )
 
 

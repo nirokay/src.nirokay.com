@@ -1,7 +1,7 @@
 import ../generator
 
 const
-    # Centering divs (around every page):
+    # Centering divs (around every page): -------------------------------------
     classDivCenteringOuter*: CssElement = ".div-centering-outer"{
         "position" := "absolute",
         "display" := "table",
@@ -18,4 +18,16 @@ const
         "width" := "100%",
         "margin-left" := "auto",
         "margin-right" := "auto"
+    }
+
+    # Links page: -------------------------------------------------------------
+    classClickableImage*: CssElement = ".image-clickable-link"{
+        "display" := "inline-block",
+        "margin" := "5px 5px",
+        "padding" := "5px",
+        "width" := "5rem",
+        "max-width" := "25%"
+    }
+    classContainerLinks*: CssElement = ".container-images-links"{
+        "text-align" := "center"
     }

@@ -5,7 +5,7 @@ import websitegenerator
 
 # Import pages and css:
 import pages/[
-    index
+    index, links, projects
 ]
 import css/[
     styles

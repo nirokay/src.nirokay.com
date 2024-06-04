@@ -2,7 +2,9 @@
 
 source env.sh
 
-cd "$OUTPUT_LN" || exit 1
+cp -r src/javascript/ "$OUTPUT_LN"/javascript || exit 1
+
+cd "$OUTPUT_LN" || exit 2
 git add .
 git commit -m "Automated deployment @ $(date)"
 git push

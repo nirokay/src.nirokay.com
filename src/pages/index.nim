@@ -8,8 +8,11 @@ var html: HtmlDocument = newHtmlPage(
 
 html.add(
     header(
-        h1("Welcome to nirokay.com"),
-        p("This is still a placeholder, something cool will pop up here soon, trust me!")
+        h1("nirokay.com"),
+        p("Welcome to my little homepage!")
+    ),
+    article(
+        
     )
 )
 
