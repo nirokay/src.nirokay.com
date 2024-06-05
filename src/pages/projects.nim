@@ -18,7 +18,9 @@ html.add(
 proc linkTo(name, url: string): HtmlElement = a(url, "&lt;" & name & " /&gt;")
 var docs: seq[HtmlElement]
 for topic, elements in projectShowcase:
-    var newElements: seq[HtmlElement]
+    var newElements: seq[HtmlElement] = @[
+        h2(topic)
+    ]
     for element in elements:
         var e: seq[HtmlElement] = @[
             h3(element.name),

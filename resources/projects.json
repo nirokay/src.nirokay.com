@@ -51,7 +51,7 @@
         },
         {
             "name": "FloppyBird",
-            "desc": "",
+            "desc": "is a basic FlappyBird clone written in Lua using the Love2D game engine.",
             "repo": "https://github.com/nirokay/FloppyBird",
             "lang": "lua"
         }

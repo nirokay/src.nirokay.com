@@ -1,4 +1,5 @@
 import ../generator
+import colours
 
 const
     # Centering divs (around every page): -------------------------------------
@@ -32,8 +33,11 @@ const
         "display" := "inline-flex",
         "margin" := "5px 5px",
         "padding" := "5px",
-        #"width" := "",
-        "max-width" := "45%"
+        "width" := "45%",
+        "max-width" := "400px",
+        "background" := colourContentBox,
+        "border-radius" := "10px",
+        "padding" := "10px"
     }
     classFlexContainer*: CssElement = ".container-flex"{
         "text-align" := "center",
