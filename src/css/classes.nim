@@ -28,9 +28,16 @@ const
         "width" := "5rem",
         "max-width" := "150px"
     }
-    classContainerClickableImages*: CssElement = ".container-images-links"{
+    classCodeShowcaseElement*: CssElement = ".code-showcase-element"{
+        "display" := "inline-flex",
+        "margin" := "5px 5px",
+        "padding" := "5px",
+        #"width" := "",
+        "max-width" := "45%"
+    }
+    classFlexContainer*: CssElement = ".container-flex"{
         "text-align" := "center",
-        "max-height" := "150px",
+        #"max-height" := "150px",
         "display" := "flex",
         "align-items" := "baseline",
         "justify-content" := "space-evenly",

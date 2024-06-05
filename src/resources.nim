@@ -1,7 +1,8 @@
-import std/[json]
+import std/[json, tables, options]
 
 type ResourceFile* = enum
-    resourceLinks = "resources/links.json"
+    resourceLinks = "resources/links.json",
+    resourceProjects = "resources/projects.json"
 
 proc parseResource[T](resource: ResourceFile, convertTo: typedesc[T]): T =
     let file: string = $resource
@@ -32,32 +33,13 @@ const
     pathImagesLanguage*: string = pathImages & "language/"
     pathImagesLinks*: string = pathImages & "links/"
 
-    # Images: -----------------------------------------------------------------
-    imageLanguages* = (
-        lua: pathImagesLanguage & "lua.png",
-        nim: pathImagesLanguage & "nim-png"
-    )
 
 type
     ImageLink* = tuple[name, img, url: string]
 
+    ProjectElement* = tuple[name, desc, repo, lang: string, docs: Option[string]]
+
 const
     # JSONs: ------------------------------------------------------------------
     linksToSocials* = resourceLinks.parseResource(seq[ImageLink])
-
-#[
-    imageLinks* = (
-        discord: (
-            img: pathImagesLinks & "discord-mark-white.svg",
-            url: "https://discordapp.com/users/279697404259991552"
-        ),
-        cohost: (
-            img: pathImagesLinks & "cohost.svg",
-            url: "https://cohost.org/nirokay"
-        ),
-        github: (
-            img: pathImagesLinks & "github.svg",
-            url: "https://github.com/nirokay"
-        )
-    )
-]#
+    projectShowcase* = resourceProjects.parseResource(OrderedTable[string, seq[ProjectElement]])

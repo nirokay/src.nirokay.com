@@ -25,7 +25,7 @@ for link in linksToSocials:
 
 html.add(
     article(
-        `div`(links).setClass(classContainerClickableImages)
+        `div`(links).setClass(classFlexContainer)
     )
 )
 

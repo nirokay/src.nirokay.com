@@ -24,8 +24,9 @@ globalCssTemplate.add(
     "img"{
         "border-radius" := "10px"
     },
+    classFlexContainer,
     classClickableImage,
-    classContainerClickableImages
+    classCodeShowcaseElement
 )
 
 

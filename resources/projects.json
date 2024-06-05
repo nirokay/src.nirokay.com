@@ -1,0 +1,59 @@
+{
+    "Libraries": [
+        {
+            "name": "nimcatapi",
+            "desc": "allows you to request images from the <a href=\"https://thecatapi\">thecatapi</a> and <a href=\"https://thedogapi\">thedogapi</a>.",
+            "repo": "https://github.com/nirokay/nimcatapi",
+            "docs": "https://nirokay.github.io/nim-docs/nimcatapi/nimcatapi.html",
+            "lang": "nim"
+        },
+        {
+            "name": "nimegenerator",
+            "desc": "is a basic name generator.",
+            "repo": "https://github.com/nirokay/nimegenerator",
+            "docs": "https://nirokay.github.io/nim-docs/nimegenerator/nimegenerator.html",
+            "lang": "nim"
+        },
+        {
+            "name": "WebsiteGenerator",
+            "desc": "is a library that allows you to generate static HTML and CSS. The website you are seeing right now is, in fact, also generated using this library!",
+            "repo": "https://github.com/nirokay/websitegenerator",
+            "docs": "https://nirokay.github.io/nim-docs/websitegenerator/websitegenerator.html",
+            "lang": "nim"
+        }
+    ],
+    "Applications": [
+        {
+            "name": "gitman",
+            "desc": "is a cross-platform application to manage and update your cloned git repositories. Useful if you build software form source and want the repositories to be kept up-to-date on your system!",
+            "repo": "https://github.com/nirokay/gitman",
+            "lang": "nim"
+        },
+        {
+            "name": "brainimfuck",
+            "desc": "is a Brainfuck interpreter with built-in syntax checking and error highlighting.",
+            "repo": "https://github.com/nirokay/brainimfuck",
+            "lang": "nim"
+        },
+        {
+            "name": "CardGenerator",
+            "desc": "lets you generate playing cards, while only focussing on the art and not the tedious work of manually compiling the final card image.",
+            "repo": "https://github.com/nirokay/cardgenerator",
+            "docs": "https://nirokay.github.io/nim-docs/cardgenerator/cardgenerator.html",
+            "lang": "nim"
+        },
+        {
+            "name": "HzgShowAround",
+            "desc": "is <a href=\"https://nirokay.github.com/HzgShowAround\">a website</a> for the people in the <i>\"Herzogsägmühle\"</i> rehab, showing them around the place with the help of a map and keeping them up-to-date with the newsfeed.",
+            "repo": "https://github.com/nirokay/hzgshowaround",
+            "docs": "https://nirokay.github.io/nim-docs/hzgshowaround/hzgshowaround.html",
+            "lang": "nim"
+        },
+        {
+            "name": "FloppyBird",
+            "desc": "",
+            "repo": "https://github.com/nirokay/FloppyBird",
+            "lang": "lua"
+        }
+    ]
+}
