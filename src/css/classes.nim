@@ -22,12 +22,17 @@ const
 
     # Links page: -------------------------------------------------------------
     classClickableImage*: CssElement = ".image-clickable-link"{
-        "display" := "inline-block",
+        "display" := "inline-flex",
         "margin" := "5px 5px",
         "padding" := "5px",
         "width" := "5rem",
-        "max-width" := "25%"
+        "max-width" := "150px"
     }
-    classContainerLinks*: CssElement = ".container-images-links"{
-        "text-align" := "center"
+    classContainerClickableImages*: CssElement = ".container-images-links"{
+        "text-align" := "center",
+        "max-height" := "150px",
+        "display" := "flex",
+        "align-items" := "baseline",
+        "justify-content" := "space-evenly",
+        "flex-wrap" := "wrap"
     }

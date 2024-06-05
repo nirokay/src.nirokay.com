@@ -56,7 +56,7 @@ proc generatePage*(page: HtmlDocument) =
     html.body = @[
         `div`(
             `div`(
-                `div`(html.body).setClass(".div-centering-inner")
+                `div`(page.body).setClass(".div-centering-inner")
             ).setClass(".div-centering-middle")
         ).setClass(".div-centering-outer")
     ]

@@ -25,7 +25,7 @@ globalCssTemplate.add(
         "border-radius" := "10px"
     },
     classClickableImage,
-    classContainerLinks
+    classContainerClickableImages
 )
 
 
