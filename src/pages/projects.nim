@@ -15,12 +15,12 @@ html.add(
         p("This is a showcase of some of my projects and their code documentation.")
     )
 )
-proc linkTo(name, url: string): HtmlElement = a(url, "&lt;" & name & " /&gt;")
+proc linkTo(name, url: string): HtmlElement = li $a(url, "&lt;" & name & " /&gt;")
 var docs: seq[HtmlElement]
 for topic, elements in projectShowcase:
-    var newElements: seq[HtmlElement] = @[
-        h2(topic)
-    ]
+    if elements.len() == 0: continue
+    docs.add h2(topic)
+    var newElements: seq[HtmlElement]
     for element in elements:
         var e: seq[HtmlElement] = @[
             h3(element.name),
@@ -33,7 +33,7 @@ for topic, elements in projectShowcase:
         if items.len() != 0: e.add ul(items)
         newElements.add `div`(e).setClass(classCodeShowcaseElement)
 
-    docs.add `div`(newElements)
+    docs.add `div`(newElements).setClass(classCodeShowcaseContainer)
 
 html.add(
     article(docs)

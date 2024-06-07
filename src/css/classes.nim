@@ -30,11 +30,12 @@ const
         "max-width" := "150px"
     }
     classCodeShowcaseElement*: CssElement = ".code-showcase-element"{
-        "display" := "inline-flex",
+        "display" := "inline-block",
         "margin" := "5px 5px",
         "padding" := "5px",
-        "width" := "45%",
-        "max-width" := "400px",
+        "width" := "30%",
+        "max-width" := "500px",
+        "min-width" := "300px",
         "background" := colourContentBox,
         "border-radius" := "10px",
         "padding" := "10px"
@@ -46,4 +47,10 @@ const
         "align-items" := "baseline",
         "justify-content" := "space-evenly",
         "flex-wrap" := "wrap"
+    }
+    classCodeShowcaseContainer*: CssElement = ".container-code-showcase"{
+        "align-items" := "center",
+        "display" := "flex",
+        "flex-wrap" := "wrap",
+        "justify-content" := "center"
     }

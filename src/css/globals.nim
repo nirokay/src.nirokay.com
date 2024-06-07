@@ -24,8 +24,12 @@ globalCssTemplate.add(
     "img"{
         "border-radius" := "10px"
     },
+    "li"{
+        "list-style-type" := "👉"
+    },
     classFlexContainer,
     classClickableImage,
+    classCodeShowcaseContainer,
     classCodeShowcaseElement
 )
 
