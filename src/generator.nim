@@ -1,10 +1,13 @@
+import std/[tables]
 import websitegenerator
 export websitegenerator except newHtmlDocument, newDocument, writeFile
 import resources
 
 var
+    menuBarPages*: OrderedTable[string, string]
     htmlPages*: seq[HtmlDocument] ## Global variable for all html pages to be generated
     cssSheets*: seq[CssStyleSheet] ## Global variable for all css stylesheets to be generated
+
 
 proc incl*(html: HtmlDocument) = htmlPages.add html ## Includes an HTML page into `htmlPages`
 proc incl*(css: CssStyleSheet) = cssSheets.add css ## Includes a CSS stylesheet into `cssSheets`
@@ -16,7 +19,7 @@ proc og(property, content: string): HtmlElement =
         "content" => content
     ]
 
-proc newHtmlPage*(title, description, path: string, cssPath: string = ""): HtmlDocument =
+proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = true, cssPath: string = ""): HtmlDocument =
     result = newHtmlDocument(path)
     # Html header stuff:
     result.addToHead(
@@ -41,6 +44,7 @@ proc newHtmlPage*(title, description, path: string, cssPath: string = ""): HtmlD
             "title" => "Relative path to global css" # Used for local debugging/test builds
         ]
     )
+    menuBarPages[title] = path
 
     if cssPath != "":
         result.addToHead(
