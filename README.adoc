@@ -1,0 +1,32 @@
+= src.nirokay.com
+
+:thecatapi: https://api.thecatapi.com/v1/images/search?format=src&size=full
+
+
+== About
+
+This is the builder for my https://nirokay.com[webpage].
+
+== Structure
+
+This module is separate from the https://github.com/nirokay/nirokay.com[actual website repository] and requires it to be in the root directory of this repo (or be linked to it).
+
+```sh
+.
+├── nirokay.com/ -> /home/niro/Git/nirokay.com
+│   └── ...
+├── resources/
+│   └── ...
+├── src/
+│   └── ...
+├── webpage_builder.nimble
+└── ...
+```
+
+This allows `deploy.sh` to add, commit and push the changes automatically.
+
+== Random cat picture
+
+image::{thecatapi}[random cat image :3, link="{thecatapi}"]
+
+Very important!
