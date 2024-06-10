@@ -9,7 +9,7 @@ const
         "width" := "100%",
         "height" := "100%",
         "left" := "0",
-        "top" := "0"
+        "top" := "200"
     }
     classDivCenteringMiddle*: CssElement = ".div-centering-middle"{
         "vertical-align" := "middle",
@@ -19,6 +19,13 @@ const
         "width" := "100%",
         "margin-left" := "auto",
         "margin-right" := "auto"
+    }
+    classDivMenuBarContainer*: CssElement = ".div-menu-bar-container"{
+        "position" := "fixed",
+        "display" := "flex",
+        "width" := "100%",
+        "left" := "0",
+        "top" := "0"
     }
 
     # Links page: -------------------------------------------------------------

@@ -27,10 +27,20 @@ globalCssTemplate.add(
     "li"{
         "list-style-type" := "👉"
     },
+    "select"{
+        "margin" := "40px",
+        "border-radius" := "10px",
+        "background-color" := colourContentBox,
+        "color" := colourText,
+        "border" := "3px solid " & colourContentBox,
+    },
     classFlexContainer,
     classClickableImage,
+
     classCodeShowcaseContainer,
-    classCodeShowcaseElement
+    classCodeShowcaseElement,
+
+    classDivMenuBarContainer
 )
 
 

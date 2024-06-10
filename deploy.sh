@@ -2,7 +2,7 @@
 
 source env.sh
 
-cp -r src/javascript/ "$OUTPUT_LN"/javascript || exit 1
+cp -r src/javascript/* "$OUTPUT_LN"/javascript || exit 1
 
 cd "$OUTPUT_LN" || exit 2
 git add .

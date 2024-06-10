@@ -1,5 +1,3 @@
-{.warning[UnusedImport]: off.}
-
 import generator except websitegenerator
 import websitegenerator
 
@@ -7,10 +5,11 @@ import websitegenerator
 import pages/[
     index, links, projects
 ]
+export index, links, projects
 import css/[
     styles
 ]
-
+export styles
 
 # Write files to disk:
 const target: string = "nirokay.com"
@@ -30,6 +29,6 @@ if htmlPages.len() != 0:
 if cssSheets.len() != 0:
     for i, sheet in cssSheets:
         stdout.write("\rGenerating '" & sheet.file & "' (" & i / cssSheets & ")                  ")
-        sheet.writeFile()
+        sheet.generateCss()
     stdout.write("\rGenerated " & $cssSheets.len() & " css files                               \n")
     stdout.flushFile()

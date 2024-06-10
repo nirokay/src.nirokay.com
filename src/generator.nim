@@ -1,7 +1,10 @@
-import std/[tables]
+import std/[tables, times, strutils]
 import websitegenerator
 export websitegenerator except newHtmlDocument, newDocument, writeFile
 import resources
+
+proc timeStamp(): string =
+    result = now().format("yyyy-MM-dd --- hh-mm-ss")
 
 var
     menuBarPages*: OrderedTable[string, string]
@@ -24,6 +27,7 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
     # Html header stuff:
     result.addToHead(
         comment("HTML and CSS is generated using https://github.com/nirokay/websitegenerator "),
+        comment("Generated: " & timeStamp() & " "),
         charset("utf-8"),
         "meta"[
             "name" => "viewport",
@@ -42,17 +46,29 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
             "rel" => "stylesheet",
             "href" => "styles.css",
             "title" => "Relative path to global css" # Used for local debugging/test builds
-        ]
+        ],
+        importScript("/javascript/menu-bar.js")
     )
-    menuBarPages[title] = path
+    if includeInMenuBar: menuBarPages[title] = path
 
     if cssPath != "":
         result.addToHead(
             "link"[
                 "rel" => "stylesheet",
-                "href" => cssPath # Local stylesheet (will not work when testing out locally :/)
+                "href" => "/" & cssPath # GLobal stylesheet (will not work when testing out locally :/)
             ]
         )
+
+proc getMenuBar*(): HtmlElement =
+    var options: seq[HtmlElement] = @[
+        option("--ignore--", "-- Menu --").addattr("selected")
+    ]
+    for title, path in menuBarPages:
+        options.add option(path, title)
+    result = select("Menu bar", "id-menu-bar", options).add(
+        attr("onchange", "changeToSelectedPage();"),
+        attr("id", "id-menu-bar")
+    )
 
 proc generatePage*(page: HtmlDocument) =
     ## Alternative for `writeFile(html)`, adding some final touches before generating the document
@@ -60,8 +76,20 @@ proc generatePage*(page: HtmlDocument) =
     html.body = @[
         `div`(
             `div`(
-                `div`(page.body).setClass(".div-centering-inner")
-            ).setClass(".div-centering-middle")
-        ).setClass(".div-centering-outer")
+                `div`(page.body).setClass("div-centering-inner")
+            ).setClass("div-centering-middle")
+        ).setClass("div-centering-outer"),
+        `div`(
+            getMenuBar()
+        ).setClass("div-menu-bar-container"),
     ]
     html.writeFile()
+
+proc generateCss*(stylesheet: CssStyleSheet) =
+    ## Alternative for `writeFile(css)`, adding some final touches before generating the stylesheet
+    var css: CssStyleSheet = newCssStyleSheet(stylesheet.file)
+    css.add newCssClass(".metadata",
+        ["generated-at", timeStamp()]
+    )
+    css.elements = css.elements & stylesheet.elements
+    css.writeFile()
