@@ -1,4 +1,4 @@
-import std/[tables, times, strutils]
+import std/[tables, times]
 import websitegenerator
 export websitegenerator except newHtmlDocument, newDocument, writeFile
 import resources
