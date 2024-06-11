@@ -42,24 +42,20 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
             "href" => "/styles.css",
             "title" => "Absolute path to global css"
         ],
-        "link"[
-            "rel" => "stylesheet",
-            "href" => "styles.css",
-            "title" => "Relative path to global css" # Used for local debugging/test builds
-        ],
         importScript("/javascript/menu-bar.js")
     )
     if includeInMenuBar: menuBarPages[title] = path
 
+    # Site-specific stylesheet:
     if cssPath != "":
         result.addToHead(
             "link"[
                 "rel" => "stylesheet",
-                "href" => "/" & cssPath # GLobal stylesheet (will not work when testing out locally :/)
+                "href" => "/" & cssPath
             ]
         )
 
-proc getMenuBar*(page: HtmlDocument): HtmlElement =
+proc getNavSelector(page: HtmlDocument): HtmlElement =
     var
         itemWasSelected: bool = false
         options: seq[HtmlElement] = @[
@@ -82,6 +78,13 @@ proc getMenuBar*(page: HtmlDocument): HtmlElement =
         attr("id", "id-menu-bar")
     )
 
+proc getTopBar(html: HtmlDocument): HtmlElement =
+    var items: seq[HtmlElement] = @[
+        h2("nirokay").addattr("style", "padding-left:10px;"),
+        html.getNavSelector()
+    ]
+    result = `div`(items).setClass("div-menu-bar-container")
+
 proc generatePage*(page: HtmlDocument) =
     ## Alternative for `writeFile(html)`, adding some final touches before generating the document
     var html: HtmlDocument = page
@@ -91,10 +94,7 @@ proc generatePage*(page: HtmlDocument) =
                 `div`(page.body).setClass("div-centering-inner")
             ).setClass("div-centering-middle")
         ).setClass("div-centering-outer"),
-        `div`(
-            h2("nirokay").addattr("style", "padding-left:10px;"),
-            html.getMenuBar()
-        ).setClass("div-menu-bar-container"),
+        html.getTopBar()
     ]
     html.writeFile()
 
