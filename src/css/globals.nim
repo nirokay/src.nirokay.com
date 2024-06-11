@@ -6,7 +6,7 @@ var globalCssTemplate*: CssStyleSheet = GENERATOR.newCssStyleSheet("---global-cs
 globalCssTemplate.add(
     "html"{
         "color" := colourText,
-        "background-color" := colourBackground,
+        "background-color" := colourBackgroundDark,
         "font-family" := "Verdana, Geneva, Tahoma, sans-serif"
     },
     "h1, h2"{
@@ -25,14 +25,14 @@ globalCssTemplate.add(
         "border-radius" := "10px"
     },
     "li"{
-        "list-style-type" := "👉"
+        "list-style-type" := "'👉'"
     },
     "select"{
-        "margin" := "40px",
+        "margin" := "20px",
         "border-radius" := "10px",
-        "background-color" := colourContentBox,
+        "background-color" := colourBackgroundLight,
         "color" := colourText,
-        "border" := "3px solid " & colourContentBox,
+        "border" := "3px solid " & colourBackgroundLight,
     },
     classFlexContainer,
     classClickableImage,

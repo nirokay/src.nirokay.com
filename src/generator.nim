@@ -80,6 +80,7 @@ proc generatePage*(page: HtmlDocument) =
             ).setClass("div-centering-middle")
         ).setClass("div-centering-outer"),
         `div`(
+            h2("nirokay").addattr("style", "padding-left:10px;"),
             getMenuBar()
         ).setClass("div-menu-bar-container"),
     ]

@@ -3,13 +3,14 @@ import colours
 
 const
     # Centering divs (around every page): -------------------------------------
+    menuBarHeight* = "72px"
     classDivCenteringOuter*: CssElement = ".div-centering-outer"{
         "position" := "absolute",
         "display" := "table",
         "width" := "100%",
         "height" := "100%",
         "left" := "0",
-        "top" := "200"
+        "top" := "calc(" & menuBarHeight & ")"
     }
     classDivCenteringMiddle*: CssElement = ".div-centering-middle"{
         "vertical-align" := "middle",
@@ -24,8 +25,10 @@ const
         "position" := "fixed",
         "display" := "flex",
         "width" := "100%",
+        "height" := menuBarHeight,
         "left" := "0",
-        "top" := "0"
+        "top" := "0",
+        "background-color" := colourBackgroundMiddle
     }
 
     # Links page: -------------------------------------------------------------
@@ -43,13 +46,12 @@ const
         "width" := "30%",
         "max-width" := "500px",
         "min-width" := "300px",
-        "background" := colourContentBox,
+        "background" := colourBackgroundMiddle,
         "border-radius" := "10px",
         "padding" := "10px"
     }
     classFlexContainer*: CssElement = ".container-flex"{
         "text-align" := "center",
-        #"max-height" := "150px",
         "display" := "flex",
         "align-items" := "baseline",
         "justify-content" := "space-evenly",
