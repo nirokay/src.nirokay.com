@@ -1,10 +1,13 @@
-import std/[tables, times]
+import std/[tables, times, strutils]
 import websitegenerator
 export websitegenerator except newHtmlDocument, newDocument, writeFile
 import resources
 
 proc timeStamp(): string =
-    result = now().format("yyyy-MM-dd --- hh-mm-ss")
+    result = now().format("yyyy-MM-dd ---- hh---mm--ss")
+        .replace("----", "@")
+        .replace("---", ":")
+        .replace("--", ".")
 
 var
     menuBarPages*: OrderedTable[string, string]
@@ -26,8 +29,8 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
     result = newHtmlDocument(path)
     # Html header stuff:
     result.addToHead(
-        comment("HTML and CSS is generated using https://github.com/nirokay/websitegenerator "),
-        comment("Generated: " & timeStamp() & " "),
+        htmlComment("HTML and CSS is generated using https://github.com/nirokay/websitegenerator"),
+        htmlComment("Generated: " & timeStamp()),
         charset("utf-8"),
         "meta"[
             "name" => "viewport",
@@ -101,8 +104,13 @@ proc generatePage*(page: HtmlDocument) =
 proc generateCss*(stylesheet: CssStyleSheet) =
     ## Alternative for `writeFile(css)`, adding some final touches before generating the stylesheet
     var css: CssStyleSheet = newCssStyleSheet(stylesheet.file)
-    css.add newCssClass(".metadata",
-        ["generated-at", timeStamp()]
-    )
+    css.add cssComment(@[
+        "@name nirokay.com stylesheet",
+        "@author nirokay",
+        "@source https://github.com/nirokay/src.nirokay.com",
+        "@website https://nirokay.com",
+        "HTML and CSS is generated using https://github.com/nirokay/websitegenerator",
+        "Generated at " & timeStamp()
+    ])
     css.elements = css.elements & stylesheet.elements
     css.writeFile()
