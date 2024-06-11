@@ -59,12 +59,24 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
             ]
         )
 
-proc getMenuBar*(): HtmlElement =
-    var options: seq[HtmlElement] = @[
-        option("--ignore--", "-- Menu --").addattr("selected")
-    ]
+proc getMenuBar*(page: HtmlDocument): HtmlElement =
+    var
+        itemWasSelected: bool = false
+        options: seq[HtmlElement] = @[
+            # option("--ignore--", "-- Menu --")
+        ]
     for title, path in menuBarPages:
-        options.add option(path, title)
+        var newOption: HtmlElement = option(path, title)
+        if path == page.file:
+            newOption.addattr("selected")
+            itemWasSelected = true
+        options.add newOption
+    if not itemWasSelected:
+        options[0] = (
+            var item = options[0]
+            item.addattr("selected")
+            item
+        )
     result = select("Menu bar", "id-menu-bar", options).add(
         attr("onchange", "changeToSelectedPage();"),
         attr("id", "id-menu-bar")
@@ -81,7 +93,7 @@ proc generatePage*(page: HtmlDocument) =
         ).setClass("div-centering-outer"),
         `div`(
             h2("nirokay").addattr("style", "padding-left:10px;"),
-            getMenuBar()
+            html.getMenuBar()
         ).setClass("div-menu-bar-container"),
     ]
     html.writeFile()
