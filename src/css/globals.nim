@@ -34,6 +34,12 @@ globalCssTemplate.add(
         "color" := colourText,
         "border" := "3px solid " & colourBackgroundLight,
     },
+    "dialog"{
+        "color" := colourText,
+        "background-color" := colourBackgroundMiddle,
+        "border-radius" := "10px",
+        "border-color" := colourBackgroundLight
+    },
     classFlexContainer,
     classClickableImage,
 
