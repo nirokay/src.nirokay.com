@@ -32,7 +32,7 @@ globalCssTemplate.add(
         "border-radius" := "10px",
         "background-color" := colourBackgroundLight,
         "color" := colourText,
-        "border" := "3px solid " & colourBackgroundLight,
+        "border" := "3px solid " & colourBackgroundLight
     },
     "dialog"{
         "color" := colourText,

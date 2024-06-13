@@ -8,7 +8,7 @@ const
         "position" := "absolute",
         "display" := "table",
         "width" := "100%",
-        "height" := "100%",
+        "height" := "calc(100% - " & menuBarHeight & ")",
         "left" := "0",
         "top" := "calc(" & menuBarHeight & ")"
     }
