@@ -122,11 +122,11 @@ for language in Language:
         article(
             dialog(false,
                 p($strings.response.passed),
-                img("/resources/images/games/findus/success.jpg", "Image success")
+                img("/resources/images/games/findus/success.jpg", "Image success").addattr("width", "200px")
             ).addattr("id", idTestPassed),
             dialog(false,
                 p($strings.response.failed),
-                img("/resources/images/games/findus/failure.png", "Image failure")
+                img("/resources/images/games/findus/failure.png", "Image failure").addattr("width", "200px")
             ).addattr("id", idTestFailed),
             fieldset(
                 legend($strings.request.legend),
