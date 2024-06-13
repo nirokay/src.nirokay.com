@@ -3,9 +3,9 @@ import websitegenerator
 
 # Import pages and css:
 import pages/[
-    index, links, projects
+    index, links, projects, games
 ]
-export index, links, projects
+export index, links, projects, games
 import css/[
     styles
 ]
