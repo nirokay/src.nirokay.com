@@ -2,7 +2,8 @@ import std/[json, tables, options]
 
 type ResourceFile* = enum
     resourceLinks = "resources/links.json",
-    resourceProjects = "resources/projects.json"
+    resourceProjects = "resources/projects.json",
+    resourceGames = "resources/games.json"
 
 proc parseResource[T](resource: ResourceFile, convertTo: typedesc[T]): T =
     let file: string = $resource
@@ -35,11 +36,19 @@ const
 
 
 type
-    ImageLink* = tuple[name, img, url: string]
-
-    ProjectElement* = tuple[name, desc, repo, lang: string, docs: Option[string]]
-
+    ImageLink* = tuple[
+        name, img, url: string
+    ]
+    ProjectElement* = tuple[
+        name, desc, repo, lang: string,
+        docs: Option[string]
+    ]
+    Game* = tuple[
+        name, desc: string,
+        file: OrderedTable[string, string]
+    ]
 const
     # JSONs: ------------------------------------------------------------------
     linksToSocials* = resourceLinks.parseResource(seq[ImageLink])
     projectShowcase* = resourceProjects.parseResource(OrderedTable[string, seq[ProjectElement]])
+    gamesJson* = resourceGames.parseResource(seq[Game])

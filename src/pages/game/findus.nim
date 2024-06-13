@@ -20,8 +20,8 @@ const strings = (
             deDE: "Dummes Spiel, das ausrechnet, ob Findus, der Kater, dich liebt."
         },
         file: toTable {
-            enGB: "findus_en.html",
-            deDE: "findus_de.html"
+            enGB: "en.html",
+            deDE: "de.html"
         }
     ),
     request: (

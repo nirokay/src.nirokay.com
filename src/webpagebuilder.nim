@@ -3,13 +3,16 @@ import websitegenerator
 
 # Import pages and css:
 import pages/[
-    index, links, projects, games
+    index, links, projects, games, fourOhFour
 ]
-export index, links, projects, games
+export
+    index, links, projects, games, fourOhFour
+
 import css/[
     styles
 ]
-export styles
+export
+    styles
 
 # Write files to disk:
 const target: string = "nirokay.com"
