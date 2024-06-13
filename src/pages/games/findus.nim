@@ -115,26 +115,34 @@ for language in Language:
         importScript("../../javascript/game/findus.js").addattr("defer")
     )
     html.add(
-        dialog(false,
-            p($strings.response.passed)
-        ).addattr("id", idTestPassed),
-        dialog(false,
-            p($strings.response.failed)
-        ).addattr("id", idTestFailed),
-        fieldset(
-            legend($strings.request.legend),
-            question(strings.question.loveCats),
-            question(strings.question.wouldGiveFood,
-                id = idFoodCheckbox
-            ),
-            question(strings.question.creditCardQuestion,
-                id = idCreditCardCheckbox
-            ),
-            question(strings.question.creditCardRequest,
-                questionType = typingShort,
-                id = idCreditCardStealer
-            ),
-            button($strings.response.submit, "submitForm();")
+        header(
+            h1($strings.meta.title),
+            p($strings.meta.desc)
+        ),
+        article(
+            dialog(false,
+                p($strings.response.passed),
+                img("/resources/images/games/findus/success.jpg", "Image success")
+            ).addattr("id", idTestPassed),
+            dialog(false,
+                p($strings.response.failed),
+                img("/resources/images/games/findus/failure.png", "Image failure")
+            ).addattr("id", idTestFailed),
+            fieldset(
+                legend($strings.request.legend),
+                question(strings.question.loveCats),
+                question(strings.question.wouldGiveFood,
+                    id = idFoodCheckbox
+                ),
+                question(strings.question.creditCardQuestion,
+                    id = idCreditCardCheckbox
+                ),
+                question(strings.question.creditCardRequest,
+                    questionType = typingShort,
+                    id = idCreditCardStealer
+                ),
+                button($strings.response.submit, "submitForm();")
+            )
         )
     )
     case language:
