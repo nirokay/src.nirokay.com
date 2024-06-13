@@ -49,21 +49,37 @@ const strings = (
         }
     ),
     question: (
+        loveCats: toTable {
+            enGB: "Do you like cats?",
+            deDE: "Magst du Katzen?"
+        },
+        catsLoveYou: toTable {
+            enGB: "Do you think cats like you?",
+            deDE: "Denkst du, dass Katzen dich mögen?"
+        },
+        catsBetterThanDogs: toTable {
+            enGB: "Cats are superior to dogs.",
+            deDE: "Katzen sind Hunden überlegen."
+        },
+        triedCatFood: toTable {
+            enGB: "Have you tried cat food before?",
+            deDE: "Hast du schonmal Katzenfutter probiert?"
+        },
         wouldGiveFood: toTable {
             enGB: "Would you give food to Findus?",
             deDE: "Würdest du Findus füttern?"
         },
-        loveCats: toTable {
-            enGB: "Do you like cats?",
-            deDE: "Magst du Katzen?"
+        financialSituation: toTable {
+            enGB: "Is your financial situation stable?",
+            deDE: "Ist dein finanzieller Status stabil?"
         },
         creditCardQuestion: toTable {
             enGB: "Would you provide your credit card information on a random internet questionnaire?",
             deDE: "Würdest du deine Kreditkarteninformationen in einem Internetfragebogen preisgeben?"
         },
-        creditCardRequest: totable {
-            enGB: "", #"Very cool! Please provide your credit card credentials:",
-            deDE: "" #"Sehr geil! Bitte gebe deine Kreditkarteninformationen an:"
+        creditCardRequest: toTable {
+            enGB: "", # "Very cool! Please provide your credit card credentials:",
+            deDE: "" # "Sehr geil! Bitte gebe deine Kreditkarteninformationen an:"
         }
     )
 )
@@ -126,14 +142,20 @@ for language in Language:
             ).addattr("id", idTestPassed),
             dialog(false,
                 p($strings.response.failed),
-                img("/resources/images/games/findus/failure.png", "Image failure").addattr("width", "200px")
+                img("/resources/images/games/findus/failure.jpg", "Image failure").addattr("width", "200px")
             ).addattr("id", idTestFailed),
             fieldset(
                 legend($strings.request.legend),
-                question(strings.question.loveCats),
+                # Cat questions:
+                question strings.question.loveCats,
+                question strings.question.catsLoveYou,
+                question strings.question.catsBetterThanDogs,
+                question strings.question.triedCatFood,
                 question(strings.question.wouldGiveFood,
                     id = idFoodCheckbox
                 ),
+                # Money scam shit: -v-
+                question strings.question.financialSituation,
                 question(strings.question.creditCardQuestion,
                     id = idCreditCardCheckbox
                 ),
