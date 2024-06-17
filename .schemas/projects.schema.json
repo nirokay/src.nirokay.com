@@ -1,0 +1,33 @@
+{
+    "title": "Projects showcase",
+    "type": "object",
+    "additionalProperties": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Project name"
+            },
+            "desc": {
+                "type": "string",
+                "description": "Project description"
+            },
+            "repo": {
+                "type": "string",
+                "description": "Project repository link"
+            },
+            "docs": {
+                "type": "string",
+                "description": "Project documentation link"
+            },
+            "lang": {
+                "type": "string",
+                "enum": ["nim", "lua"],
+                "description": "Project primary programming language"
+            }
+        },
+        "required": [
+            "name", "desc", "repo"
+        ]
+    }
+}

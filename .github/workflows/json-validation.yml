@@ -1,0 +1,34 @@
+name: Validate JSONs
+
+on: [pull_request, push]
+
+jobs:
+  verify-json-games:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate locations
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: /.schemas/games.schema.json
+          INPUT_JSONS: /resources/games.json
+
+  verify-json-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate locations
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: /.schemas/links.schema.json
+          INPUT_JSONS: /resources/links.json
+
+  verify-json-projects:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate locations
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: /.schemas/projects.schema.json
+          INPUT_JSONS: /resources/projects.json

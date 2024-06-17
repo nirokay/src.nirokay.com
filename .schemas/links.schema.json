@@ -1,0 +1,24 @@
+{
+    "title": "Links to social media",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Social media service name"
+            },
+            "img": {
+                "type": "string",
+                "description": "File name in `/resources/images/links/`"
+            },
+            "url": {
+                "type": "string",
+                "description": "Social media URL"
+            }
+        },
+        "required": [
+            "name", "img", "url"
+        ]
+    }
+}

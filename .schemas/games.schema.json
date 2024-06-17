@@ -1,0 +1,24 @@
+{
+    "title": "Games collection",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "Game name"
+            },
+            "desc": {
+                "type": "string",
+                "description": "Game description"
+            },
+            "file": {
+                "type": "object",
+                "description": "Game links [path] -> [link text]"
+            }
+        },
+        "required": [
+            "name", "desc", "file"
+        ]
+    }
+}
