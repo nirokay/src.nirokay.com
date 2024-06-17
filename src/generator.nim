@@ -83,7 +83,7 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
 
 proc getTopBar(html: HtmlDocument): HtmlElement =
     var items: seq[HtmlElement] = @[
-        h2("nirokay").addattr("style", "padding-left:10px;"),
+        a("/index.html", $h2("nirokay").addattr("style", "padding-left:10px;color:#e8e6e3;")),
         html.getNavSelector()
     ]
     result = `div`(items).setClass("div-menu-bar-container")
