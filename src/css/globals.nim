@@ -34,6 +34,13 @@ globalCssTemplate.add(
         "color" := colourText,
         "border" := "3px solid " & colourBackgroundLight
     },
+    "input"{
+        "color" := colourText,
+        "background-color" := colourBackgroundLight,
+        "border-radius" := "2px",
+        "border-color" := colourBackgroundLight,
+        "padding" := "2px"
+    },
     "dialog"{
         "color" := colourText,
         "background-color" := colourBackgroundMiddle,
