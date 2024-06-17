@@ -117,7 +117,7 @@ var
 
 proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
     htmlTarget = htmlSource
-    htmlTarget.file = "games/findus/" & $strings.meta.file
+    htmlTarget.file = "game/findus/" & $strings.meta.file
 
 for language in Language:
     setTranslationTarget(language)
@@ -128,7 +128,7 @@ for language in Language:
         includeInMenuBar = false
     )
     html.addToHead(
-        importScript("../../javascript/game/findus.js").addattr("defer")
+        importScript("/javascript/game/findus.js").addattr("defer")
     )
     html.add(
         header(

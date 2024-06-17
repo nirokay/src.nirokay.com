@@ -18,7 +18,7 @@ var gamesHtml: seq[HtmlElement]
 for game in gamesJson:
     var links: seq[HtmlElement]
     for path, text in game.file:
-        links.add li($a("games/" & path, text))
+        links.add li($a("game/" & path, text))
     gamesHtml.add `div`(
         h3(game.name),
         p(game.desc),
