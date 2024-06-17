@@ -22,8 +22,17 @@ for topic, elements in projectShowcase:
     docs.add h2(topic)
     var newElements: seq[HtmlElement]
     for element in elements:
+        let image: HtmlElement = img(
+            "/resources/images/language/" & (
+                case element.lang:
+                of "nim": "nim.png"
+                of "lua": "lua.png"
+                else: "none.png"
+            ),
+            "/"
+        ).addattr("style", "max-height:1em;")
         var e: seq[HtmlElement] = @[
-            h3(element.name),
+            h3(element.name & " " & $image),
             p($b(element.name) & " " & element.desc)
         ]
         var items: seq[HtmlElement]

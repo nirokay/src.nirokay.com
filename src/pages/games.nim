@@ -33,7 +33,7 @@ html.add(
 
 incl html
 
-import games/[
+import game/[
     findus
 ]
 export
