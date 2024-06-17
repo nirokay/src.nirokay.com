@@ -2,8 +2,8 @@
     "title": "Projects showcase",
     "type": "object",
     "additionalProperties": {
-        "type": "object",
-        "properties": {
+        "type": "array",
+        "items": {
             "name": {
                 "type": "string",
                 "description": "Project name"
