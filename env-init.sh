@@ -30,11 +30,12 @@ if [ ! "$OUTPUT_DIR" ]; then
     fi
 fi
 
-if [ ! -d "$OUTPUT_DIR" ]; then
-    panic "Directory at '$OUTPUT_DIR' does not exist :( Aborting"
-fi
-
 if [ ! -d "$OUTPUT_LN" ]; then
     echo "Creating symlink"
     ln -s "$OUTPUT_DIR" "$OUTPUT_LN"
 fi
+
+if [ ! -d "$OUTPUT_DIR" ]; then
+    panic "Directory at '$OUTPUT_DIR' does not exist :( Aborting"
+fi
+

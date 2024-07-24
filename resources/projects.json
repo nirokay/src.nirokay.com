@@ -20,6 +20,12 @@
             "repo": "https://github.com/nirokay/websitegenerator",
             "docs": "https://nirokay.github.io/nim-docs/websitegenerator/websitegenerator.html",
             "lang": "nim"
+        },
+        {
+            "name": "HolidAPI",
+            "desc": "is a collection of API wrappers for Holiday APIs, which supports many countries.",
+            "repo": "https://github.com/nirokay/holidapi",
+            "lang": "nim"
         }
     ],
     "Applications": [
