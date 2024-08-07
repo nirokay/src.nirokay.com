@@ -42,18 +42,25 @@ let catRight = new Cat("id-cat-right-picture", "id-cat-right-score");
 //  - Cat failures:
 const directoryCatFailure: string = "cat/failure/";
 const filesCatFailure: string[] = [
-    "sad-01.gif",
-    "disbelief.gif"
+    "cry.gif",
+    "disbelief.gif",
+    "rage.gif",
+    "sad.gif",
+    "shock.gif"
 ];
 //  - Cat successes:
 const directoryCatSuccess: string = "cat/success/";
 const filesCatSuccess: string[] = [
+    "dance.gif",
+    "grin.gif",
+    "happy.gif",
+    "smug.gif",
     "yippie.gif"
 ];
 //  - Cat assets:
 const directoryCatWhileGaming: string = "cat/";
-const fileCatStandBy: string = "cat-standby.png";
-const fileCatPong: string = "cat-pinged.png";
+const fileCatStandBy: string = "standby.png";
+const fileCatPong: string = "pong.png";
 
 
 // Other constants:
@@ -109,8 +116,13 @@ function endGame() {
     console.log("Winning cat:");
     console.log(getWinningCat());
 
-    getWinningCat().setFrame(directoryCatSuccess + filesCatSuccess[getRandomIndex(filesCatSuccess)])
-    getLosingCat().setFrame(directoryCatFailure + filesCatFailure[getRandomIndex(filesCatFailure)])
+    let winnerGif: string = directoryCatSuccess + filesCatSuccess[getRandomIndex(filesCatSuccess)];
+    let loserGif: string = directoryCatFailure + filesCatFailure[getRandomIndex(filesCatFailure)];
+    getWinningCat().setFrame(winnerGif);
+    getLosingCat().setFrame(loserGif);
+
+    console.log(winnerGif);
+    console.log(loserGif);
 
     getWinningCat().increaseScore();
     gameLock = false;
