@@ -34,7 +34,7 @@ html.add(
 incl html
 
 import game/[
-    findus
+    findus, pingpong
 ]
 export
-    findus
+    findus, pingpong
