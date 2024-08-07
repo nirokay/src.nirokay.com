@@ -2,7 +2,7 @@
 
 source env.sh
 
-./compile-javascript.sh
+./compile-typescript.sh
 # cp -r src/javascript/* "$OUTPUT_LN"/javascript || exit 1
 
 cd "$OUTPUT_LN" || exit 2
