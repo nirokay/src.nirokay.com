@@ -95,17 +95,17 @@ for i in ["button", ".button"]:
         "display" := "inline-block",
         "border" := "none",
         "padding" := "10px 20px",
-        "background-color" := rgba(255, 100, 255, 0.1),
+        "background-color" := colourBackgroundLight,
         "cursor" := "pointer",
         "text-decoration" := "none",
         "text-align" := "center",
     }
-globalCssTemplate.add(
-    ".button:hover"{
-        "transition" := "0.1s",
-        "background-color" := rgba(255, 100, 255, 0.2),
-    }
-)
+    globalCssTemplate.add(
+        (i & ":hover"){
+            "transition" := "0.1s",
+            "background-color" := colourBackgroundMiddle,
+        }
+    )
 
 # Centering content inside three divs: ----------------------------------------
 globalCssTemplate.add(

@@ -1,6 +1,17 @@
 import std/[]
 import ../../generator, ../../css/styles
 
+const
+    ballWidth: string = "15px"
+
+    maxCatWidth: string = "200px"
+    maxCatHeight: string = "300px"
+
+    maxTableWidth: string = "300px"
+    maxTableHeight: string = "200px"
+
+    itemsWidth: string = "30%"
+
 var html: HtmlDocument = newHtmlPage(
     "PingPong",
     "Cats playing fucking Ping-Pong!!!!",
@@ -16,6 +27,7 @@ html.add(
         p("Bored of coin flipping? Me too: " & $i($b("CATS PLAYING PING-PONG!")))
     ),
     article(
+        button("Start game", "game();").addattr("id", "id-button-start-game"),
         `div`(
             h1("0").add(
                 attr("id", "id-cat-left-score"),
@@ -30,17 +42,44 @@ html.add(
             attr("style", "margin:20px;")
         ),
         `div`(
+            # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            img("", "Ball Left - Game Over").add(
+                attr("id", "id-ball-left-game-over"),
+                attr("style", "max-width:" & ballWidth & ";align-self:end;")
+            ),
+            # -----------------------------------------------------------------
             img("", "Left cat").add(
                 attr("id", "id-cat-left-picture"),
-                attr("style", "max-height:400px;max-width:200px;")
+                attr("style", "max-height:" & maxCatHeight & ";max-width:" & maxCatWidth & ";width:" & itemsWidth & ";")
             ),
-            img("../resources/images/games/pingpong/table.png", "Ping pong table").addattr("style", "max-height:200px;max-width:200px;"),
+            # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            img("", "Ball Left").add(
+                attr("id", "id-ball-left"),
+                attr("style", "max-width:" & ballWidth & ";align-self:baseline;")
+            ),
+            # =================================================================
+            img("../resources/images/games/pingpong/table.png", "Ping pong table").addattr(
+                "style",
+                "max-height:" & maxTableHeight & ";max-width:" & maxTableWidth & ";width:" & itemsWidth & ";"
+            ),
+            # =================================================================
+            img("", "Ball Right").add(
+                attr("id", "id-ball-right"),
+                attr("style", "max-width:" & ballWidth & ";align-self:baseline;")
+            ),
+            # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             img("", "Right cat").add(
                 attr("id", "id-cat-right-picture"),
-                attr("style", "max-height:400px;max-width:200px;transform:scaleX(-1);")
+                attr("style", "max-height:" & maxCatHeight & ";max-width:" & maxCatWidth & ";width:" & itemsWidth & ";transform:scaleX(-1);")
+            ),
+            # -----------------------------------------------------------------
+            img("", "Ball Right - Game Over").add(
+                attr("id", "id-ball-right-game-over"),
+                attr("style", "max-width:" & ballWidth & ";align-self:end;")
             )
+            # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         ).setClass(classFlexContainer).add(
-            attr("align-items", "center")
+            attr("style", "align-items:end;min-height:400px;"),
         )
     )
 )
