@@ -1,4 +1,4 @@
-import std/[]
+import std/[os, strutils]
 import ../../generator, ../../css/styles
 
 const
@@ -20,6 +20,20 @@ var html: HtmlDocument = newHtmlPage(
 )
 
 html.addToHead importScript("../javascript/game/pingpong.js").addattr("defer") # /javascript/game/pingpong.js
+
+# Preload images:
+var paths: seq[string]
+for path in walkDirRec("nirokay.com/resources/images/games/pingpong/"):
+    if path.dirExists(): continue
+    if not path.fileExists(): continue
+    paths.add path
+for path in paths:
+    let href: string = path.replace("nirokay.com", "..")
+    html.addToHead("link"[
+        "rel" => "preload",
+        "href" => href,
+        "as" => "image"
+    ])
 
 html.add(
     header(
