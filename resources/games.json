@@ -6,5 +6,12 @@
             "findus/en.html": "English",
             "findus/de.html": "German (Deutsch)"
         }
+    },
+    {
+        "name": "Cat Ping-Pong",
+        "desc": "Cats playing Ping-Pong - the new competition to online coin flippers!",
+        "file": {
+            "pingpong.html": "Cat Ping-Pong"
+        }
     }
 ]
