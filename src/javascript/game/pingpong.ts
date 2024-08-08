@@ -17,6 +17,9 @@ class Cat {
     pictureId: string;
     scoreId: string;
 
+    /**
+     * Updates the source of the cat image element
+     */
     setFrame(source: string) {
         let element: HTMLPictureElement | null = document.getElementById(this.pictureId) as HTMLPictureElement;
         if(element == null) {
@@ -26,6 +29,9 @@ class Cat {
         element.setAttribute("src", directoryGameResources + source);
     }
 
+    /**
+     * Sets the score of the cat
+     */
     setScore(score: number) {
         let element: HTMLElement | null = document.getElementById(this.scoreId);
         if(element == null) {
@@ -34,6 +40,9 @@ class Cat {
         }
         element.innerHTML = score.toString();
     }
+    /**
+     * Increments the cat score
+     */
     increaseScore() {
         let element: HTMLElement | null = document.getElementById(this.scoreId);
         if(element == null) {
@@ -43,9 +52,10 @@ class Cat {
         this.setScore(parseInt(element.innerHTML) + 1);
     }
 
-
+    /**
+     * Shifts the cat up
+     */
     shiftUp() {
-        console.log("Plonk");
         let element: HTMLPictureElement | null = document.getElementById(this.pictureId) as HTMLPictureElement;
         if(element == null) {
             console.error("Cat picture by id " + this.pictureId + " not found");
@@ -121,6 +131,9 @@ function getGamePongs(): number {
     return Math.ceil(Math.random() * config.pongs.multiplier + config.pongs.min);
 }
 
+/**
+ * Sets all balls invisible except the one that is passed to it
+ */
 function moveBallTo(ball: Ball) {
     [ballLeft, ballRight, ballLeftGameOver, ballRightGameOver].forEach(ball => {
         let id: string = ball.pictureId;
@@ -142,6 +155,9 @@ function moveBallTo(ball: Ball) {
     picture.setAttribute("src", directoryGameResources + fileBall);
 }
 
+/**
+ * Updates the "Start Game" button text
+ */
 function setButtonText(text: string) {
     let button: HTMLButtonElement = document.getElementById(idButtonStartGame) as HTMLButtonElement;
     if(button == null) {
@@ -151,42 +167,67 @@ function setButtonText(text: string) {
     button.innerHTML = text;
 }
 
+/**
+ * Inits cats as idle
+ */
 function setCatsIdle() {
     [catLeft, catRight].forEach(cat => {
         cat.setFrame(directoryCatWhileGaming + fileCatStandBy);
     });
 }
+/**
+ * Gets a random index of an array
+ */
 function getRandomIndex(array: Array<string>): number {
     let multiplier: number = Math.random()
     return Math.ceil(array.length * multiplier) - 1;
 }
 
+/**
+ * Gets the currently winning cat (the one that pongs)
+ */
 function getWinningCat(): Cat {
     return frameCount % 2 == 0 ? catRight : catLeft;
 }
+/**
+ * Gets the currently losing cat (the one that is about to pong)
+ */
 function getLosingCat(): Cat {
     return frameCount % 2 == 1 ? catRight : catLeft;
 }
+/**
+ * Animates and updates cats and balls - increments `frameCount`
+ */
 function stepCatsPlayingPingPong(pongs: number) {
-    getLosingCat().setFrame(directoryCatWhileGaming + fileCatStandBy);
-    getWinningCat().setFrame(directoryCatWhileGaming + fileCatPong);
+    let winningCat: Cat = getWinningCat();
+    let losingCat: Cat = getLosingCat();
 
-    // Move ball and cat:
-    let ballPosition: Ball = getWinningCat().scoreId == catLeft.scoreId ? ballLeft : ballRight
+    // Animate cats:
+    losingCat.setFrame(directoryCatWhileGaming + fileCatStandBy);
+    winningCat.setFrame(directoryCatWhileGaming + fileCatPong);
+    winningCat.shiftUp();
+    setTimeout(() => {
+        winningCat.setFrame(directoryCatWhileGaming + fileCatStandBy);
+    }, config.pongs.msPongLength);
+
+    // Move ball:
+    let ballPosition: Ball = winningCat.scoreId == catLeft.scoreId ? ballLeft : ballRight;
     moveBallTo(ballPosition);
-    getWinningCat().shiftUp();
 
-    console.log("Pong!");
+    // Update frame counter:
     frameCount++;
 
     // Game over ball position:
     if(frameCount == pongs) {
         setTimeout(() => {
-            let finalBallPosition: Ball = ballPosition == ballLeft ? ballLeftGameOver : ballRightGameOver
+            let finalBallPosition: Ball = ballPosition == ballLeft ? ballLeftGameOver : ballRightGameOver;
             moveBallTo(finalBallPosition);
         }, config.pongs.msPongLength);
     }
 }
+/**
+ * Updates cats and score on game ending
+ */
 function endGame() {
     let winnerGif: string = directoryCatSuccess + filesCatSuccess[getRandomIndex(filesCatSuccess)];
     let loserGif: string = directoryCatFailure + filesCatFailure[getRandomIndex(filesCatFailure)];
@@ -198,6 +239,9 @@ function endGame() {
     gameLock = false;
 }
 
+/**
+ * Game logic function (called by the "Start Game" button)
+ */
 function game() {
     if(gameLock) {return}
     gameLock = true;

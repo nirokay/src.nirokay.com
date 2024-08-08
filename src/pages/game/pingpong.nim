@@ -27,7 +27,9 @@ html.add(
         p("Bored of coin flipping? Me too: " & $i($b("CATS PLAYING PING-PONG!")))
     ),
     article(
-        button("Start game", "game();").addattr("id", "id-button-start-game"),
+        `div`(
+            button("Start game", "game();").addattr("id", "id-button-start-game")
+        ).setClass(classFlexContainer),
         `div`(
             h1("0").add(
                 attr("id", "id-cat-left-score"),
