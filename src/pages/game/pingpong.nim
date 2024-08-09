@@ -10,7 +10,7 @@ const
     maxTableWidth: string = "300px"
     maxTableHeight: string = "200px"
 
-    itemsWidth: string = "30%"
+    itemsWidth: string = "20%"
 
 var html: HtmlDocument = newHtmlPage(
     "Cat Ping-Pong",
