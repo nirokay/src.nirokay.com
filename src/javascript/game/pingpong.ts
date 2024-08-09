@@ -210,15 +210,16 @@ function stepCatsPlayingPingPong(pongs: number) {
         winningCat.setFrame(directoryCatWhileGaming + fileCatStandBy);
     }, config.pongs.msPongLength);
 
-    // Move ball:
-    let ballPosition: Ball = winningCat.scoreId == catLeft.scoreId ? ballLeft : ballRight;
-    moveBallTo(ballPosition);
-
     // Update frame counter:
     frameCount++;
 
-    // Game over ball position:
-    if(frameCount == pongs) {
+    // Update ball:
+    let ballPosition: Ball = winningCat.scoreId == catLeft.scoreId ? ballLeft : ballRight;
+    if(frameCount < pongs) {
+        // Normal ball update:
+        moveBallTo(ballPosition);
+    } else {
+        // Game over ball position:
         setTimeout(() => {
             let finalBallPosition: Ball = ballPosition == ballLeft ? ballLeftGameOver : ballRightGameOver;
             moveBallTo(finalBallPosition);
@@ -262,8 +263,8 @@ function game() {
 }
 
 window.onload = () => {
-    moveBallTo(new Ball("null"));
-    setCatsIdle();
-    setButtonText("Begin the battle!");
+    moveBallTo(new Ball("null")); // Inits sources for the balls
+    setCatsIdle(); // Inits sources for the cats
+    setButtonText("Begin the battle!"); // Overrides the button text to before-first-game state
 }
 

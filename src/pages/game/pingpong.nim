@@ -13,13 +13,16 @@ const
     itemsWidth: string = "30%"
 
 var html: HtmlDocument = newHtmlPage(
-    "PingPong",
+    "Cat Ping-Pong",
     "Cats playing fucking Ping-Pong!!!!",
     "game/pingpong.html",
     includeInMenuBar = false
 )
 
-html.addToHead importScript("../javascript/game/pingpong.js").addattr("defer") # /javascript/game/pingpong.js
+html.addToHead(
+    importScript("../javascript/game/pingpong.js").addattr("defer"),
+    og("image", "../resources/images/games/pingpong/cat/pong.png")
+)
 
 # Preload images:
 var paths: seq[string]
@@ -59,17 +62,17 @@ html.add(
         ),
         `div`(
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("", "Ball Left - Game Over").add(
+            img("-", "Ball Left - Game Over").add(
                 attr("id", "id-ball-left-game-over"),
                 attr("style", "max-width:" & ballWidth & ";align-self:end;")
             ),
             # -----------------------------------------------------------------
-            img("", "Left cat").add(
+            img("-", "Left cat").add(
                 attr("id", "id-cat-left-picture"),
                 attr("style", "max-height:" & maxCatHeight & ";max-width:" & maxCatWidth & ";width:" & itemsWidth & ";")
             ),
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("", "Ball Left").add(
+            img("-", "Ball Left").add(
                 attr("id", "id-ball-left"),
                 attr("style", "max-width:" & ballWidth & ";align-self:baseline;")
             ),
@@ -79,17 +82,17 @@ html.add(
                 "max-height:" & maxTableHeight & ";max-width:" & maxTableWidth & ";width:" & itemsWidth & ";"
             ),
             # =================================================================
-            img("", "Ball Right").add(
+            img("-", "Ball Right").add(
                 attr("id", "id-ball-right"),
                 attr("style", "max-width:" & ballWidth & ";align-self:baseline;")
             ),
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("", "Right cat").add(
+            img("-", "Right cat").add(
                 attr("id", "id-cat-right-picture"),
                 attr("style", "max-height:" & maxCatHeight & ";max-width:" & maxCatWidth & ";width:" & itemsWidth & ";transform:scaleX(-1);")
             ),
             # -----------------------------------------------------------------
-            img("", "Ball Right - Game Over").add(
+            img("-", "Ball Right - Game Over").add(
                 attr("id", "id-ball-right-game-over"),
                 attr("style", "max-width:" & ballWidth & ";align-self:end;")
             )

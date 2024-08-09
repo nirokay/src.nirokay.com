@@ -19,7 +19,7 @@ proc incl*(html: HtmlDocument) = htmlPages.add html ## Includes an HTML page int
 proc incl*(css: CssStyleSheet) = cssSheets.add css ## Includes a CSS stylesheet into `cssSheets`
 
 
-proc og(property, content: string): HtmlElement =
+proc og*(property, content: string): HtmlElement =
     result = "meta"[
         "property" => "og:" & property,
         "content" => content
