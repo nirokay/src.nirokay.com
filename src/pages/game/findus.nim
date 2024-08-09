@@ -128,7 +128,8 @@ for language in Language:
         includeInMenuBar = false
     )
     html.addToHead(
-        importScript("/javascript/game/findus.js").addattr("defer")
+        importScript("/javascript/game/findus.js").addattr("defer"),
+        og("image", "/resources/images/games/findus/success.jpg")
     )
     html.add(
         header(
