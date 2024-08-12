@@ -1,5 +1,32 @@
+import std/[strutils, strformat]
 import ../generator
 import colours
+
+
+proc newTextGradientClass*(className: string, colourLeft, colourRight: string|CssColour): CssElement =
+    ## Generates a new text gradient CSS class
+    result = ("." & className){
+        "background" := &"linear-gradient(45deg, {colourLeft}, {colourRight})",
+        "background-clip" := "text",
+        "-webkit-background-clip" := "text",
+        "-webkit-text-fill-color" := "transparent"
+    }
+proc newTextGradientRainbowClass*(): CssElement =
+    let colours: string = coloursGradientRainbow.join(", ")
+    result = ".text-gradient-rainbow"{
+        #[
+        # Should not be necessarry:
+        "background" := "red",
+        "background" := "-webkit-linear-gradient(left, " & colours & ")",
+        "background" := "-o-linear-gradient(right, " & colours & ")",
+        "background" := "-moz-linear-gradient(right, " & colours & ")",
+        ]#
+        "background" := "linear-gradient(to right, " & colours & ")",
+        "-webkit-background-clip" := "text",
+        "-webkit-text-fill-color" := "transparent",
+        "background-clip" := "text"
+    }
+
 
 const
     # Centering divs (around every page): -------------------------------------
@@ -63,3 +90,8 @@ const
         "flex-wrap" := "wrap",
         "justify-content" := "center"
     }
+
+    # Fancy text: -------------------------------------------------------------
+    classGradientTextPrimaryToSecondary*: CssElement = newTextGradientClass("text-gradient-one", colourPalettePrimary, colourPaletteSecondary)
+    classGradientTextSecondaryToTrinary*: CssElement = newTextGradientClass("text-gradient-two", colourPaletteSecondary, colourPaletteTrinary)
+    classGradientTextRainbow*: CssElement = newTextGradientRainbowClass()

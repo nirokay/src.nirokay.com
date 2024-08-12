@@ -15,7 +15,9 @@ html.add(
         p("This is a showcase of some of my projects and their code documentation.")
     )
 )
-proc linkTo(name, url: string): HtmlElement = li $a(url, "&lt;" & name & " /&gt;")
+proc linkTo(name, url: string): HtmlElement = li(
+    $a(url, "&lt;" & name & " /&gt;").setClass(classGradientTextRainbow)
+)
 var docs: seq[HtmlElement]
 for topic, elements in projectShowcase:
     if elements.len() == 0: continue

@@ -11,4 +11,4 @@ bin           = @["webpagebuilder"]
 # Dependencies
 
 requires "nim >= 2.0.0"
-requires "websitegenerator >= 1.0.4"
+requires "websitegenerator >= 1.0.5"

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck source=/dev/null
 source env-template.sh
 
 ENV_FILE=env.sh
@@ -13,7 +14,7 @@ fi
 eval "$ENV_TEMPLATE"
 
 # Load file:
-# shellcheck disable=SC1090
+# shellcheck source=/dev/null
 source $ENV_FILE
 
 

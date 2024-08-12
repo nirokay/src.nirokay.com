@@ -6,11 +6,9 @@ const
     colourBackgroundMiddle* = "#23252c"
     colourBackgroundLight* = "#2f3139"
 
-    # colourContentBox* = "#23252c" ## `colourContentBox` over `colourBackground`
-    # colourContentBoxTransparent* = rgba(255, 255, 255, 0.05) ## white transparency, old form of `colourContentBox`
-
-    colourButton* = rgba(255, 100, 255, 0.1)
-    colourButtonHover* = rgba(255, 100, 255, 0.2)
+    colourButton* = colourBackgroundLight #rgba(255, 100, 255, 0.1)
+    colourButtonHover* = colourBackgroundMiddle #rgba(255, 100, 255, 0.2)
+    colourButtonClick* = colourBackgroundDark
 
     # Palette:
     colourPalettePrimary* = HotPink ## Vibrant colour
@@ -28,4 +26,30 @@ const
     # Progress bars:
     colourProgressBarForeground* = colourText
     colourProgressBarBackground* = colourPalettePrimary
+
+    # Rainbow:
+    coloursGradientRainbow* = @[
+        rgb(225, 53, 53),
+        rgb(229, 161, 60),
+        rgb(216, 228, 59),
+        rgb(80, 204, 223),
+        rgb(70, 141, 222),
+        rgb(139, 86, 245),
+        rgb(192, 62, 239),
+        rgb(214, 61, 194)
+    ]
+    #[
+        Old colours:
+        rgba(255, 0, 0, 1.0),
+        rgba(255, 154, 0, 1.0),
+        rgba(208, 222, 33, 1.0),
+        rgba(79, 220, 74, 1.0),
+        rgba(63, 218, 216, 1.0),
+        rgba(47, 201, 226, 1.0),
+        rgba(28, 127, 238, 1.0),
+        rgba(95, 21, 242, 1.0),
+        rgba(186, 12, 248, 1.0),
+        rgba(251, 7, 217, 1.0),
+        rgba(255, 0, 0, 1.0)
+    ]#
 

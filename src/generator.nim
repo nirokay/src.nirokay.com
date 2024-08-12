@@ -18,13 +18,6 @@ var
 proc incl*(html: HtmlDocument) = htmlPages.add html ## Includes an HTML page into `htmlPages`
 proc incl*(css: CssStyleSheet) = cssSheets.add css ## Includes a CSS stylesheet into `cssSheets`
 
-
-proc og*(property, content: string): HtmlElement =
-    result = "meta"[
-        "property" => "og:" & property,
-        "content" => content
-    ]
-
 proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = true, cssPath: string = ""): HtmlDocument =
     result = newHtmlDocument(path)
     # Html header stuff:
@@ -37,8 +30,8 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
             "content" => "width=device-width, initial-scale=1"
         ],
         title(title),
-        og("title", title),
-        og("description", description),
+        ogTitle(title),
+        ogDescription(description),
         icon(pathImages & "/favicon.gif", imageGif, "32x32"),
         "link"[
             "rel" => "stylesheet",

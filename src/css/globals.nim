@@ -3,6 +3,7 @@ import classes, colours
 export classes, colours
 
 var globalCssTemplate*: CssStyleSheet = GENERATOR.newCssStyleSheet("---global-css---")
+
 globalCssTemplate.add(
     "html"{
         "color" := colourText,
@@ -24,8 +25,8 @@ globalCssTemplate.add(
     "img"{
         "border-radius" := "10px"
     },
-    "li"{
-        "list-style-type" := "'👉'"
+    "ul > li"{
+        "list-style-type" := "'👉 '"
     },
     "select"{
         "margin" := "20px",
@@ -34,18 +35,28 @@ globalCssTemplate.add(
         "color" := colourText,
         "border" := "3px solid " & colourBackgroundLight
     },
-    "input"{
+    "textarea, input"{
         "color" := colourText,
         "background-color" := colourBackgroundLight,
-        "border-radius" := "2px",
+        "border-radius" := "10px",
         "border-color" := colourBackgroundLight,
-        "padding" := "2px"
+        "padding" := "5px 10px",
+        "margin" := "4px 5px",
+        "accent-color" := $colourPalettePrimary
     },
     "dialog"{
         "color" := colourText,
         "background-color" := colourBackgroundMiddle,
         "border-radius" := "10px",
-        "border-color" := colourBackgroundLight
+        "border-color" := colourBackgroundLight,
+        "width" := "50%",
+        "max-width" := "800px"
+    },
+    "code > pre"{
+        "color" := colourText,
+        "background-color" := rgba(0, 0, 0, 0.25),
+        "padding" := "10px",
+        "border-radius" := "10px"
     },
     classFlexContainer,
     classClickableImage,
@@ -69,19 +80,27 @@ globalCssTemplate.add(
     link("active", colourLinkClick)
 )
 
+
 # Progress bar: ---------------------------------------------------------------
 globalCssTemplate.add(
     "progress"{
-        "margin" := "auto 1px",
-        "width" := "90%",
+        "border-radius" := "10px",
+        "border-color" := colourText,
+        "border-width" := "2px"
+    },
+    "progress::-webkit-progress-bar"{
+        "background-color" := colourText,
+        "border-radius" := "10px"
+    },
+    "progress::-webkit-progress-value"{
+        "background-color" := $colourPalettePrimary,
+        "border-radius" := "10px"
+    },
+    "progress::-moz-progress-bar"{
+        "background-color" := $colourPalettePrimary,
         "border-radius" := "10px"
     }
 )
-for i in ["-webkit-progress-bar", "-webkit-progress-value", "-moz-progress-bar"]:
-    globalCssTemplate.add ("progress::" & i){
-        "border-radius" := "10px",
-        "background-color" := colourText
-    }
 
 
 # Button: ---------------------------------------------------------------------
@@ -95,7 +114,7 @@ for i in ["button", ".button"]:
         "display" := "inline-block",
         "border" := "none",
         "padding" := "10px 20px",
-        "background-color" := colourBackgroundLight,
+        "background-color" := colourButton,
         "cursor" := "pointer",
         "text-decoration" := "none",
         "text-align" := "center",
@@ -103,9 +122,21 @@ for i in ["button", ".button"]:
     globalCssTemplate.add(
         (i & ":hover"){
             "transition" := "0.1s",
-            "background-color" := colourBackgroundMiddle,
+            "background-color" := colourButtonHover
+        },
+        (i & ":active"){
+            "background-color" := colourButtonClick
         }
     )
+
+
+# Fancy text stuff: -----------------------------------------------------------
+globalCssTemplate.add(
+    classGradientTextPrimaryToSecondary,
+    classGradientTextSecondaryToTrinary,
+    classGradientTextRainbow
+)
+
 
 # Centering content inside three divs: ----------------------------------------
 globalCssTemplate.add(

@@ -1,4 +1,4 @@
-import ../generator
+import ../generator, ../css/styles
 
 var html: HtmlDocument = newHtmlPage(
     "Home",
@@ -9,11 +9,12 @@ var html: HtmlDocument = newHtmlPage(
 html.add(
     header(
         h1("nirokay.com"),
-        p("Welcome to my little homepage!")
+        p("Welcome to my little homepage!").setClass(classGradientTextRainbow).attrStyle(
+            "width" := "fit-content",
+            "margin" := "auto"
+        )
     ),
-    article(
-        
-    )
+    article()
 )
 
 incl html

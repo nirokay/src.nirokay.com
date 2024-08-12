@@ -129,7 +129,7 @@ for language in Language:
     )
     html.addToHead(
         importScript("/javascript/game/findus.js").addattr("defer"),
-        og("image", "/resources/images/games/findus/success.jpg")
+        ogImage("/resources/images/games/findus/success.jpg")
     )
     html.add(
         header(
