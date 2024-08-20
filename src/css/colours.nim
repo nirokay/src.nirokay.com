@@ -6,6 +6,9 @@ const
     colourBackgroundMiddle* = "#23252c"
     colourBackgroundLight* = "#2f3139"
 
+    colourBackgroundTransparentDarken* = rgba(0, 0, 0, 0.15)
+    colourBackgroundTransparentLighten* = rgba(255, 255, 255, 0.03)
+
     colourButton* = colourBackgroundLight #rgba(255, 100, 255, 0.1)
     colourButtonHover* = colourBackgroundMiddle #rgba(255, 100, 255, 0.2)
     colourButtonClick* = colourBackgroundDark
@@ -17,6 +20,7 @@ const
 
     # Text:
     colourText* = "#e8e6e3" # Stolen from DarkReader with love <3
+    colourTextGrey* = "#979592"
 
     colourLinkDefault* = colourPalettePrimary
     colourLinkVisited* = colourLinkDefault

@@ -10,24 +10,30 @@ globalCssTemplate.add(
         "background-color" := colourBackgroundDark,
         "font-family" := "Verdana, Geneva, Tahoma, sans-serif"
     },
+
     "h1, h2"{
         "text-align" := "center"
     },
     "h3, h4, h5, h6"{
         "text-align" := "left"
     },
+
     "header > p"{
         "text-align" := "center"
     },
     "article > p"{
         "text-align" := "left"
     },
+
     "img"{
-        "border-radius" := "10px"
+        "border-radius" := "10px",
+        "color" := colourTextGrey
     },
+
     "ul > li"{
         "list-style-type" := "'👉 '"
     },
+
     "select"{
         "margin" := "20px",
         "border-radius" := "10px",
@@ -44,6 +50,7 @@ globalCssTemplate.add(
         "margin" := "4px 5px",
         "accent-color" := $colourPalettePrimary
     },
+
     "dialog"{
         "color" := colourText,
         "background-color" := colourBackgroundMiddle,
@@ -52,12 +59,41 @@ globalCssTemplate.add(
         "width" := "50%",
         "max-width" := "800px"
     },
-    "code > pre"{
+
+    "code > pre, samp > pre"{
         "color" := colourText,
-        "background-color" := rgba(0, 0, 0, 0.25),
+        "background-color" := colourBackgroundTransparentDarken,
         "padding" := "10px",
         "border-radius" := "10px"
     },
+
+    "dl"{
+        "background-color" := colourBackgroundTransparentDarken,
+        "padding" := "10px",
+        "border-radius" := "10px"
+    },
+    "dl > dt"{
+        "text-decoration" := "underline"
+    },
+    "dl > dd"{
+        "color" := colourTextGrey
+    },
+
+    "abbr"{
+        "text-decoration-style" := "dotted"
+    },
+    "s"{
+        "color" := colourTextGrey
+    },
+
+    "fieldset"{
+        "background-color" := colourBackgroundTransparentLighten, #colourBackgroundTransparentDarken,
+        "border-radius" := "10px"
+    },
+    "fieldset > legend"{
+        "text-decoration" := "underline"
+    },
+
     classFlexContainer,
     classClickableImage,
 
@@ -110,7 +146,7 @@ for i in ["button", ".button"]:
         "margin" := "4px 2px",
         "font-size" := "20px",
         "transition" := "0.3s",
-        "border-radius" := "6px",
+        "border-radius" := "10px",
         "display" := "inline-block",
         "border" := "none",
         "padding" := "10px 20px",
