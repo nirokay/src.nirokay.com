@@ -5,12 +5,14 @@ export classes, colours
 var globalCssTemplate*: CssStyleSheet = GENERATOR.newCssStyleSheet("---global-css---")
 
 globalCssTemplate.add(
+    # --- Global: -------------------------------------------------------------
     "html"{
         "color" := colourText,
         "background-color" := colourBackgroundDark,
         "font-family" := "Verdana, Geneva, Tahoma, sans-serif"
     },
 
+    # --- Headers: ------------------------------------------------------------
     "h1, h2"{
         "text-align" := "center"
     },
@@ -18,6 +20,7 @@ globalCssTemplate.add(
         "text-align" := "left"
     },
 
+    # --- Page layout: --------------------------------------------------------
     "header > p"{
         "text-align" := "center"
     },
@@ -25,17 +28,22 @@ globalCssTemplate.add(
         "text-align" := "left"
     },
 
+    # --- Images: -------------------------------------------------------------
     "img"{
         "border-radius" := "10px",
         "color" := colourTextGrey
     },
 
+    # --- Lists: --------------------------------------------------------------
     "ul > li"{
         "list-style-type" := "'👉 '"
     },
 
+
+    # --- User input: ---------------------------------------------------------
     "select"{
         "margin" := "20px",
+        "border-style" := "solid",
         "border-radius" := "10px",
         "background-color" := colourBackgroundLight,
         "color" := colourText,
@@ -44,6 +52,7 @@ globalCssTemplate.add(
     "textarea, input"{
         "color" := colourText,
         "background-color" := colourBackgroundLight,
+        "border-style" := "solid",
         "border-radius" := "10px",
         "border-color" := colourBackgroundLight,
         "padding" := "5px 10px",
@@ -51,6 +60,7 @@ globalCssTemplate.add(
         "accent-color" := $colourPalettePrimary
     },
 
+    # --- Output: -------------------------------------------------------------
     "dialog"{
         "color" := colourText,
         "background-color" := colourBackgroundMiddle,
@@ -60,6 +70,7 @@ globalCssTemplate.add(
         "max-width" := "800px"
     },
 
+    # --- Nerd stuff (computer): ----------------------------------------------
     "code > pre, samp > pre"{
         "color" := colourText,
         "background-color" := colourBackgroundTransparentDarken,
@@ -67,6 +78,46 @@ globalCssTemplate.add(
         "border-radius" := "10px"
     },
 
+    "pre > kbd"{
+        "font-weight" := "bold"
+    },
+    "kbd"{
+        "background-color" := colourBackgroundLight,
+        "padding" := "5px",
+        "border-radius" := "10px",
+        "border-style" := "outset",
+        "border-color" := colourBackgroundLight,
+        "font-weight" := "bold"
+    },
+
+    # --- Quotes: --------------------------------------------------------
+    "div:has(> blockquote)"{
+        "background-color" := colourBackgroundLight,
+        "margin" := "10px auto",
+        "padding" := "15px",
+        "border-radius" := "10px"
+    },
+
+    "blockquote p::before"{
+        "content" := "'\\201C'",
+        "text-weight" := ""
+    },
+    "blockquote p::after"{
+        "content" := "'\\201D'"
+    },
+
+    "blockquote > p"{
+        "font-style" := "italic"
+    },
+    "blockquote + p"{
+        "text-align" := "right"
+    },
+
+    "q"{
+        "font-style" := "italic"
+    },
+
+    # --- Definitions: --------------------------------------------------------
     "dl"{
         "background-color" := colourBackgroundTransparentDarken,
         "padding" := "10px",
@@ -79,6 +130,7 @@ globalCssTemplate.add(
         "color" := colourTextGrey
     },
 
+    # --- Misc: ---------------------------------------------------------------
     "abbr"{
         "text-decoration-style" := "dotted"
     },
@@ -86,6 +138,7 @@ globalCssTemplate.add(
         "color" := colourTextGrey
     },
 
+    # --- Fieldset: -----------------------------------------------------------
     "fieldset"{
         "background-color" := colourBackgroundTransparentLighten, #colourBackgroundTransparentDarken,
         "border-radius" := "10px"
@@ -94,6 +147,7 @@ globalCssTemplate.add(
         "text-decoration" := "underline"
     },
 
+    # --- Classes: ------------------------------------------------------------
     classFlexContainer,
     classClickableImage,
 
@@ -117,7 +171,7 @@ globalCssTemplate.add(
 )
 
 
-# Progress bar: ---------------------------------------------------------------
+# Progress bar and meter: -----------------------------------------------------
 globalCssTemplate.add(
     "progress"{
         "border-radius" := "10px",
@@ -135,6 +189,45 @@ globalCssTemplate.add(
     "progress::-moz-progress-bar"{
         "background-color" := $colourPalettePrimary,
         "border-radius" := "10px"
+    },
+
+    "meter"{
+        "--background" := colourText,
+        "--optimum" := $ForestGreen,
+        "--sub-optimum" := $Gold,
+        "--sub-sub-optimum" := $Crimson,
+
+        "background" := "var(--background)",
+        "border-radius" := "10px",
+        "border-color" := colourText,
+        "border-width" := "2px"
+    },
+    "meter::-webkit-meter-bar"{
+        "background" := "var(--background)",
+        "border-radius" := "10px",
+        "border-color" := colourText,
+        "border-width" := "2px"
+    },
+
+    "meter:-moz-meter-optimum::-moz-meter-bar"{
+        "background" := "var(--optimum)"
+    },
+    "meter::-webkit-meter-optimum-value"{
+        "background" := "var(--optimum)"
+    },
+
+    "meter:-moz-meter-sub-optimum::-moz-meter-bar"{
+        "background" := "var(--sub-optimum)"
+    },
+    "meter::-webkit-meter-suboptimum-value"{
+        "background" := "var(--sub-optimum)"
+    },
+
+    "meter:-moz-meter-sub-sub-optimum::-moz-meter-bar"{
+        "background" := "var(--sub-sub-optimum)"
+    },
+    "meter::-webkit-meter-even-less-good-value"{
+        "background" := "var(--sub-sub-optimum)"
     }
 )
 

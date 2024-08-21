@@ -55,13 +55,15 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
     var
         itemWasSelected: bool = false
         options: seq[HtmlElement] = @[
-            # option("--ignore--", "-- Menu --")
+            option("--ignore--", "🔍 Navigation")
         ]
     for title, path in menuBarPages:
         var newOption: HtmlElement = option(path, title)
+        #[
         if path == page.file:
             newOption.addattr("selected")
             itemWasSelected = true
+        ]#
         options.add newOption
     if not itemWasSelected:
         options[0] = (
