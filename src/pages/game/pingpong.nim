@@ -21,7 +21,7 @@ var html: HtmlDocument = newHtmlPage(
 
 html.addToHead(
     importScript("../javascript/game/pingpong.js").addattr("defer"),
-    og("image", "../resources/images/games/pingpong/cat/pong.png")
+    ogImage("../resources/images/games/pingpong/cat/pong.png")
 )
 
 # Preload images:
@@ -62,39 +62,43 @@ html.add(
         ),
         `div`(
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("-", "Ball Left - Game Over").add(
-                attr("id", "id-ball-left-game-over"),
-                attr("style", "max-width:" & ballWidth & ";align-self:end;")
+            img("-", "Ball Left - Game Over").addattr("id", "id-ball-left-game-over").addStyle(
+                "max-width" := ballWidth,
+                "align-self" := "end"
             ),
             # -----------------------------------------------------------------
-            img("-", "Left cat").add(
-                attr("id", "id-cat-left-picture"),
-                attr("style", "max-height:" & maxCatHeight & ";max-width:" & maxCatWidth & ";width:" & itemsWidth & ";")
+            img("-", "Left cat").addattr("id", "id-cat-left-picture").addStyle(
+                "max-height" := maxCatHeight,
+                "max-width" := maxCatWidth,
+                "width" := itemsWidth
             ),
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("-", "Ball Left").add(
-                attr("id", "id-ball-left"),
-                attr("style", "max-width:" & ballWidth & ";align-self:baseline;")
+            img("-", "Ball Left").addattr("id", "id-ball-left").addStyle(
+                "max-width" := ballWidth,
+                "align-self" := "baseline"
             ),
             # =================================================================
-            img("../resources/images/games/pingpong/table.png", "Ping pong table").addattr(
-                "style",
-                "max-height:" & maxTableHeight & ";max-width:" & maxTableWidth & ";width:" & itemsWidth & ";"
+            img("../resources/images/games/pingpong/table.png", "Ping pong table").addStyle(
+                "max-height" := maxTableHeight,
+                "max-width" := maxTableWidth,
+                "width" := itemsWidth
             ),
             # =================================================================
-            img("-", "Ball Right").add(
-                attr("id", "id-ball-right"),
-                attr("style", "max-width:" & ballWidth & ";align-self:baseline;")
+            img("-", "Ball Right").addattr("id", "id-ball-right").addStyle(
+                "max-width" := ballWidth,
+                "align-self" := "baseline"
             ),
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("-", "Right cat").add(
-                attr("id", "id-cat-right-picture"),
-                attr("style", "max-height:" & maxCatHeight & ";max-width:" & maxCatWidth & ";width:" & itemsWidth & ";transform:scaleX(-1);")
+            img("-", "Right cat").addattr("id", "id-cat-right-picture").addStyle(
+                "max-height" := maxCatHeight,
+                "max-width" := maxCatWidth,
+                "width" := itemsWidth,
+                "transform" := "scaleX(-1)"
             ),
             # -----------------------------------------------------------------
-            img("-", "Ball Right - Game Over").add(
-                attr("id", "id-ball-right-game-over"),
-                attr("style", "max-width:" & ballWidth & ";align-self:end;")
+            img("-", "Ball Right - Game Over").addattr("id", "id-ball-right-game-over").addStyle(
+                "max-width" := ballWidth,
+                "align-self" := "end"
             )
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         ).setClass(classFlexContainer).add(
