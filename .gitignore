@@ -5,6 +5,9 @@
 *.out
 !*/
 
+# Environment/Configs:
+env.sh
+
 # SymLink to repo:
 nirokay.com
 

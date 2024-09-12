@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source env.sh
+# shellcheck source=/dev/null
+source ./env.sh
 
 ./compile-typescript.sh || exit 10
 

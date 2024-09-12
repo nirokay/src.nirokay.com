@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # shellcheck source=/dev/null
-source env-template.sh
+source ./env-template.sh
 
-ENV_FILE=env.sh
+ENV_FILE=./env.sh
 
 # Write file, if not present:
 if [ ! -f env.sh ]; then
