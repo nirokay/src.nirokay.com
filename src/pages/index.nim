@@ -12,7 +12,8 @@ html.add(
         p("Welcome to my little homepage!").setClass(classGradientTextRainbow).addStyle(
             "width" := "fit-content",
             "margin" := "auto"
-        )
+        ),
+        p("If you are here for HzgShowAround, just click " & $a("/HzgShowAround/index.html", "this hyperlink!") & "!")
     ),
     article()
 )

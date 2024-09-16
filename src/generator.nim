@@ -55,7 +55,8 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
     var
         itemWasSelected: bool = false
         options: seq[HtmlElement] = @[
-            option("--ignore--", "🔍 Navigation")
+            option("--ignore--", "🚀 Navigation"),
+            option("HzgShowAround/index.html", "🔍 HzgShowAround")
         ]
     for title, path in menuBarPages:
         var newOption: HtmlElement = option(path, title)
@@ -66,11 +67,7 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
         ]#
         options.add newOption
     if not itemWasSelected:
-        options[0] = (
-            var item = options[0]
-            item.addattr("selected")
-            item
-        )
+        options[0].addattr("selected")
     result = select("Menu bar", "id-menu-bar", options).add(
         attr("onchange", "changeToSelectedPage();"),
         attr("id", "id-menu-bar")
@@ -78,7 +75,10 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
 
 proc getTopBar(html: HtmlDocument): HtmlElement =
     var items: seq[HtmlElement] = @[
-        a("/index.html", $h2("nirokay").addattr("style", "padding-left:10px;color:#e8e6e3;")),
+        a("/index.html", $h2("nirokay").addStyle(
+            "padding-left" := "10px",
+            "color" := "#e8e6e3"
+        )),
         html.getNavSelector()
     ]
     result = `div`(items).setClass("div-menu-bar-container")
