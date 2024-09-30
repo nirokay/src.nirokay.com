@@ -159,15 +159,15 @@ globalCssTemplate.add(
 
 
 # Links: ----------------------------------------------------------------------
-proc link(which: string, colour: CssColour|string): CssElement = ("a:" & which){
+proc link(which: string, colour: CssColour|string, textDecoration: string = "none"): CssElement = ("a:" & which){
     "color" := $colour,
-    "text-decoration" := "none"
+    "text-decoration" := textDecoration
 } ## Css thing constructor
 globalCssTemplate.add(
     link("link", colourLinkDefault),
     link("visited", colourLinkVisited),
-    link("hover", colourLinkHover),
-    link("active", colourLinkClick)
+    link("hover", colourLinkHover, "underline"),
+    link("active", colourLinkClick, "underline")
 )
 
 
