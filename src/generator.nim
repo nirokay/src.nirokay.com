@@ -31,6 +31,7 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
         ],
         title(title),
         ogTitle(title),
+        description(description),
         ogDescription(description),
         icon(pathImages & "/favicon.gif", imageGif, "32x32"),
         "link"[
