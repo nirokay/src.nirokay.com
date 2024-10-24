@@ -31,6 +31,7 @@ globalCssTemplate.add(
     # --- Images: -------------------------------------------------------------
     "img"{
         "border-radius" := "10px",
+        "background-color" := colourBackgroundLight,
         "color" := colourTextGrey
     },
 
@@ -100,7 +101,6 @@ globalCssTemplate.add(
 
     "blockquote p::before"{
         "content" := "'\\201C'",
-        "text-weight" := ""
     },
     "blockquote p::after"{
         "content" := "'\\201D'"
@@ -115,6 +115,11 @@ globalCssTemplate.add(
 
     "q"{
         "font-style" := "italic"
+    },
+
+    # --- Tables: -------------------------------------------------------------
+    "th, td"{
+        "padding" := "10px"
     },
 
     # --- Definitions: --------------------------------------------------------

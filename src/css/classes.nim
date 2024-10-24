@@ -55,6 +55,7 @@ const
         "height" := menuBarHeight,
         "left" := "0",
         "top" := "0",
+        "padding-left" := "10px",
         "background-color" := colourBackgroundMiddle
     }
 

@@ -76,8 +76,7 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
 
 proc getTopBar(html: HtmlDocument): HtmlElement =
     var items: seq[HtmlElement] = @[
-        a("/index.html", $h2("nirokay").addStyle(
-            "padding-left" := "10px",
+        a("/", $h2("nirokay.com").addStyle(
             "color" := "#e8e6e3"
         )),
         html.getNavSelector()
