@@ -31,7 +31,7 @@ globalCssTemplate.add(
     # --- Images: -------------------------------------------------------------
     "img"{
         "border-radius" := "10px",
-        "background-color" := colourBackgroundLight,
+        # "background-color" := colourBackgroundLight, # breaks transparent images
         "color" := colourTextGrey
     },
 
