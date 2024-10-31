@@ -181,7 +181,6 @@ function sendCookie(dictionary: Dictionary) {
             const value: string = dictionary[index] ?? "";
             let newCookieValue: string = index + "=" + value + "; expires=" + expirationDate.toString() + "; ";
             document.cookie = newCookieValue;
-            console.log(newCookieValue)
         }
     }
 }
