@@ -2,7 +2,7 @@
     "Libraries": [
         {
             "name": "nimcatapi",
-            "desc": "allows you to request images from the <a href=\"https://thecatapi\">thecatapi</a> and <a href=\"https://thedogapi\">thedogapi</a>.",
+            "desc": "allows you to request images from the <a href='https://thecatapi'>thecatapi</a> and <a href='https://thedogapi'>thedogapi</a>.",
             "repo": "https://github.com/nirokay/nimcatapi",
             "docs": "https://nirokay.github.io/nim-docs/nimcatapi/nimcatapi.html",
             "lang": "nim"
@@ -50,9 +50,8 @@
         },
         {
             "name": "HzgShowAround",
-            "desc": "is <a href=\"https://nirokay.github.com/HzgShowAround\">a website</a> for the people in the <i>\"Herzogsägmühle\"</i> rehab, showing them around the place with the help of a map and keeping them up-to-date with the newsfeed.",
+            "desc": "is <a href='https://nirokay.github.com/HzgShowAround'>a website</a> for the people in the <i>'Herzogsägmühle'</i> rehab, showing them around the place with the help of a map and keeping them up-to-date with the newsfeed.",
             "repo": "https://github.com/nirokay/hzgshowaround",
-            "docs": "https://nirokay.github.io/nim-docs/hzgshowaround/hzgshowaround.html",
             "lang": "nim"
         },
         {
