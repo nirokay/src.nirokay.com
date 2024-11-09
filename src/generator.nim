@@ -71,6 +71,7 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
         options[0].addattr("selected")
     result = select("Menu bar", "id-menu-bar", options).add(
         attr("onchange", "changeToSelectedPage();"),
+        attr("onfocus", "setSelectedToNavigation();"),
         attr("id", "id-menu-bar")
     )
 
