@@ -78,6 +78,10 @@ const
         "border-radius" := "10px",
         "padding" := "10px"
     }
+    classCodeShowcaseLanguageImage*: CssElement = ".code-showcase-language-image"{
+        "max-height" := "1rem",
+        "border-radius" := "0px"
+    }
     classFlexContainer*: CssElement = ".container-flex"{
         "text-align" := "center",
         "display" := "flex",

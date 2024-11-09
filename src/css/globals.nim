@@ -156,6 +156,7 @@ globalCssTemplate.add(
     classFlexContainer,
     classClickableImage,
 
+    classCodeShowcaseLanguageImage,
     classCodeShowcaseContainer,
     classCodeShowcaseElement,
 
@@ -166,7 +167,8 @@ globalCssTemplate.add(
 # Links: ----------------------------------------------------------------------
 proc link(which: string, colour: CssColour|string, textDecoration: string = "none"): CssElement = ("a:" & which){
     "color" := $colour,
-    "text-decoration" := textDecoration
+    "text-decoration" := textDecoration,
+    "text-decoration-color" := colourText
 } ## Css thing constructor
 globalCssTemplate.add(
     link("link", colourLinkDefault),

@@ -31,8 +31,8 @@ for topic, elements in projectShowcase:
                 of "lua": "lua.png"
                 else: "none.png"
             ),
-            "/"
-        ).addattr("style", "max-height:1em;")
+            element.lang
+        ).setClass(classCodeShowcaseLanguageImage)
         var e: seq[HtmlElement] = @[
             h3(element.name & " " & $image),
             p($b(element.name) & " " & element.desc)
