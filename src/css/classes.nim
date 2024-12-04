@@ -11,8 +11,12 @@ proc newTextGradientClass*(className: string, colourLeft, colourRight: string|Cs
         "-webkit-background-clip" := "text",
         "-webkit-text-fill-color" := "transparent"
     }
-proc newTextGradientRainbowClass*(): CssElement =
+proc newTextGradientRainbowBackgroundClass*(): CssElement =
     let colours: string = coloursGradientRainbow.join(", ")
+    result = ".text-gradient-background-rainbow"{
+        "background" := "linear-gradient(to right, " & colours & ")"
+    }
+proc newTextGradientRainbowClass*(): CssElement =
     result = ".text-gradient-rainbow"{
         #[
         # Should not be necessarry:
@@ -21,7 +25,6 @@ proc newTextGradientRainbowClass*(): CssElement =
         "background" := "-o-linear-gradient(right, " & colours & ")",
         "background" := "-moz-linear-gradient(right, " & colours & ")",
         ]#
-        "background" := "linear-gradient(to right, " & colours & ")",
         "-webkit-background-clip" := "text",
         "-webkit-text-fill-color" := "transparent",
         "background-clip" := "text"
@@ -99,4 +102,5 @@ const
     # Fancy text: -------------------------------------------------------------
     classGradientTextPrimaryToSecondary*: CssElement = newTextGradientClass("text-gradient-one", colourPalettePrimary, colourPaletteSecondary)
     classGradientTextSecondaryToTrinary*: CssElement = newTextGradientClass("text-gradient-two", colourPaletteSecondary, colourPaletteTrinary)
+    classGradientRainbowBackground*: CssElement = newTextGradientRainbowBackgroundClass()
     classGradientTextRainbow*: CssElement = newTextGradientRainbowClass()

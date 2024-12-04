@@ -9,7 +9,7 @@ var html: HtmlDocument = newHtmlPage(
 html.add(
     header(
         h1("nirokay.com"),
-        p("Welcome to my little homepage!").setClass(classGradientTextRainbow).addStyle(
+        p("Welcome to my little homepage!").setClass(classGradientRainbowBackground).setClass(classGradientTextRainbow).addStyle(
             "width" := "fit-content",
             "margin" := "auto"
         ),

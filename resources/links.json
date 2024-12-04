@@ -8,5 +8,10 @@
         "name": "Discord",
         "img": "discord-mark-white.svg",
         "url": "https://discordapp.com/users/279697404259991552"
+    },
+    {
+        "name": "BlueSky",
+        "img": "bluesky.svg",
+        "url": "https://bsky.app/profile/nirokay.com"
     }
 ]

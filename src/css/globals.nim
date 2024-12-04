@@ -270,6 +270,7 @@ for i in ["button", ".button"]:
 globalCssTemplate.add(
     classGradientTextPrimaryToSecondary,
     classGradientTextSecondaryToTrinary,
+    classGradientRainbowBackground,
     classGradientTextRainbow
 )
 
