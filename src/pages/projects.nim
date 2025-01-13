@@ -16,7 +16,7 @@ html.add(
     )
 )
 proc linkTo(name, url: string): HtmlElement = li(
-    $a(url, "&lt;" & name & " /&gt;").setClass(classGradientTextRainbow)
+    $a(url, "&lt;" & name & " /&gt;").setClass(classGradientRainbowBackground).setClass(classGradientTextRainbow)
 )
 var docs: seq[HtmlElement]
 for topic, elements in projectShowcase:
