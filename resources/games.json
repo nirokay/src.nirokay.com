@@ -1,5 +1,12 @@
 [
     {
+        "name": "Cat Ping-Pong",
+        "desc": "Cats playing Ping-Pong - the new competition to online coin flippers!",
+        "file": {
+            "pingpong.html": "Cat Ping-Pong"
+        }
+    },
+    {
         "name": "Findus Love Calculator",
         "desc": "Silly game to determine if Findus, the cat, loves you.",
         "file": {
@@ -8,10 +15,11 @@
         }
     },
     {
-        "name": "Cat Ping-Pong",
-        "desc": "Cats playing Ping-Pong - the new competition to online coin flippers!",
+        "name": "✨ AI Doctor Diagnosis ✨",
+        "desc": "✨ Super-duper blazingly fast AI tool to diagnose ANY illness, better than your doctor!! 🚀",
         "file": {
-            "pingpong.html": "Cat Ping-Pong"
+            "ai-doctor-diagnosis/en.html": "English",
+            "ai-doctor-diagnosis/de.html": "German (Deutsch)"
         }
     }
 ]
