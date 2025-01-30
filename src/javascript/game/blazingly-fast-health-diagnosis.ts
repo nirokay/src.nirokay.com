@@ -2,6 +2,8 @@ const idLanguageVar: string = "page-language-variable"
 const idDiagnosisName: string = "diagnosis-name"
 
 const idLoadingText: string = "loading-text"
+const idPrefixQuestionNumber: string = "quiz-question-nr-"
+const idSuffixQuestionYouTrustEverythingOnTheInternet: string = "nah-scratch-that-this-stays-on"
 
 const idPageLanguage: string = "page-language-variable"
 enum Section {
@@ -25,6 +27,97 @@ function getLanguage() {
     language = element.innerHTML;
 }
 
+
+interface Illness {
+    "enGB": string;
+    "deDE": string;
+}
+interface FatalIllnesses {
+    noSymptoms: Illness,
+    allSymptoms: Illness
+}
+
+function ill(enGB: string, deDE: string): Illness {
+    let result = {
+        "enGB": enGB,
+        "deDE": deDE
+    };
+    return result;
+}
+const illnesses: Illness[] = [
+    ill(
+        "Kidney Failure",
+        "Nierenversagen"
+    ),
+    ill(
+        "Heart Failure",
+        "Herzversagen"
+    ),
+    ill(
+        "Breast Cancer",
+        "Brustkrebs"
+    ),
+    ill(
+        "Skin Cancer",
+        "Hautkrebs"
+    ),
+    ill(
+        "Lung Cancer",
+        "Lungenkrebs"
+    ),
+    ill(
+        "Paper Cut :( ouch",
+        "Papierschnittwunde :( aua"
+    )
+];
+const fatalIllnesses: FatalIllnesses = {
+    noSymptoms: ill(
+        "Death",
+        "Tod"
+    ),
+    allSymptoms: ill(
+        "100% Healthy",
+        "100% Gesund"
+    )
+}
+
+function getAccurateDiagnosisOneHundredPercentNotACompletelyRandomPickFromAList(): Illness {
+    let symptomCount: number = 0;
+    let checkboxCount: number = 0;
+    let defaultIllness: Illness = ill(
+        "Mysterious Disease",
+        "Mysteriöse Krankheit"
+    );
+
+    // Count illness symptoms by checking the checkboxes:
+    for(let i = 0; i < 1024; i++) {
+        const id: string = idPrefixQuestionNumber + i.toString();
+        let element: HTMLInputElement|null = document.getElementById(id) as HTMLInputElement;
+        if(element == undefined || element == null) break;
+
+        if(element.checked) symptomCount++;
+        checkboxCount++;
+    }
+
+    // Pick ~~a random~~ *the correct* disease:
+    let illnessIndex: number = checkboxCount % illnesses.length;
+    let totallyAccurateDiagnosis: Illness = illnesses[illnessIndex];
+
+    // Override for fatal situations (being healthy is counted as fatal, as it should be):
+    switch(symptomCount) {
+        case 0:
+            totallyAccurateDiagnosis = fatalIllnesses.noSymptoms;
+            break;
+        case checkboxCount:
+            totallyAccurateDiagnosis = fatalIllnesses.allSymptoms;
+            break;
+        default:
+            break;
+    }
+
+    return totallyAccurateDiagnosis ?? defaultIllness;
+}
+
 /**
  * Hides all sections, except the specified one
  */
@@ -40,6 +133,9 @@ function showOnlySection(toShow: Section) {
         }
         element.style.display = visibility;
     });
+
+    // Ensure checkbox is always checked:
+    checkSillyCheckbox();
 }
 /**
  * Activates visibility of `Section.idSectionShowingResults`
@@ -85,7 +181,29 @@ function restartQuiz() {
     startQuiz();
 }
 
+function getSillyCheckbox(): HTMLInputElement|null {
+    let id: string = idPrefixQuestionNumber + idSuffixQuestionYouTrustEverythingOnTheInternet;
+    let result: HTMLInputElement|null = document.getElementById(id) as HTMLInputElement;
+    if(result == null || result == undefined) console.warn("Element by id '" + id + "' not found...");
+    return result;
+}
+function checkSillyCheckbox() {
+    let element: HTMLInputElement|null = getSillyCheckbox();
+    if(element == null || element == undefined) return;
+    element.checked = true;
+}
+function sillyCheckbox() {
+    let element: HTMLInputElement|null = getSillyCheckbox();
+    if(element == null || element == undefined) return;
+    checkSillyCheckbox();
+    element.addEventListener("change", () => {
+        setTimeout(() => {
+            element.checked = true;
+        }, 200)
+    });
+}
 
 window.onload = () => {
     getLanguage();
+    sillyCheckbox();
 }

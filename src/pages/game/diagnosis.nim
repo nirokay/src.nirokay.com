@@ -18,7 +18,8 @@ const
     idButtonSubmit: string = "button-quiz-submit"
     idButtonRetryQuiz: string = "button-quiz-retry"
 
-    idQuizQuestionStarting: string = "quiz-question-nr-"
+    idQuizQuestionPrefix: string = "quiz-question-nr-"
+    idQuizQuestionYouTrustEverythingOnTheInternetSuffix: string = "nah-scratch-that-this-stays-on"
 
 const strings = (
     meta: (
@@ -64,9 +65,17 @@ const strings = (
         }
     ),
     question: (
+        instructions: toTable {
+            enGB: "Please submit the symptoms you are experiencing:",
+            deDE: "Bitte kreuzen Sie die Symptome an, die Sie leiden lassen:"
+        },
         additionWriting: toTable {
             enGB: "Feel free to elaborate on your symptoms, this will help our AI model to accurately diagnose you:",
             deDE: "Sie können weitere Symptome hier erläutern. Dies wird unserem KI Modell helfen, Sie besser zu diagnostizieren:"
+        },
+        youTrustEverythingOnTheInternet: toTable {
+            enGB: "You trust everything on the internet.",
+            deDE: "Sie glauben Alles, was im Internet steht."
         },
         list: [
             toTable {
@@ -117,6 +126,14 @@ proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
     htmlTarget.file = "game/ai-doctor-diagnosis/" & $strings.meta.file
 
 
+proc newQuestion(id, text: string, inputAttrs: seq[HtmlElementAttribute] = @[]): HtmlElement =
+    result = `div`(
+        label(id, "").add(
+            input("checkbox", id).add(inputAttrs),
+            rawText text
+        )
+    )
+
 for language in Language:
     setTranslationTarget(language)
     var html: HtmlDocument = newHtmlPage(
@@ -140,6 +157,17 @@ for language in Language:
         )
     )
 
+    var questions: seq[HtmlElement] = @[]
+    for questionCount, question in strings.question.list:
+        let id: string = idQuizQuestionPrefix & $questionCount
+        questions.add newQuestion(id, $question)
+
+    questions.add newQuestion(
+        idQuizQuestionYouTrustEverythingOnTheInternetSuffix,
+        $strings.question.youTrustEverythingOnTheInternet,
+        @[attr("checked")]
+    )
+
     html.add(
         # Static header:
         header(
@@ -156,6 +184,9 @@ for language in Language:
 
             # Quiz screen:
             `div`(
+                fieldset(
+                    @[legend($strings.question.instructions)] & questions
+                ),
                 button($strings.button.submit, "submitQuiz();").setId(idButtonSubmit)
             ).setId(idSectionQuiz).addStyle("display" := "none"),
 
