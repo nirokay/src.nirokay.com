@@ -67,10 +67,12 @@ const strings = (
     ),
     introduction: toTable {
         enGB: @[
-            "Our AI model is trained exclusively on legally-dubious acquired patient data from data brokers and health insurances. This allows us to provide you with a 99.999% accurate diagnosis.",
+            "Our AI model is trained exclusively on legally-dubious acquired patient data from data brokers and health insurances. This allows us to provide you with a 99.999% accurate diagnosis!",
+            "9/10 doctors recommend our service" & $sup("[Citation needed]") & "!"
         ].join("\n"),
         deDE: @[
-            ""
+            "Unser KI Modell ist exklusiv auf legal-fragwürdig beschaffenen Patienteninformation von Data Brokern und Gesundheitsversicherungen trainiert. Dies erlaubt uns Ihnen eine 99.999% korrekte Diagnosis zu Stellen!",
+            "9 von 10 Ärzte empfehlen unser KI Modell" & $sup("[Quelle gebraucht]") & "!"
         ].join("\n")
     },
     question: (
@@ -238,19 +240,6 @@ for language in Language:
     html.addToHead(
         importScript("/javascript/game/blazingly-fast-health-diagnosis.js").addattr("defer")
     )
-
-    var paths: seq[string]
-    for path in walkDirRec("nirokay.com/resources/images/games/ai-doctor-diagnosis/"):
-        if path.dirExists(): continue
-        if not path.fileExists(): continue
-        paths.add path
-    for path in paths:
-        let href: string = path.replace("nirokay.com", "..")
-        html.addToHead("link"[
-            "rel" => "preload",
-            "href" => href,
-            "as" => "sound"
-        ])
 
     html.add( # Wtf is this monstrosity??
         `var`(
