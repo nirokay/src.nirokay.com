@@ -1,6 +1,5 @@
 import std/[tables]
 
-
 type
     Language* = enum
         enGB = "English",
@@ -22,6 +21,3 @@ proc `$`*(str: LanguageString): string =
         echo "Failed to translate language string '" & $$str & "'!"
         return ""
     return str[translationTarget]
-
-
-

@@ -2,6 +2,7 @@ const idLanguageVar: string = "page-language-variable"
 const idDiagnosisName: string = "diagnosis-name"
 
 const idLoadingText: string = "loading-text"
+const idDiagnosisResultText: string = "diagnosis-result-text"
 const idPrefixQuestionNumber: string = "quiz-question-nr-"
 const idSuffixQuestionYouTrustEverythingOnTheInternet: string = "nah-scratch-that-this-stays-on"
 
@@ -12,6 +13,9 @@ enum Section {
     idSectionComputing = "section-computing-results",
     idSectionShowingResults = "section-showing-results"
 }
+
+const soundTada: HTMLAudioElement = new Audio("../../resources/sounds/games/ai-doctor-diagnosis/tada.mp3");
+soundTada.volume = 0.8;
 
 let language: string = "enGB";
 /**
@@ -29,8 +33,9 @@ function getLanguage() {
 
 
 interface Illness {
-    "enGB": string;
-    "deDE": string;
+    [key: string]: string;
+    // "enGB": string;
+    // "deDE": string;
 }
 interface FatalIllnesses {
     noSymptoms: Illness,
@@ -50,24 +55,76 @@ const illnesses: Illness[] = [
         "Nierenversagen"
     ),
     ill(
+        "Meningitis",
+        "Hirnhautentzündung"
+    ),
+    ill(
         "Heart Failure",
         "Herzversagen"
     ),
     ill(
-        "Breast Cancer",
-        "Brustkrebs"
+        "Tollwut",
+        "Rabies"
     ),
     ill(
-        "Skin Cancer",
-        "Hautkrebs"
+        "Tuberculosis",
+        "Tuberkulose"
     ),
     ill(
         "Lung Cancer",
         "Lungenkrebs"
     ),
     ill(
-        "Paper Cut :( ouch",
-        "Papierschnittwunde :( aua"
+        "Paper Cut :( ouch ;-;",
+        "Papierschnittwunde :( aua ;-;"
+    ),
+    ill(
+        "Heart attack",
+        "Herzinfarkt"
+    ),
+    ill(
+        "Dementia",
+        "Demenz"
+    ),
+    ill(
+        "Brain Bleeding",
+        "Hirnblutung"
+    ),
+    ill(
+        "Liver Cirrhosis",
+        "Leberzirrhose"
+    ),
+    ill(
+        "Pneumonia",
+        "Lungenentzündung"
+    ),
+    ill(
+        "Ebola",
+        "Ebola"
+    ),
+    ill(
+        "Breast Cancer",
+        "Brustkrebs"
+    ),
+    ill(
+        "HIV",
+        "HIV"
+    ),
+    ill(
+        "Swine Flu",
+        "Schweinegrippe"
+    ),
+    ill(
+        "Parkinson's Disease",
+        "Parkinson-Krankheit"
+    ),
+    ill(
+        "Malaria",
+        "Malaria"
+    ),
+    ill(
+        "Leprosy",
+        "Lepra"
     )
 ];
 const fatalIllnesses: FatalIllnesses = {
@@ -81,6 +138,17 @@ const fatalIllnesses: FatalIllnesses = {
     )
 }
 
+function everyCheckbox(): HTMLInputElement[] {
+    let result: HTMLInputElement[] = [];
+    for(let i = 0; i < 1024; i++) {
+        const id: string = idPrefixQuestionNumber + i.toString();
+        let element: HTMLInputElement|null = document.getElementById(id) as HTMLInputElement;
+        if(element == undefined || element == null) break;
+        result.push(element);
+    }
+    return result;
+}
+
 function getAccurateDiagnosisOneHundredPercentNotACompletelyRandomPickFromAList(): Illness {
     let symptomCount: number = 0;
     let checkboxCount: number = 0;
@@ -90,17 +158,13 @@ function getAccurateDiagnosisOneHundredPercentNotACompletelyRandomPickFromAList(
     );
 
     // Count illness symptoms by checking the checkboxes:
-    for(let i = 0; i < 1024; i++) {
-        const id: string = idPrefixQuestionNumber + i.toString();
-        let element: HTMLInputElement|null = document.getElementById(id) as HTMLInputElement;
-        if(element == undefined || element == null) break;
-
+    everyCheckbox().forEach((element) => {
         if(element.checked) symptomCount++;
-        checkboxCount++;
-    }
+        checkboxCount++; // could be done with `.length`, but im freaky
+    })
 
     // Pick ~~a random~~ *the correct* disease:
-    let illnessIndex: number = checkboxCount % illnesses.length;
+    let illnessIndex: number = symptomCount % illnesses.length;
     let totallyAccurateDiagnosis: Illness = illnesses[illnessIndex];
 
     // Override for fatal situations (being healthy is counted as fatal, as it should be):
@@ -123,7 +187,6 @@ function getAccurateDiagnosisOneHundredPercentNotACompletelyRandomPickFromAList(
  */
 function showOnlySection(toShow: Section) {
     Object.values(Section).forEach(section => {
-        console.log(section, toShow, section === toShow)
         let visibility: string = "none";
         if(section === toShow) visibility = "initial";
         let element: HTMLElement|null = document.getElementById(section);
@@ -137,18 +200,41 @@ function showOnlySection(toShow: Section) {
     // Ensure checkbox is always checked:
     checkSillyCheckbox();
 }
+
+function setDiagnosisText(text: string, emojiPrefix: string = "", emojiSuffix: string = "") {
+    let element: HTMLElement|null = document.getElementById(idDiagnosisResultText);
+    if(element == null || element == undefined) return;
+    // Wonderful stuff:
+    if(emojiPrefix != "" || emojiSuffix != "") {
+        if(emojiPrefix != "" && emojiSuffix == "") emojiSuffix = emojiPrefix;
+        if(emojiPrefix == "" && emojiSuffix != "") emojiPrefix = emojiSuffix;
+    }
+    if(emojiPrefix != "") emojiPrefix = emojiPrefix + " ";
+    if(emojiSuffix != "") emojiSuffix = " " + emojiSuffix;
+    element.innerText = emojiPrefix + text + emojiSuffix;
+}
+
+/**
+ * Gets called by `spinLoadingText()` after a short waiting time
+ */
+function switchToResults() {
+    showOnlySection(Section.idSectionShowingResults);
+    let result: HTMLElement|null = document.getElementById(idDiagnosisResultText);
+    if(result == null || result == undefined) return;
+    result.classList.add("animated");
+    result.classList.add("intensifies");
+
+    const illness: Illness = getAccurateDiagnosisOneHundredPercentNotACompletelyRandomPickFromAList();
+    const illnessName: string = illness[language] ?? "???";
+    setDiagnosisText(illnessName, "🎉", "🥳");
+    soundTada.play();
+}
+
 /**
  * Activates visibility of `Section.idSectionShowingResults`
  */
 function spinLoadingText() {
     let element: HTMLElement|null = document.getElementById(idLoadingText);
-    /**
-     * Gets waited on and displays results
-     */
-    function switchToResults() {
-        showOnlySection(Section.idSectionShowingResults);
-    }
-
     if(element != null) {
         element.classList.add("animated");
         element.classList.add("twister");
@@ -162,6 +248,10 @@ function spinLoadingText() {
  * Invoked via button -> Shows question
  */
 function startQuiz() {
+    // Remove checked boxes:
+    everyCheckbox().forEach((element) => {
+        element.checked = false;
+    })
     showOnlySection(Section.idSectionQuiz);
 }
 
@@ -199,7 +289,7 @@ function sillyCheckbox() {
     element.addEventListener("change", () => {
         setTimeout(() => {
             element.checked = true;
-        }, 200)
+        }, 100)
     });
 }
 

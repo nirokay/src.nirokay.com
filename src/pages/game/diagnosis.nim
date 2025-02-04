@@ -1,5 +1,5 @@
-import std/[tables]
-import ../../generator
+import std/[tables, strutils, algorithm, os]
+import ../../generator, ../../snippets
 import ../types
 
 const
@@ -13,6 +13,7 @@ const
     idSectionShowingResults: string = "section-showing-results"
 
     idLoadingText: string = "loading-text"
+    idDiagnosisResultText: string = "diagnosis-result-text"
 
     idButtonStartQuiz: string = "button-quiz-start"
     idButtonSubmit: string = "button-quiz-submit"
@@ -64,6 +65,14 @@ const strings = (
             deDE: "<small>* <u>Falls wir falsch liegen sollten (unmöglich), dann haben Sie halt Pech gehabt!</u></small>"
         }
     ),
+    introduction: toTable {
+        enGB: @[
+            "Our AI model is trained exclusively on legally-dubious acquired patient data from data brokers and health insurances. This allows us to provide you with a 99.999% accurate diagnosis.",
+        ].join("\n"),
+        deDE: @[
+            ""
+        ].join("\n")
+    },
     question: (
         instructions: toTable {
             enGB: "Please submit the symptoms you are experiencing:",
@@ -77,10 +86,10 @@ const strings = (
             enGB: "You trust everything on the internet.",
             deDE: "Sie glauben Alles, was im Internet steht."
         },
-        list: [
+        list: @[
             toTable {
-                enGB: "Sniffles",
-                deDE: "Schnupfen"
+                enGB: "Sneezing",
+                deDE: "Niesen"
             },
             toTable {
                 enGB: "Coughing",
@@ -103,16 +112,92 @@ const strings = (
                 deDE: "Muskelschmerzen"
             },
             toTable {
-                enGB: "Dry mouth",
-                deDE: "Trockener Mund"
+                enGB: "Eye pain",
+                deDE: "Augenschmerzen"
+            },
+            toTable {
+                enGB: "Joint pain",
+                deDE: "Gelenkschmerzen"
+            },
+            toTable {
+                enGB: "Stomach pain",
+                deDE: "Bauchschmerzen"
+            },
+            toTable {
+                enGB: "Tooth pain",
+                deDE: "Zahnschmerzen"
             },
             toTable {
                 enGB: "Light sensitivity",
                 deDE: "Lichtempfindlichkeit"
             },
             toTable {
+                enGB: "Dry mouth",
+                deDE: "Trockener Mund"
+            },
+            toTable {
                 enGB: "Trembling",
                 deDE: "Zittern"
+            },
+            toTable {
+                enGB: "Ear pain",
+                deDE: "Ohrenschmerzen"
+            },
+            toTable {
+                enGB: "Abnormal sweating",
+                deDE: "Abnormales Schwitzen"
+            },
+            toTable {
+                enGB: "Abnormal heart rate",
+                deDE: "Abnormale Herzfrequenz"
+            },
+            toTable {
+                enGB: "Abnormal blood pressure",
+                deDE: "Abnormaler Blutdruck"
+            },
+            toTable {
+                enGB: "Diarrhea",
+                deDE: "Durchfall"
+            },
+            toTable {
+                enGB: "Hair loss",
+                deDE: "Haarausfall"
+            },
+            toTable {
+                enGB: "Itching",
+                deDE: "Juckreiz"
+            },
+            toTable {
+                enGB: "Tiredness",
+                deDE: "Müdigkeit"
+            },
+            toTable {
+                enGB: "Weight loss or gain",
+                deDE: "Gewichtsabnahme oder -zunahme"
+            },
+            toTable {
+                enGB: "Abnormal body temperature",
+                deDE: "Abnormale Körpertemperatur"
+            },
+            toTable {
+                enGB: "Vomiting",
+                deDE: "Erbrechen"
+            },
+            toTable {
+                enGB: "Anxiety",
+                deDE: "Angstzustände"
+            },
+            toTable {
+                enGB: "Flatulence",
+                deDE: "Blähungen"
+            },
+            toTable {
+                enGB: "Abnormal urine colour",
+                deDE: "Abnormale Urinfarbe"
+            },
+            toTable {
+                enGB: "Frequent urination",
+                deDE: "Häufiges Urinieren"
             }
         ]
     )
@@ -125,13 +210,20 @@ proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
     htmlTarget = htmlSource
     htmlTarget.file = "game/ai-doctor-diagnosis/" & $strings.meta.file
 
-
 proc newQuestion(id, text: string, inputAttrs: seq[HtmlElementAttribute] = @[]): HtmlElement =
     result = `div`(
         label(id, "").add(
             input("checkbox", id).add(inputAttrs),
             rawText text
         )
+    )
+
+proc newButton(text: string, action: string): HtmlElement =
+    result = `div`(
+        button(text, action)
+    ).addStyle(
+        "margin" := "20px auto",
+        "text-align" := "center"
     )
 
 for language in Language:
@@ -142,10 +234,23 @@ for language in Language:
         $strings.meta.file,
         includeInMenuBar = false
     )
-    html.setStylesheet(newCssStyleSheet(urlObnoxiousCss))
+    html.setStylesheet(websitegenerator.newCssStyleSheet(urlObnoxiousCss))
     html.addToHead(
         importScript("/javascript/game/blazingly-fast-health-diagnosis.js").addattr("defer")
     )
+
+    var paths: seq[string]
+    for path in walkDirRec("nirokay.com/resources/images/games/ai-doctor-diagnosis/"):
+        if path.dirExists(): continue
+        if not path.fileExists(): continue
+        paths.add path
+    for path in paths:
+        let href: string = path.replace("nirokay.com", "..")
+        html.addToHead("link"[
+            "rel" => "preload",
+            "href" => href,
+            "as" => "sound"
+        ])
 
     html.add( # Wtf is this monstrosity??
         `var`(
@@ -157,13 +262,17 @@ for language in Language:
         )
     )
 
+    var questionList: seq[LanguageString] = strings.question.list
+    questionList.sort do (x, y: LanguageString) -> int:
+        result = cmp(toLower($x), toLower($y))
+
     var questions: seq[HtmlElement] = @[]
-    for questionCount, question in strings.question.list:
+    for questionCount, question in questionList:
         let id: string = idQuizQuestionPrefix & $questionCount
         questions.add newQuestion(id, $question)
 
     questions.add newQuestion(
-        idQuizQuestionYouTrustEverythingOnTheInternetSuffix,
+        idQuizQuestionPrefix & idQuizQuestionYouTrustEverythingOnTheInternetSuffix,
         $strings.question.youTrustEverythingOnTheInternet,
         @[attr("checked")]
     )
@@ -179,7 +288,8 @@ for language in Language:
         article(
             # Start quiz screen:
             `div`(
-                button($strings.button.start, "startQuiz();").setId(idButtonStartQuiz)
+                pc($strings.introduction),
+                newButton($strings.button.start, "startQuiz();").setId(idButtonStartQuiz)
             ).setId(idSectionStartQuiz).addStyle("display" := "initial"),
 
             # Quiz screen:
@@ -187,7 +297,7 @@ for language in Language:
                 fieldset(
                     @[legend($strings.question.instructions)] & questions
                 ),
-                button($strings.button.submit, "submitQuiz();").setId(idButtonSubmit)
+                newButton($strings.button.submit, "submitQuiz();").setId(idButtonSubmit)
             ).setId(idSectionQuiz).addStyle("display" := "none"),
 
             # Computing screen:
@@ -197,8 +307,13 @@ for language in Language:
 
             # Results display screen:
             `div`(
-                button($strings.button.retry, "restartQuiz();").setId(idButtonRetryQuiz).setId(idButtonRetryQuiz)
+                pc($strings.diagnosis.youHaveStart),
+                h2("???").setId(idDiagnosisResultText),
+                pc($strings.diagnosis.youHaveEnd),
+                newButton($strings.button.retry, "restartQuiz();").setId(idButtonRetryQuiz).setId(idButtonRetryQuiz)
             ).setId(idSectionShowingResults).addStyle("display" := "none")
+        ).addStyle(
+            "margin" := "50px 10%"
         )
     )
 
