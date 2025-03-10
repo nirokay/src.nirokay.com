@@ -26,8 +26,8 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
         htmlComment("Generated: " & timeStamp()),
         charset("utf-8"),
         "meta"[
-            "name" => "viewport",
-            "content" => "width=device-width, initial-scale=1"
+            "name" -= "viewport",
+            "content" -= "width=device-width, initial-scale=1"
         ],
         title(title),
         ogTitle(title),
@@ -35,9 +35,9 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
         ogDescription(description),
         icon(pathImages & "/favicon.gif", imageGif, "32x32"),
         "link"[
-            "rel" => "stylesheet",
-            "href" => "/styles.css",
-            "title" => "Absolute path to global css"
+            "rel" -= "stylesheet",
+            "href" -= "/styles.css",
+            "title" -= "Absolute path to global css"
         ],
         importScript("/javascript/menu-bar.js")
     )
@@ -47,8 +47,8 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
     if cssPath != "":
         result.addToHead(
             "link"[
-                "rel" => "stylesheet",
-                "href" => "/" & cssPath
+                "rel" -= "stylesheet",
+                "href" -= "/" & cssPath
             ]
         )
 

@@ -6,6 +6,11 @@ type
         deDE = "German (Deutsch)"
     LanguageString* = Table[Language, string]
 
+proc newLanguageString*(en, de: string): LanguageString =
+    result[enGB] = en
+    result[deDE] = de
+proc lang*(en, de: string): LanguageString = newLanguageString(en, de)
+
 var translationTarget: Language = enGB
 proc setTranslationTarget*(language: Language) =
     ## Sets the target language

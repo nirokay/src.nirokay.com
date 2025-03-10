@@ -1,9 +1,11 @@
 import std/[json, tables, options]
+import pages/types
 
 type ResourceFile* = enum
     resourceLinks = "resources/links.json",
     resourceProjects = "resources/projects.json",
-    resourceGames = "resources/games.json"
+    resourceGames = "resources/games.json",
+    resourceGameWhoSaidWhat = "resources/game/who-said-what.json"
 
 proc parseResource[T](resource: ResourceFile, convertTo: typedesc[T]): T =
     let file: string = $resource
@@ -47,8 +49,21 @@ type
         name, desc: string,
         file: OrderedTable[string, string]
     ]
+
+type
+    WhoSaidWhatAuthor* = object
+        imageUrl*, allegiance*: string
+    WhoSaidWhatAuthors* = OrderedTable[string, WhoSaidWhatAuthor]
+    WhoSaidWhatThesis* = object
+        enGB*, deDE*, source*, author*: string
+
+    WhoSaidWhatFileStructure* = object
+        authors*: WhoSaidWhatAuthors
+        thesis*: seq[WhoSaidWhatThesis]
+
 const
     # JSONs: ------------------------------------------------------------------
     linksToSocials* = resourceLinks.parseResource(seq[ImageLink])
     projectShowcase* = resourceProjects.parseResource(OrderedTable[string, seq[ProjectElement]])
     gamesJson* = resourceGames.parseResource(seq[Game])
+    whoSaidWhatJson* = resourceGameWhoSaidWhat.parseResource(WhoSaidWhatFileStructure)

@@ -98,11 +98,11 @@ proc question(question: LanguageString, questionType: QuestionType = yesNo, id: 
         )
     var
         input = "input"[
-            "type" => inputType,
-            "name" => questionName
+            "type" -= inputType,
+            "name" -= questionName
         ]
         label = "label"[
-            "for" => questionName
+            "for" -= questionName
         ]
     if id != "": input.tagAttributes.add(attr("id", id))
     if inputType == "text": input.addattr("placeholder", $strings.request.typeHere)

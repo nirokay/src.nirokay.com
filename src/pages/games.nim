@@ -34,7 +34,7 @@ html.add(
 incl html
 
 import game/[
-    findus, pingpong, diagnosis
+    findus, pingpong, diagnosis, whoSaidWhat
 ]
 export
-    findus, pingpong, diagnosis
+    findus, pingpong, diagnosis, whoSaidWhat

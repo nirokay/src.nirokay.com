@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "'Who Said What' game data",
+    "type": "object",
+    "properties": {
+        "authors": {
+            "description": "List of authors used in the game",
+            "type": "object",
+            "additionalProperties": {
+                "imageUrl": {
+                    "description": "Link to their portrait picture",
+                    "type": "string"
+                },
+                "allegiance": {
+                    "description": "e.g. political party",
+                    "type": "string"
+                }
+            }
+        },
+        "thesis": {
+            "description": "List of thesis made",
+            "type": "array",
+            "items": {
+                "description": "Thesis object",
+                "type": "object",
+                "properties": {
+                    "enGB": {
+                        "description": "Quote translated to English",
+                        "type": "string"
+                    },
+                    "deDE": {
+                        "description": "Quote in German",
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "enGB", "deDE", "author", "statement"
+                ]
+            }
+        }
+    }
+}

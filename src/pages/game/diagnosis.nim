@@ -1,4 +1,4 @@
-import std/[tables, strutils, algorithm, os]
+import std/[tables, strutils, algorithm]
 import ../../generator, ../../snippets
 import ../types
 

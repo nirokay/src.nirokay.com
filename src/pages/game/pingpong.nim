@@ -33,9 +33,9 @@ for path in walkDirRec("nirokay.com/resources/images/games/pingpong/"):
 for path in paths:
     let href: string = path.replace("nirokay.com", "..")
     html.addToHead("link"[
-        "rel" => "preload",
-        "href" => href,
-        "as" => "image"
+        "rel" -= "preload",
+        "href" -= href,
+        "as" -= "image"
     ])
 
 html.add(
