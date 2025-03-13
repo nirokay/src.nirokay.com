@@ -11,11 +11,17 @@
                     "description": "Link to their portrait picture",
                     "type": "string"
                 },
-                "allegiance": {
-                    "description": "e.g. political party",
-                    "type": "string"
+                "allegiances": {
+                    "description": "e.g. political parties",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
-            }
+            },
+            "required": [
+                "allegiances"
+            ]
         },
         "thesis": {
             "description": "List of thesis made",
@@ -36,6 +42,9 @@
                         "type": "string"
                     },
                     "author": {
+                        "type": "string"
+                    },
+                    "note": {
                         "type": "string"
                     }
                 },

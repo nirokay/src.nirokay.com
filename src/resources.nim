@@ -52,7 +52,8 @@ type
 
 type
     WhoSaidWhatAuthor* = object
-        imageUrl*, allegiance*: string
+        imageUrl*: Option[string] = some("unknown.svg")
+        allegiances*: seq[string]
     WhoSaidWhatAuthors* = OrderedTable[string, WhoSaidWhatAuthor]
     WhoSaidWhatThesis* = object
         enGB*, deDE*, source*, author*: string
