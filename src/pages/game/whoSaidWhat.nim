@@ -1,4 +1,4 @@
-import std/[tables, strutils, options]
+import std/[tables, strutils, strformat, options]
 import ../../generator, ../../snippets, ../../resources, ../../css/styles
 import ../types
 
@@ -7,7 +7,6 @@ const
     idThesisButtonsDiv: string = "id-thesis-buttons-"
     idThesisQuotePrefix: string = "id-thesis-quote-"
     idThesisAuthorPrefix: string = "id-thesis-author-"
-    idThesisAuthorDivPrefix: string = "id-thesis-author-div-"
     idThesisButtonAfdPrefix: string = "id-thesis-button-afd-"
     idThesisButtonOtherPrefix: string = "id-thesis-button-other-"
     idThesisCorrectAnswerPrefix: string = "id-thesis-correct-answer-var-"
@@ -89,13 +88,14 @@ proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
     htmlTarget = htmlSource
     htmlTarget.file = "game/who-said-what/" & $strings.meta.file
 
-
-proc getAuthor(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
+proc getAuthor(thesis: WhoSaidWhatThesis): WhoSaidWhatAuthor =
     let author: WhoSaidWhatAuthor = block:
         if whoSaidWhatJson.authors.hasKey(thesis.author):
             whoSaidWhatJson.authors[thesis.author]
         else:
             WhoSaidWhatAuthor()
+proc getAuthorDiv(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
+    let author: WhoSaidWhatAuthor = thesis.getAuthor()
     let imgUrl: string = block:
         let path: string = author.imageUrl.get("unknown.svg")
         if path.startsWith("https://") or path.startsWith("http://") or path.startsWith("/"):
@@ -117,7 +117,7 @@ proc getAuthor(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
     )
 
     result = `div`(
-        img(imgUrl, $strings.data.authorImgAlt).setClass(classAuthorImage).setId(idThesisAuthorDivPrefix & $id),
+        img(imgUrl, $strings.data.authorImgAlt).setClass(classAuthorImage),
         p(thesis.author & allegiances),
         source
     ).setClass(idThesisAuthorPrefix & $id).addStyle("display" := "none")
@@ -125,15 +125,29 @@ proc getAuthor(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
 proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
     let
         quote: LanguageString = lang(thesis.enGB, thesis.deDE)
-        authorDiv: HtmlElement = thesis.getAuthor(id)
+        authorDiv: HtmlElement = thesis.getAuthorDiv(id)
+
+        afdQuote: bool = block:
+            var yes: bool = false
+            echo thesis.getAuthor().allegiances
+            for allegiance in thesis.getAuthor().allegiances:
+                if allegiance.toLower() in ["afd", "ex-afd"]: yes = true
+            yes
+
+        buttonFunctionCorrect: string = &"submitQuestion({id}, {true});"
+        buttonFunctionIncorrect: string = &"submitQuestion({id}, {false});"
+
+        buttonWasSaidByAfd: string = if afdQuote: buttonFunctionCorrect else: buttonFunctionIncorrect
+        buttonWasNotSaidByAfd: string = if not afdQuote: buttonFunctionCorrect else: buttonFunctionIncorrect
+
     result = `div`(
         q($quote).setId(idThesisQuotePrefix & $id).setClass(classBullshitQuote),
         `div`(
             authorDiv,
             `div`(
                 p($strings.data.button.question),
-                button($strings.data.button.wasSaidByAfd, "").addStyle("background-color" := colourGreen).setClass(idThesisButtonAfdPrefix & $id),
-                button($strings.data.button.wasNotSaidByAfd, "").addStyle("background-color" := colourRed).setClass(idThesisButtonOtherPrefix & $id)
+                button($strings.data.button.wasSaidByAfd, buttonWasSaidByAfd).addStyle("background-color" := colourGreen).setClass(idThesisButtonAfdPrefix & $id),
+                button($strings.data.button.wasNotSaidByAfd, buttonWasNotSaidByAfd).addStyle("background-color" := colourRed).setClass(idThesisButtonOtherPrefix & $id)
             ).setId(idThesisButtonsDiv & $id)
         ).setClass(classFlexContainer).addStyle("align-items" := "center")
     ).setId(idThesisDivPrefix & $id).setClass(classQuestionBlock)

@@ -10,6 +10,25 @@
         "Björn Höcke": {
             "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Bj%C3%B6rn_H%C3%B6cke_%28cropped%29.jpg/1024px-Bj%C3%B6rn_H%C3%B6cke_%28cropped%29.jpg",
             "allegiances": ["AfD"]
+        },
+        "Marcel Grauf": {
+            "allegiances": ["AfD"]
+        },
+        "Kai Borrmann": {
+            "imageUrl": "kai-borrmann.jpg",
+            "allegiances": ["AfD"]
+        },
+        "Andreas Geithe": {
+            "allegiances": ["AfD"]
+        },
+        "Mirko Welsch": {
+            "allegiances": ["Ex-AfD"]
+        },
+        "Kay-Uwe Ziegler": {
+            "allegiances": ["AfD"]
+        },
+        "Benjamin Nolte": {
+            "allegiances": ["AfD"]
         }
     },
     "thesis": [
@@ -18,6 +37,48 @@
             "deDE": "1000 Jahre Deutschland! Ich gebe euch nicht her.",
             "source": "https://afd-verbot.de/beweise/73803",
             "author": "Björn Höcke"
+        },
+        {
+            "enGB": "Sieg Heil!",
+            "deDE": "Sieg Heil!",
+            "source": "https://afd-verbot.de/beweise/31014",
+            "author": "Marcel Grauf"
+        },
+        {
+            "enGB": "[...] I don't care about the stuff with the jews, I liked that time.",
+            "deDE": "[...] das mit den Juden ist mir völlig egal, ich fand einfach die Zeit dufte.",
+            "source": "https://afd-verbot.de/beweise/48248",
+            "author": "Kai Borrmann"
+        },
+        {
+            "enGB": "We will not get a change of course, without overthrowing the government and revolution",
+            "deDE": "Ohne Umsturz und Revolution erreichen wir hier keinen Kurswechsel mehr.",
+            "source": "https://afd-verbot.de/beweise/62781",
+            "author": "Alois Ostermair"
+        },
+        {
+            "enGB": "We should found a SA [<a href='https://en.wikipedia.org/wiki/Sturmabteilung'>Sturmabteilung</a>] and clean up.",
+            "deDE": "Wir sollten eine SA [<a href='https://de.wikipedia.org/wiki/Sturmabteilung'>Sturmabteilung</a>] gründen und aufräumen.",
+            "source": "https://afd-verbot.de/beweise/48818",
+            "author": "Andreas Geithe"
+        },
+        {
+            "enGB": "Deport Antifa to Buchenwald [former concentration camp]. Work instead of left terror[ism]!",
+            "deDE": "Abschiebung der Antifa nach Buchenwald [ehemaliges Konzentrationslager]. Arbeit statt Linksterror!",
+            "source": "https://afd-verbot.de/beweise/81223",
+            "author": "Mirko Welsch"
+        },
+        {
+            "enGB": "Everything for Germany [<a href='https://de.wikipedia.org/wiki/Alles_f%C3%BCr_Deutschland'>Nazi parole</a>]!",
+            "deDE": "Alles für Deutschland [<a href='https://de.wikipedia.org/wiki/Alles_f%C3%BCr_Deutschland'>Naziparole</a>]!",
+            "source": "",
+            "author": "Kay-Uwe Ziegler"
+        },
+        {
+            "enGB": "Germany for Germans.",
+            "deDE": "Deutschland den Deutschen.",
+            "source": "https://afd-verbot.de/beweise/90971",
+            "author": "Benjamin Nolte"
         }
     ]
 }
