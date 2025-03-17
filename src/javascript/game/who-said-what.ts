@@ -6,6 +6,21 @@ const idThesisAuthorPrefix: string = "id-thesis-author-"
 const idThesisButtonAfdPrefix: string = "id-thesis-button-afd-"
 const idThesisButtonOtherPrefix: string = "id-thesis-button-other-"
 
+const idButtonStartQuestions: string = "id-button-start"
+const idButtonSkipQuestion: string = "id-button-skip"
+const idButtonNextQuestion: string = "id-button-next"
+const buttonIds: Array<string> = [idButtonStartQuestions, idButtonSkipQuestion, idButtonNextQuestion]
+
+function displayOnlyButton(id: string) {
+    buttonIds.forEach((id) => {
+        let button: HTMLButtonElement|null = document.getElementById(id) as HTMLButtonElement;
+        if(button != null && button != undefined) button.style.display = "none";
+    });
+    let button: HTMLButtonElement|null = document.getElementById(id) as HTMLButtonElement;
+    if(button != null && button != undefined) button.style.display = "block";
+}
+
+
 let lastQuestionsBuffer: Array<number> = [];
 function addToBuffer(id: number) {
     lastQuestionsBuffer.push(id);
@@ -28,7 +43,7 @@ function everyGameQuestionId(): Array<number> {
     let result: Array<number> = [];
     for (let id = 0; id < 1024; id++) {
         let element: HTMLElement|null = getQuestion(id);
-        if(element != null && element != undefined) break;
+        if(element == null || element == undefined) break;
         result.push(id);
     }
     return result;
@@ -42,7 +57,7 @@ function hideAllQuestions() {
         let buttons: HTMLElement|null = getQuestionButtons(id);
         if(question != null && question != undefined) question.style.display = "none";
         if(author != null && author != undefined) author.style.display = "none";
-        if(buttons != null && buttons != undefined) buttons.style.display = "initial";
+        if(buttons != null && buttons != undefined) buttons.style.display = "block";
 
         try {
             question?.classList.remove("thesis-wrong-answer");
@@ -56,7 +71,7 @@ function hideAllQuestions() {
 function viewQuestionWithId(id: number) {
     hideAllQuestions();
     let element: HTMLElement|null = getQuestion(id);
-    if(element != null && element != undefined) element.style.display = "initial";
+    if(element != null && element != undefined) element.style.display = "block";
 }
 function viewRandomQuestion() {
     let ids: Array<number> = everyGameQuestionId();
@@ -97,16 +112,30 @@ function submitQuestion(id: number, correct: boolean) {
     let buttons: HTMLElement|null = getQuestionButtons(id);
     if(buttons != null && buttons != undefined) buttons.style.display = "none";
     let author: HTMLElement|null = getQuestionAuthor(id);
-    if(author != null && buttons != undefined) author.style.display = "initial";
+    if(author != null && author != undefined) {
+        author.style.display = "block";
+    } else {
+        console.warn("Could not display author", author);
+    }
+    displayOnlyButton(idButtonNextQuestion);
 }
 
 
-function gameWhoSaidWhatInit() {
-    // hideAllQuestions();
+function whoSaidWhatStart() {
     viewRandomQuestion();
+    displayOnlyButton(idButtonSkipQuestion);
+}
+function whoSaidWhatSkip() {
+    viewRandomQuestion();
+    displayOnlyButton(idButtonSkipQuestion);
+}
+function whoSaidWhatNext() {
+    viewRandomQuestion();
+    displayOnlyButton(idButtonSkipQuestion);
 }
 
 
 document.onload = () => {
-    gameWhoSaidWhatInit();
+    displayOnlyButton(idButtonStartQuestions);
+    hideAllQuestions();
 };

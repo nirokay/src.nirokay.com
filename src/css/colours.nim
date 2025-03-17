@@ -32,7 +32,29 @@ const
     colourProgressBarBackground* = colourPalettePrimary
 
     # Rainbow:
-    coloursGradientRainbow* = @[
+    colourMagenta* = "#F46ECE"
+    colourRed* = "#F4716E"
+    colourOrange* = "#F4956E"
+    colourYellow* = "#F4E96E"
+    colourGreen* = "#8BF46E"
+    colourTurquoise* = "#6EF4D0"
+    colourLightBlue* = "#6EADF4"
+    colourBlue* = "#776EF4"
+    colourPurple* = "#C36EF4"
+
+    coloursGradientRainbow*: seq[string] = @[
+        colourMagenta,
+        colourRed,
+        colourOrange,
+        colourYellow,
+        colourGreen,
+        colourTurquoise,
+        colourLightBlue,
+        colourBlue,
+        colourPurple
+    ]
+    #[ Old colours:
+    @[
         rgb(225, 53, 53),
         rgb(229, 161, 60),
         rgb(216, 228, 59),
@@ -42,18 +64,6 @@ const
         rgb(192, 62, 239),
         rgb(214, 61, 194)
     ]
-    #[
-        Old colours:
-        rgba(255, 0, 0, 1.0),
-        rgba(255, 154, 0, 1.0),
-        rgba(208, 222, 33, 1.0),
-        rgba(79, 220, 74, 1.0),
-        rgba(63, 218, 216, 1.0),
-        rgba(47, 201, 226, 1.0),
-        rgba(28, 127, 238, 1.0),
-        rgba(95, 21, 242, 1.0),
-        rgba(186, 12, 248, 1.0),
-        rgba(251, 7, 217, 1.0),
-        rgba(255, 0, 0, 1.0)
     ]#
+
 

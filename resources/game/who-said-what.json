@@ -1,6 +1,6 @@
 {
     "authors": {
-        "AfD": {
+        "Junge Alternative": {
             "allegiances": ["AfD"]
         },
         "Alice Weidel": {
@@ -12,23 +12,47 @@
             "allegiances": ["AfD"]
         },
         "Marcel Grauf": {
-            "allegiances": ["AfD"]
+            "imageUrl": "https://www.lebensbund.org/wp-content/uploads/2022/07/Grauf1-599x1024.jpg",
+            "allegiances": ["AfD", "Ex-NPD"]
         },
         "Kai Borrmann": {
             "imageUrl": "kai-borrmann.jpg",
             "allegiances": ["AfD"]
         },
         "Andreas Geithe": {
+            "imageUrl": "andreas-geithe.jpg",
             "allegiances": ["AfD"]
         },
         "Mirko Welsch": {
+            "imageUrl": "https://www.queer.de/img/mirko-welsch-toleranz-600x396.jpg",
             "allegiances": ["Ex-AfD"]
         },
         "Kay-Uwe Ziegler": {
+            "imageUrl": "kay-uwe-ziegler.jpg",
             "allegiances": ["AfD"]
         },
         "Benjamin Nolte": {
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Benjamin_Nolte_%282023%29.jpg",
             "allegiances": ["AfD"]
+        },
+        "Alois Ostermair": {
+            "allegiances": ["Ex-AfD"]
+        },
+        "Adolf Hitler": {
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Bundesarchiv_Bild_183-H1216-0500-002%2C_Adolf_Hitler.jpg",
+            "allegiances": ["NSDAP"]
+        },
+        "Joseph Goebbels": {
+            "imageUrl": "",
+            "allegiances": ["NSDAP"]
+        },
+        "Heinrich Himmler": {
+            "imageUrl": "",
+            "allegiances": ["NSDAP"]
+        },
+        "Hermann Göring": {
+            "imageUrl": "",
+            "allegiances": ["NSDAP"]
         }
     },
     "thesis": [
@@ -42,6 +66,18 @@
             "enGB": "Sieg Heil!",
             "deDE": "Sieg Heil!",
             "source": "https://afd-verbot.de/beweise/31014",
+            "author": "Marcel Grauf"
+        },
+        {
+            "enGB": "After all, we now have so many foreigners in the country that a Holocaust would be worth it again.",
+            "deDE": "Immerhin haben wir jetzt so viele Ausländer im Land, dass sich ein Holocaust mal wieder lohnen würde.",
+            "source": "https://afd-verbot.de/beweise/11258",
+            "author": "Marcel Grauf"
+        },
+        {
+            "enGB": "I'm so full of hate. The harassment is growing. I would not judge anyone who lights an inhabited asylum seekers on fire.",
+            "deDE": "Ich bin so voller Hass. Die Belästigungen werden auch immer mehr. Ich würde niemanden verurteilen, der ein bewohntes Asylantenheim anzündet.",
+            "source": "https://afd-verbot.de/beweise/99352",
             "author": "Marcel Grauf"
         },
         {
@@ -71,7 +107,7 @@
         {
             "enGB": "Everything for Germany [<a href='https://de.wikipedia.org/wiki/Alles_f%C3%BCr_Deutschland'>Nazi parole</a>]!",
             "deDE": "Alles für Deutschland [<a href='https://de.wikipedia.org/wiki/Alles_f%C3%BCr_Deutschland'>Naziparole</a>]!",
-            "source": "",
+            "source": "https://afd-verbot.de/beweise/40707",
             "author": "Kay-Uwe Ziegler"
         },
         {
@@ -79,6 +115,78 @@
             "deDE": "Deutschland den Deutschen.",
             "source": "https://afd-verbot.de/beweise/90971",
             "author": "Benjamin Nolte"
+        },
+        {
+            "enGB": "The future of the German people lies in ourselves alone.",
+            "deDE": " In uns selbst allein liegt die Zukunft des deutschen Volkes.",
+            "source": "https://www.zitate7.de/autor/Adolf+Hitler/",
+            "author": "Adolf Hitler"
+        },
+        {
+            "enGB": "And we know that Germany is in front of us, Germany marches in us and behind us.",
+            "deDE": "Und wir wissen, vor uns liegt Deutschland, in uns marschiert Deutschland und hinter uns.",
+            "source": "https://www.zitate7.de/autor/Adolf+Hitler/",
+            "author": "Adolf Hitler"
+        },
+        {
+            "enGB": "If you have power, you will also get your right!",
+            "deDE": "Wer Macht besitzt, bekommt dann auch sein Recht!",
+            "source": "https://www.zitate7.de/autor/Joseph+Goebbels/",
+            "author": "Joseph Goebbels"
+        },
+        {
+            "enGB": "We will definitely have finished the migration [...] in a year; then nobody will come. Because now there must be purification.",
+            "deDE": "Die Völkerwanderung [...] werden wir in einem Jahr bestimmt fertig haben; dann wandert keiner mehr. Denn jetzt muss reiner Tisch gemacht werden.",
+            "source": "https://www.zitate7.de/autor/Heinrich+Himmler/",
+            "author": "Heinrich Himmler"
+        },
+        {
+            "enGB": "The [minority group] has to understand one thing clearly - they have to get out!",
+            "deDE": " [Die Minderheitsgruppe] muss eins klar verstehen, er muss raus!",
+            "source": "https://www.zitate7.de/autor/Hermann+G%C3%B6ring/",
+            "author": "Hermann Göring"
+        },
+        {
+            "enGB": "What we have to fight for, is to secure the existence and reproduction of our race and our people [...].",
+            "deDE": "Wofür wir kämpfen müssen, ist die Sicherung der Existenz und Fortpflanzung unserer Rasse und unseres Volkes [...].",
+            "source": "https://de.alphahistory.com/Nazi-Deutschland/Nazi-Deutschland-Zitate/",
+            "author": "Adolf Hitler"
+        },
+        {
+            "enGB": "The goal of female education must always be being a future mother.",
+            "deDE": "Das Ziel der weiblichen Bildung muss immer die zukünftige Mutter sein.",
+            "source": "https://de.alphahistory.com/Nazi-Deutschland/Nazi-Deutschland-Zitate/",
+            "author": "Adolf Hitler"
+        },
+        {
+            "enGB": "We only have one task of staying steadfast and leading the racial fight without mercy.",
+            "deDE": "Wir haben nur eine Aufgabe, standhaft zu bleiben und den Rassenkampf ohne Gnade zu führen.",
+            "source": "https://de.alphahistory.com/Nazi-Deutschland/Nazi-Deutschland-Zitate/",
+            "author": "Heinrich Himmler"
+        },
+        {
+            "enGB": "There is a threat of the European continent, which puts all the previous dangers of the West far into the shade.",
+            "deDE": "Hier ist eine Bedrohung [...] des europäischen Kontinents gegeben, die alle bisherigen Gefahren des Abendlandes weit in den Schatten stellt.",
+            "source": "https://www.stern.de/politik/geschichte/sportpalast-rede--wollt-ihr-den-totalen-krieg---3301372.html",
+            "author": "Joseph Goebbels"
+        },
+        {
+            "enGB": "I want Germany not only have a thousand years of past. I want Germany to have a thousand years of future.",
+            "deDE": "Ich will, dass Deutschland nicht nur eine tausendjährige Vergangenheit hat. Ich will, dass Deutschland auch eine tausendjährige Zukunft hat.",
+            "source": "https://www.focus.de/politik/deutschland/bjoern-hoecke-sieben-zitate-zeigen-wie-gefaehrlich-der-afd-rechtsaussen-wirklich-ist_id_6536746.html",
+            "author": "Björn Höcke"
+        },
+        {
+            "enGB": "Christianity and Judaism represent an antagonism. That is why I can't understand the concept of the Christian-Jewish West.",
+            "deDE": "Christentum und Judentum stellen einen Antagonismus dar. Darum kann ich mit dem Begriff des christlich-jüdischen Abendlands nichts anfangen.",
+            "source": "https://www.focus.de/politik/deutschland/bjoern-hoecke-sieben-zitate-zeigen-wie-gefaehrlich-der-afd-rechtsaussen-wirklich-ist_id_6536746.html",
+            "author": "Junge Alternative"
+        },
+        {
+            "enGB": "I don't want you to vote for it! Germany should be free, but not through you [politician from the SPD].",
+            "deDE": "Ich will auch gar nicht, dass Sie dafür stimmen! Deutschland soll frei werden, aber nicht durch Sie [SPD Politiker].",
+            "source": "https://gutezitate.com/zitat/235484",
+            "author": "Adolf Hitler"
         }
     ]
 }

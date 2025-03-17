@@ -9,11 +9,10 @@ const
     idThesisAuthorPrefix: string = "id-thesis-author-"
     idThesisButtonAfdPrefix: string = "id-thesis-button-afd-"
     idThesisButtonOtherPrefix: string = "id-thesis-button-other-"
-    idThesisCorrectAnswerPrefix: string = "id-thesis-correct-answer-var-"
 
-    colourGreen: string = "#4bb231"
-    colourBlue: string = "#315cb2"
-    colourRed: string = "#C75553"
+    idButtonStartQuestions: string = "id-button-start"
+    idButtonSkipQuestion: string = "id-button-skip"
+    idButtonNextQuestion: string = "id-button-next"
 
 
 # Strings ---------------------------------------------------------------------
@@ -32,10 +31,13 @@ const strings = (
         sourceMissing: lang("Source missing", "Quelle fehlt"),
         authorUnknown: lang("Unknown", "Unbekannt"),
         authorImgAlt: lang("Image of author", "Bild des Authors"),
+        question: lang("Was this said by a member of the AfD?", "Wurde das von einem AfD-Mitglied gesagt?"),
         button: (
-            question: lang("Was this said by a member of the AfD?", "Wurde das von einem AfD-Mitglied gesagt?"),
-            wasSaidByAfd: lang("Yes", "Ja"),
-            wasNotSaidByAfd: lang("No", "Nein")
+            yes: lang("Yes", "Ja"),
+            no: lang("No", "Nein"),
+            start: lang("Start", "Starten"),
+            skip: lang("Skip", "Überspringen"),
+            next: lang("Next", "Weiter")
         )
     )
 )
@@ -49,6 +51,8 @@ const
         "border-color" := colourText,
         "background-color" := colourBackgroundMiddle,
         "border-radius" := "20px",
+        "border-style" := "solid",
+        "border-width" := "3px",
         "margin" := "20px",
         "padding" := "20px"
     }
@@ -57,6 +61,9 @@ const
     }
     classCorrectAnswer = ".thesis-correct-answer"{
         "border-color" := colourGreen
+    }
+    classButton = ".true-false-button"{
+        "color" := $Black
     }
 
     classBullshitQuote = ".quote-bullshit"{
@@ -72,6 +79,8 @@ css.add(
     classQuestionBlock,
     classWrongAnswer,
     classCorrectAnswer,
+
+    classButton,
 
     classBullshitQuote,
 
@@ -89,7 +98,7 @@ proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
     htmlTarget.file = "game/who-said-what/" & $strings.meta.file
 
 proc getAuthor(thesis: WhoSaidWhatThesis): WhoSaidWhatAuthor =
-    let author: WhoSaidWhatAuthor = block:
+    result = block:
         if whoSaidWhatJson.authors.hasKey(thesis.author):
             whoSaidWhatJson.authors[thesis.author]
         else:
@@ -107,7 +116,7 @@ proc getAuthorDiv(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
         if author.allegiances.len() == 0:
             ""
         else:
-            " - " & $i(author.allegiances.join(", "))
+            ": " & $i(author.allegiances.join(", "))
 
     let source: HtmlElement = p(
         if thesis.source.strip() == "":
@@ -120,7 +129,7 @@ proc getAuthorDiv(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
         img(imgUrl, $strings.data.authorImgAlt).setClass(classAuthorImage),
         p(thesis.author & allegiances),
         source
-    ).setClass(idThesisAuthorPrefix & $id).addStyle("display" := "none")
+    ).setId(idThesisAuthorPrefix & $id).addStyle("display" := "none")
 
 proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
     let
@@ -129,7 +138,6 @@ proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
 
         afdQuote: bool = block:
             var yes: bool = false
-            echo thesis.getAuthor().allegiances
             for allegiance in thesis.getAuthor().allegiances:
                 if allegiance.toLower() in ["afd", "ex-afd"]: yes = true
             yes
@@ -145,12 +153,12 @@ proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
         `div`(
             authorDiv,
             `div`(
-                p($strings.data.button.question),
-                button($strings.data.button.wasSaidByAfd, buttonWasSaidByAfd).addStyle("background-color" := colourGreen).setClass(idThesisButtonAfdPrefix & $id),
-                button($strings.data.button.wasNotSaidByAfd, buttonWasNotSaidByAfd).addStyle("background-color" := colourRed).setClass(idThesisButtonOtherPrefix & $id)
+                p($strings.data.question),
+                button($strings.data.button.yes, buttonWasSaidByAfd).addStyle("background-color" := colourGreen).setId(idThesisButtonAfdPrefix & $id).setClass(classButton),
+                button($strings.data.button.no, buttonWasNotSaidByAfd).addStyle("background-color" := colourRed).setId(idThesisButtonOtherPrefix & $id).setClass(classButton)
             ).setId(idThesisButtonsDiv & $id)
         ).setClass(classFlexContainer).addStyle("align-items" := "center")
-    ).setId(idThesisDivPrefix & $id).setClass(classQuestionBlock)
+    ).setId(idThesisDivPrefix & $id).setClass(classQuestionBlock).addStyle("display" := "none")
 
 
 for language in LANGUAGE:
@@ -171,7 +179,12 @@ for language in LANGUAGE:
     html.add(
         header(
             h1($strings.meta.title),
-            p($strings.meta.desc)
+            p($strings.meta.desc),
+            nav(
+                button($strings.data.button.start, "whoSaidWhatStart();").setId(idButtonStartQuestions).addStyle("display" := "block"),
+                button($strings.data.button.skip, "whoSaidWhatSkip();").setId(idButtonSkipQuestion).addStyle("display" := "none"),
+                button($strings.data.button.next, "whoSaidWhatNext();").setId(idButtonNextQuestion).addStyle("display" := "none")
+            ).setClass(classFlexContainer)
         )
     )
 
