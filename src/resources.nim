@@ -38,19 +38,17 @@ const
 
 
 type
-    ImageLink* = tuple[
-        name, img, url: string
-    ]
-    ProjectElement* = tuple[
-        name, desc, repo, lang: string,
-        docs: Option[string]
-    ]
-    Game* = tuple[
-        name, desc: string,
-        file: OrderedTable[string, string]
-    ]
+    ImageLink* = object
+        name*, img*, url*: string
 
-type
+    ProjectElement* = object
+        name*, desc*, repo*, lang*: string
+        docs*: Option[string]
+
+    Game* = object
+        name*, desc*, title*: string
+        universal*: Option[bool] = some(false)
+
     WhoSaidWhatAuthor* = object
         imageUrl*: Option[string] = some("unknown.svg")
         allegiances*: seq[string]

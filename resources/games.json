@@ -2,32 +2,22 @@
     {
         "name": "Cat Ping-Pong",
         "desc": "Cats playing Ping-Pong - the new competition to online coin flippers!",
-        "file": {
-            "pingpong.html": "Cat Ping-Pong"
-        }
+        "title": "pingpong",
+        "universal": true
     },
     {
         "name": "✨ AI Doctor Diagnosis ✨",
         "desc": "✨ Super-duper blazingly fast AI tool to diagnose ANY illness, better than your doctor!! 🚀",
-        "file": {
-            "ai-doctor-diagnosis/en.html": "English",
-            "ai-doctor-diagnosis/de.html": "German (Deutsch)"
-        }
+        "title": "ai-doctor-diagnosis"
     },
     {
         "name": "Who said what?",
         "desc": "A depressing game about the re-rise of fascism in Germany.",
-        "file": {
-            "who-said-what/en.html": "English",
-            "who-said-what/de.html": "German (Deutsch)"
-        }
+        "title": "who-said-what"
     },
     {
         "name": "Findus Love Calculator",
         "desc": "Silly game to determine if Findus, the cat, loves you.",
-        "file": {
-            "findus/en.html": "English",
-            "findus/de.html": "German (Deutsch)"
-        }
+        "title": "findus"
     }
 ]

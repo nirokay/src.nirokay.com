@@ -182,8 +182,7 @@ for language in LANGUAGE:
     var html: HtmlDocument = newHtmlLanguagedPage(
         $strings.meta.title,
         $strings.meta.desc,
-        "who-said-what",
-        includeInMenuBar = false
+        "who-said-what"
     )
     block `overwrite funky css file name stuff lol`:
         let cssOverride: CssStyleSheet = newCssStyleSheet(css.file.split("/")[^1])

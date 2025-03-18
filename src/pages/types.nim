@@ -1,10 +1,23 @@
 import std/[tables]
+export tables
 
 type
     Language* = enum
-        enGB = "English",
-        deDE = "German (Deutsch)"
-    LanguageString* = Table[Language, string]
+        enGB, deDE
+    LanguageString* = OrderedTable[Language, string]
+    LanguageObject* = object
+        flag*, short*, long*: string
+
+proc newLanguage(flag, short, long: string): LanguageObject = LanguageObject(
+    flag: flag,
+    short: short,
+    long: long
+)
+const languageObject*: OrderedTable[Language, LanguageObject] = toOrderedTable {
+    enGB: newLanguage("🇬🇧", "en", "English"),
+    deDE: newLanguage("🇩🇪", "de", "Deutsch (German)")
+}
+proc get*(language: Language): LanguageObject = languageObject[language]
 
 proc newLanguageString*(en, de: string): LanguageString =
     result[enGB] = en
@@ -32,6 +45,4 @@ proc `$`*(str: LanguageString): string =
 
 proc toUrlRepr*(language: Language): string =
     ## Representation of language in URL
-    case language:
-    of enGB: "en"
-    of deDE: "de"
+    result = language.get().short

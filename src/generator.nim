@@ -1,7 +1,8 @@
 import std/[tables, times, strutils]
 import websitegenerator
 export websitegenerator except newHtmlDocument, newDocument, writeFile
-import resources
+import resources, snippets
+export snippets
 
 proc timeStamp(): string =
     result = now().format("yyyy-MM-dd ---- hh---mm--ss")

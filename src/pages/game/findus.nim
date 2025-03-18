@@ -1,4 +1,3 @@
-import std/[tables]
 import generator
 
 const
@@ -10,72 +9,27 @@ const
 
 const strings = (
     meta: (
-        title: toTable {
-            enGB: "Findus Love Calculator",
-            deDE: "Findus Liebes-Rechner"
-        },
-        desc: toTable {
-            enGB: "Silly game to determine if Findus, the cat, loves you.",
-            deDE: "Dummes Spiel, das ausrechnet, ob Findus, der Kater, dich liebt."
-        }
+        title: lang("Findus Love Calculator", "Findus Liebes-Rechner"),
+        desc: lang("Silly game to determine if Findus, the cat, loves you.", "Dummes Spiel, das ausrechnet, ob Findus, der Kater, dich liebt.")
     ),
     request: (
-        legend: toTable {
-            enGB: "Please tick the correct boxes:",
-            deDE: "Bitte kreuze die zutreffenden Felder an:"
-        },
-        typeHere: toTable {
-            enGB: "Please type it in here :)",
-            deDE: "Bitte hier eingeben :)"
-        }
+        legend: lang("Please tick the correct boxes:", "Bitte kreuze die zutreffenden Felder an:"),
+        typeHere: lang("Please type it in here :)", "Bitte hier eingeben :)")
     ),
     response: (
-        submit: toTable {
-            enGB: "Submit",
-            deDE: "Einreichen"
-        },
-        passed: toTable {
-            enGB: "YIPPIE! Findus loves you a lot! Good job on that!!! :3",
-            deDE: "YIPPIE! Findus liebt dich sehr! Gute Arbeit!!! :3"
-        },
-        failed: toTable {
-            enGB: "Ew, Findus finds you disgusting. Please work on yourself to become a better person...",
-            deDE: "Igitt, Findus findet dich eklig. Bitte arbeite an deiner Persönlichkeit, um ein besserer Mensch zu werden..."
-        }
+        submit: lang("Submit", "Einreichen"),
+        passed: lang("YIPPIE! Findus loves you a lot! Good job on that!!! :3", "YIPPIE! Findus liebt dich sehr! Gute Arbeit!!! :3"),
+        failed: lang("Ew, Findus finds you disgusting. Please work on yourself to become a better person...", "Igitt, Findus findet dich eklig. Bitte arbeite an deiner Persönlichkeit, um ein besserer Mensch zu werden...")
     ),
     question: (
-        loveCats: toTable {
-            enGB: "Do you like cats?",
-            deDE: "Magst du Katzen?"
-        },
-        catsLoveYou: toTable {
-            enGB: "Do you think cats like you?",
-            deDE: "Denkst du, dass Katzen dich mögen?"
-        },
-        catsBetterThanDogs: toTable {
-            enGB: "Cats are superior to dogs.",
-            deDE: "Katzen sind Hunden überlegen."
-        },
-        triedCatFood: toTable {
-            enGB: "Have you tried cat food before?",
-            deDE: "Hast du schonmal Katzenfutter probiert?"
-        },
-        wouldGiveFood: toTable {
-            enGB: "Would you give food to Findus?",
-            deDE: "Würdest du Findus füttern?"
-        },
-        financialSituation: toTable {
-            enGB: "Is your financial situation stable?",
-            deDE: "Ist dein finanzieller Status stabil?"
-        },
-        creditCardQuestion: toTable {
-            enGB: "Would you provide your credit card information on a random internet questionnaire?",
-            deDE: "Würdest du deine Kreditkarteninformationen in einem Internetfragebogen preisgeben?"
-        },
-        creditCardRequest: toTable {
-            enGB: "", # "Very cool! Please provide your credit card credentials:",
-            deDE: "" # "Sehr geil! Bitte gebe deine Kreditkarteninformationen an:"
-        }
+        loveCats: lang("Do you like cats?", "Magst du Katzen?"),
+        catsLoveYou: lang("Do you think cats like you?", "Denkst du, dass Katzen dich mögen?"),
+        catsBetterThanDogs: lang("Cats are superior to dogs.", "Katzen sind Hunden überlegen."),
+        triedCatFood: lang("Have you tried cat food before?", "Hast du schonmal Katzenfutter probiert?"),
+        wouldGiveFood: lang("Would you give food to Findus?", "Würdest du Findus füttern?"),
+        financialSituation: lang("Is your financial situation stable?", "Ist dein finanzieller Status stabil?"),
+        creditCardQuestion: lang("Would you provide your credit card information on a random internet questionnaire?", "Würdest du deine Kreditkarteninformationen in einem Internetfragebogen preisgeben?"),
+        creditCardRequest: lang("", "")
     )
 )
 
@@ -114,8 +68,7 @@ for language in Language:
     var html: HtmlDocument = newHtmlLanguagedPage(
         $strings.meta.title,
         $strings.meta.desc,
-        "findus",
-        includeInMenuBar = false
+        "findus"
     )
     html.addToHead(
         importScript("/javascript/game/findus.js").addattr("defer"),
@@ -137,7 +90,7 @@ for language in Language:
             ).addattr("id", idTestFailed),
             fieldset(
                 legend($strings.request.legend),
-                # Cat questions:
+                # Cat questions
                 question strings.question.loveCats,
                 question strings.question.catsLoveYou,
                 question strings.question.catsBetterThanDogs,

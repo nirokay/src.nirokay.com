@@ -13,11 +13,10 @@ const
 
     itemsWidth: string = "20%"
 
-var html: HtmlDocument = newHtmlPage(
+var html: HtmlDocument = newHtmlUniversalPage(
     "Cat Ping-Pong",
     "Cats playing fucking Ping-Pong!!!!",
-    "game/pingpong.html",
-    includeInMenuBar = false
+    "pingpong"
 )
 
 html.addToHead(

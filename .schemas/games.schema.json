@@ -12,9 +12,13 @@
                 "type": "string",
                 "description": "Game description"
             },
-            "file": {
-                "type": "object",
-                "description": "Game links [path] -> [link text]"
+            "title": {
+                "type": "string",
+                "description": "Game title (subdirectory or direct file)"
+            },
+            "universal": {
+                "type": "boolean",
+                "description": "No multiple translations"
             }
         },
         "required": [

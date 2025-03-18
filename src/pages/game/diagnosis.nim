@@ -1,4 +1,4 @@
-import std/[tables, strutils, algorithm]
+import std/[strutils, algorithm]
 import ../../snippets
 import generator
 
@@ -24,179 +24,77 @@ const
 
 const strings = (
     meta: (
-        title: toTable {
-            enGB: "A.I. Health Diagnosis",
-            deDE: "K.I. Gesundheitsdiagnose"
-        },
-        desc: toTable {
-            enGB: "✨ Super-duper blazingly fast AI tool to diagnose ANY illness, better than your doctor!! 🚀",
-            deDE: "✨ Ultra super-duper schnelles KI Tool, um JEGLICHE Erkrankung zu diagnostizieren, besser als Ihr Arzt!! 🚀"
-        }
+        title: lang("A.I. Health Diagnosis", "K.I. Gesundheitsdiagnose"),
+        desc: lang("✨ Super-duper blazingly fast AI tool to diagnose ANY illness, better than your doctor!! 🚀", "✨ Ultra super-duper schnelles KI Tool, um JEGLICHE Erkrankung zu diagnostizieren, besser als Ihr Arzt!! 🚀")
     ),
     button: (
-        start: toTable {
-            enGB: "Start quiz",
-            deDE: "Quiz starten"
-        },
-        submit: toTable {
-            enGB: "Calculate",
-            deDE: "Berechnen"
-        },
-        retry: toTable {
-            enGB: "Retry quiz",
-            deDE: "Quiz neustarten"
-        }
+        start: lang("Start quiz", "Quiz starten"),
+        submit: lang("Calculate", "Berechnen"),
+        retry: lang("Retry quiz", "Quiz neustarten")
     ),
-    loading: toTable {
-        enGB: "Computing...",
-        deDE: "Berechnung läuft..."
-    },
+    loading: lang("Computing...", "Berechnung läuft..."),
     diagnosis: (
-        youHaveStart: toTable {
-            enGB: "According to our 99.999%<small>*</small> accurate diagnoses, you suffer from",
-            deDE: "Laut unserer 99,999%<small>*</small> korrekten Diagnose, leiden Sie unter"
-        },
-        youHaveEnd: toTable {
-            enGB: "<small>* <u>If we are mistaken (impossible), then you just had bad luck!</u></small>",
-            deDE: "<small>* <u>Falls wir falsch liegen sollten (unmöglich), dann haben Sie halt Pech gehabt!</u></small>"
-        }
+        youHaveStart: lang(
+            "According to our 99.999%<small>*</small> accurate diagnoses, you suffer from",
+            "Laut unserer 99,999%<small>*</small> korrekten Diagnose, leiden Sie unter"
+        ),
+        youHaveEnd: lang(
+            "<small>* <u>If we are mistaken (impossible), then you just had bad luck!</u></small>",
+            "<small>* <u>Falls wir falsch liegen sollten (unmöglich), dann haben Sie halt Pech gehabt!</u></small>"
+        )
     ),
-    introduction: toTable {
-        enGB: @[
+    introduction: lang(
+        @[
             "Our AI model is trained exclusively on legally-dubious acquired patient data from data brokers and health insurances. This allows us to provide you with a 99.999% accurate diagnosis!",
             "9/10 doctors recommend our service" & $sup("[Citation needed]") & "!"
         ].join("\n"),
-        deDE: @[
+        @[
             "Unser KI Modell ist exklusiv auf legal-fragwürdig beschaffenen Patienteninformation von Data Brokern und Gesundheitsversicherungen trainiert. Dies erlaubt uns Ihnen eine 99.999% korrekte Diagnosis zu Stellen!",
             "9 von 10 Ärzte empfehlen unser KI Modell" & $sup("[Quelle gebraucht]") & "!"
         ].join("\n")
-    },
+    ),
     question: (
-        instructions: toTable {
-            enGB: "Please submit the symptoms you are experiencing:",
-            deDE: "Bitte kreuzen Sie die Symptome an, die Sie leiden lassen:"
-        },
-        additionWriting: toTable {
-            enGB: "Feel free to elaborate on your symptoms, this will help our AI model to accurately diagnose you:",
-            deDE: "Sie können weitere Symptome hier erläutern. Dies wird unserem KI Modell helfen, Sie besser zu diagnostizieren:"
-        },
-        youTrustEverythingOnTheInternet: toTable {
-            enGB: "You trust everything on the internet.",
-            deDE: "Sie glauben Alles, was im Internet steht."
-        },
+        instructions: lang(
+            "Please submit the symptoms you are experiencing:",
+            "Bitte kreuzen Sie die Symptome an, die Sie leiden lassen:"
+        ),
+        additionWriting: lang(
+            "Feel free to elaborate on your symptoms, this will help our AI model to accurately diagnose you:",
+            "Sie können weitere Symptome hier erläutern. Dies wird unserem KI Modell helfen, Sie besser zu diagnostizieren:"
+        ),
+        youTrustEverythingOnTheInternet: lang(
+            "You trust everything on the internet.",
+            "Sie glauben Alles, was im Internet steht."
+        ),
         list: @[
-            toTable {
-                enGB: "Sneezing",
-                deDE: "Niesen"
-            },
-            toTable {
-                enGB: "Coughing",
-                deDE: "Husten"
-            },
-            toTable {
-                enGB: "Dizziness",
-                deDE: "Schwindel"
-            },
-            toTable {
-                enGB: "Headache",
-                deDE: "Kopfschmerzen"
-            },
-            toTable {
-                enGB: "Back pain",
-                deDE: "Rückenschmerzen"
-            },
-            toTable {
-                enGB: "Muscle pain",
-                deDE: "Muskelschmerzen"
-            },
-            toTable {
-                enGB: "Eye pain",
-                deDE: "Augenschmerzen"
-            },
-            toTable {
-                enGB: "Joint pain",
-                deDE: "Gelenkschmerzen"
-            },
-            toTable {
-                enGB: "Stomach pain",
-                deDE: "Bauchschmerzen"
-            },
-            toTable {
-                enGB: "Tooth pain",
-                deDE: "Zahnschmerzen"
-            },
-            toTable {
-                enGB: "Light sensitivity",
-                deDE: "Lichtempfindlichkeit"
-            },
-            toTable {
-                enGB: "Dry mouth",
-                deDE: "Trockener Mund"
-            },
-            toTable {
-                enGB: "Trembling",
-                deDE: "Zittern"
-            },
-            toTable {
-                enGB: "Ear pain",
-                deDE: "Ohrenschmerzen"
-            },
-            toTable {
-                enGB: "Abnormal sweating",
-                deDE: "Abnormales Schwitzen"
-            },
-            toTable {
-                enGB: "Abnormal heart rate",
-                deDE: "Abnormale Herzfrequenz"
-            },
-            toTable {
-                enGB: "Abnormal blood pressure",
-                deDE: "Abnormaler Blutdruck"
-            },
-            toTable {
-                enGB: "Diarrhea",
-                deDE: "Durchfall"
-            },
-            toTable {
-                enGB: "Hair loss",
-                deDE: "Haarausfall"
-            },
-            toTable {
-                enGB: "Itching",
-                deDE: "Juckreiz"
-            },
-            toTable {
-                enGB: "Tiredness",
-                deDE: "Müdigkeit"
-            },
-            toTable {
-                enGB: "Weight loss or gain",
-                deDE: "Gewichtsabnahme oder -zunahme"
-            },
-            toTable {
-                enGB: "Abnormal body temperature",
-                deDE: "Abnormale Körpertemperatur"
-            },
-            toTable {
-                enGB: "Vomiting",
-                deDE: "Erbrechen"
-            },
-            toTable {
-                enGB: "Anxiety",
-                deDE: "Angstzustände"
-            },
-            toTable {
-                enGB: "Flatulence",
-                deDE: "Blähungen"
-            },
-            toTable {
-                enGB: "Abnormal urine colour",
-                deDE: "Abnormale Urinfarbe"
-            },
-            toTable {
-                enGB: "Frequent urination",
-                deDE: "Häufiges Urinieren"
-            }
+            lang("Sneezing", "Niesen"),
+            lang("Coughing", "Husten"),
+            lang("Dizziness", "Schwindel"),
+            lang("Headache", "Kopfschmerzen"),
+            lang("Back pain", "Rückenschmerzen"),
+            lang("Muscle pain", "Muskelschmerzen"),
+            lang("Eye pain", "Augenschmerzen"),
+            lang("Joint pain", "Gelenkschmerzen"),
+            lang("Stomach pain", "Bauchschmerzen"),
+            lang("Tooth pain", "Zahnschmerzen"),
+            lang("Light sensitivity", "Lichtempfindlichkeit"),
+            lang("Dry mouth", "Trockener Mund"),
+            lang("Trembling", "Zittern"),
+            lang("Ear pain", "Ohrenschmerzen"),
+            lang("Abnormal sweating", "Abnormales Schwitzen"),
+            lang("Abnormal heart rate", "Abnormale Herzfrequenz"),
+            lang("Abnormal blood pressure", "Abnormaler Blutdruck"),
+            lang("Diarrhea", "Durchfall"),
+            lang("Hair loss", "Haarausfall"),
+            lang("Itching", "Juckreiz"),
+            lang("Tiredness", "Müdigkeit"),
+            lang("Weight loss or gain", "Gewichtsabnahme oder -zunahme"),
+            lang("Abnormal body temperature", "Abnormale Körpertemperatur"),
+            lang("Vomiting", "Erbrechen"),
+            lang("Anxiety", "Angstzustände"),
+            lang("Flatulence", "Blähungen"),
+            lang("Abnormal urine colour", "Abnormale Urinfarbe"),
+            lang("Frequent urination", "Häufiges Urinieren")
         ]
     )
 )
@@ -226,8 +124,7 @@ for language in Language:
     var html: HtmlDocument = newHtmlLanguagedPage(
         $strings.meta.title,
         $strings.meta.desc,
-        "ai-doctor-diagnosis",
-        includeInMenuBar = false
+        "ai-doctor-diagnosis"
     )
     html.setStylesheet(websitegenerator.newCssStyleSheet(urlObnoxiousCss))
     html.addToHead(

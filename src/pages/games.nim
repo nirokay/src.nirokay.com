@@ -1,5 +1,6 @@
-import std/[tables]
-import ../generator, ../css/styles, ../resources
+import ../generator, ../css/styles, ../resources, ../snippets
+import types
+from ./game/generator import getHtmlLanguagedPagePath, getHtmlUniversalPagePath
 
 var html: HtmlDocument = newHtmlPage(
     "Games",
@@ -17,8 +18,13 @@ html.add(
 var gamesHtml: seq[HtmlElement]
 for game in gamesJson:
     var links: seq[HtmlElement]
-    for path, text in game.file:
-        links.add li($a("game/" & path, text))
+    if game.universal.isSet():
+        links.add(li a(game.title.getHtmlUniversalPagePath(), game.name))
+    else:
+        for language in Language:
+            let lang: LanguageObject = language.get()
+            links.add(li a(game.title.getHtmlLanguagedPagePath(language), lang.long))
+
     gamesHtml.add `div`(
         h3(game.name),
         p(game.desc),
