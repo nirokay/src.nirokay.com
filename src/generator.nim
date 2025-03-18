@@ -88,7 +88,7 @@ proc getTopBar(html: HtmlDocument): HtmlElement =
     let pathComponents: seq[string] = html.file.split("/")
     if pathComponents.len() != 0:
         var subUrl: string = pathComponents[0].split(".")[0]
-        if subUrl notin ["index"]:
+        if subUrl notin ["index", "404"]:
             if subUrl == "game": subUrl = "games"
             items.add newElem("/" & subUrl & ".html", subUrl.capitalizeAscii())
 
