@@ -106,8 +106,7 @@ proc question(question: LanguageString, questionType: QuestionType = yesNo, id: 
         ]
     if id != "": input.tagAttributes.add(attr("id", id))
     if inputType == "text": input.addattr("placeholder", $strings.request.typeHere)
-    input &=> $question
-    label &=> $input
+    label.add(input, rawText($question))
     result = `div`(label)
     inc questionCounter
 
