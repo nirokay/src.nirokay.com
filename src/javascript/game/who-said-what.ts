@@ -1,3 +1,6 @@
+// Settings:
+const questionsWithoutRepeating: number = 10;
+
 // Questions:
 const idThesisDivPrefix: string = "id-thesis-div-";
 const idThesisButtonsDiv: string = "id-thesis-buttons-";
@@ -78,7 +81,7 @@ function increaseScore(id: number, correct: boolean) {
 let lastQuestionsBuffer: Array<number> = [];
 function addToLastQuestionBuffer(id: number) {
     lastQuestionsBuffer.push(id);
-    if(lastQuestionsBuffer.length > 5) lastQuestionsBuffer.shift();
+    if(lastQuestionsBuffer.length > questionsWithoutRepeating) lastQuestionsBuffer.shift();
 }
 
 
