@@ -180,6 +180,9 @@ function submitQuestion(id: number, correct: boolean) {
 function whoSaidWhatStart() {
     viewRandomQuestion();
     displayOnlyButton(idButtonSkipQuestion);
+
+    let uniqueRight: HTMLElement|null = document.getElementById(idScoreUniqueRight);
+    if(uniqueRight != null && uniqueRight != undefined) uniqueRight.innerHTML = everyGameQuestionId().length.toString();
 }
 function whoSaidWhatSkip() {
     viewRandomQuestion();

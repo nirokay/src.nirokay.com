@@ -50,8 +50,8 @@ const strings = (
             next: lang("Next", "Weiter")
         ),
         score: (
-            correctUnique: lang("Score unique: ", "Einzel"),
-            correctAbsolute: lang("Score absolute: ", "")
+            correctUnique: lang("Score non-repeating questions: ", "Punkte nicht-wiederholter Fragen: "),
+            correctAbsolute: lang("Score all questions: ", "Punkte aller Fragen: ")
         )
     )
 )

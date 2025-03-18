@@ -1,6 +1,7 @@
 {
     "authors": {
         "Junge Alternative": {
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/48/AfD-Logo-2017.svg",
             "allegiances": ["AfD"]
         },
         "Alice Weidel": {
@@ -13,7 +14,7 @@
         },
         "Marcel Grauf": {
             "imageUrl": "https://www.lebensbund.org/wp-content/uploads/2022/07/Grauf1-599x1024.jpg",
-            "allegiances": ["AfD", "Ex-NPD"]
+            "allegiances": ["Ex-NPD", "Ex-AfD"]
         },
         "Kai Borrmann": {
             "imageUrl": "kai-borrmann.jpg",
@@ -43,15 +44,15 @@
             "allegiances": ["NSDAP"]
         },
         "Joseph Goebbels": {
-            "imageUrl": "",
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Bundesarchiv_Bild_146-1968-101-20A%2C_Joseph_Goebbels.jpg",
             "allegiances": ["NSDAP"]
         },
         "Heinrich Himmler": {
-            "imageUrl": "",
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Heinrich_Himmler_%283x4_cropped%29.jpg",
             "allegiances": ["NSDAP"]
         },
         "Hermann Göring": {
-            "imageUrl": "",
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Hermann_Goering_-_Nuremberg_2_%28cropped%29.jpg",
             "allegiances": ["NSDAP"]
         }
     },
@@ -142,7 +143,7 @@
         },
         {
             "enGB": "The [minority group] has to understand one thing clearly - they have to get out!",
-            "deDE": " [Die Minderheitsgruppe] muss eins klar verstehen, er muss raus!",
+            "deDE": " [Die Minderheitsgruppe] muss eins klar verstehen, [sie] muss raus!",
             "source": "https://www.zitate7.de/autor/Hermann+G%C3%B6ring/",
             "author": "Hermann Göring"
         },
