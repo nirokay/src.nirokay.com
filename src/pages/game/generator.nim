@@ -21,7 +21,7 @@ proc newHtmlLanguagedPage*(title, description, gameTitle: string, cssPath: strin
 
     # Language picker page:
     let newPath: string = "game/" & gameTitle & ".html"
-    var html: HtmlDocument = newHtmlPage("Pick Language", "Pick a language for the game", newPath, false)
+    var html: HtmlDocument = newHtmlPage(title & " (Language Picker)", description & " (Language Picker)", newPath, false)
     html.add(
         header(
             h1("Choose language"),

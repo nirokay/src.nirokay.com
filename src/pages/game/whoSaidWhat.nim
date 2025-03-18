@@ -31,7 +31,7 @@ const strings = (
     meta: (
         title: lang("Who said what?", "Wer hat was gesagt?"),
         desc: lang(
-            @[
+            @[ # First element (split by "\n" used for meta description)
                 "Who said what, an AfD member or another fascist? A depressing game about the (re-)rise of fascism in Germany.",
                 "The source to the quote is featured after submitting your answer. If you discover an error or would like to submit more quotes, feel free to " & $a("https://github.com/nirokay/src.nirokay.com/blob/master/resources/game/who-said-what.json", "send a pull request on GitHub") & "."
             ].join("\n"),
@@ -181,7 +181,7 @@ for language in LANGUAGE:
     setTranslationTarget(language)
     var html: HtmlDocument = newHtmlLanguagedPage(
         $strings.meta.title,
-        $strings.meta.desc,
+        split($strings.meta.desc, "\n")[0],
         "who-said-what"
     )
     block `overwrite funky css file name stuff lol`:
