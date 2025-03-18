@@ -1,8 +1,9 @@
 import std/[tables, strutils, strformat, options]
-import ../../generator, ../../snippets, ../../resources, ../../css/styles
+import ../../generator, ../../resources, ../../css/styles
 import ../types
 
 const
+    # Questions:
     idThesisDivPrefix: string = "id-thesis-div-"
     idThesisButtonsDiv: string = "id-thesis-buttons-"
     idThesisQuotePrefix: string = "id-thesis-quote-"
@@ -10,6 +11,15 @@ const
     idThesisButtonAfdPrefix: string = "id-thesis-button-afd-"
     idThesisButtonOtherPrefix: string = "id-thesis-button-other-"
 
+    # Score:
+    idScoreAbsoluteLeft: string = "id-score-absolute-left"
+    idScoreAbsoluteRight: string = "id-score-absolute-right"
+
+    idScoreUniqueLeft: string = "id-score-unique-left"
+    idScoreUniqueMiddle: string = "id-score-unique-middle"
+    idScoreUniqueRight: string = "id-score-unique-right"
+
+    # Buttons:
     idButtonStartQuestions: string = "id-button-start"
     idButtonSkipQuestion: string = "id-button-skip"
     idButtonNextQuestion: string = "id-button-next"
@@ -21,8 +31,8 @@ const strings = (
     meta: (
         title: lang("Who said what?", "Wer hat was gesagt?"),
         desc: lang(
-            "Who said what? A depressing game about the re-rise of fascism in Germany.",
-            "Wer hat was gesagt? Ein deprimierendes Spiel über den Wiederanstieg des Faschismus in Deutschland."
+            "Who said what, an AfD member or another fascist? A depressing game about the (re-)rise of fascism in Germany.",
+            "Wer hat was gesagt, ein AfD Mitglied oder ein anderer Faschist? Ein deprimierendes Spiel über den (Wieder-)Anstieg des Faschismus in Deutschland."
         ),
         file: lang("en.html", "de.html")
     ),
@@ -38,6 +48,10 @@ const strings = (
             start: lang("Start", "Starten"),
             skip: lang("Skip", "Überspringen"),
             next: lang("Next", "Weiter")
+        ),
+        score: (
+            correctUnique: lang("Score unique: ", "Einzel"),
+            correctAbsolute: lang("Score absolute: ", "")
         )
     )
 )
@@ -180,6 +194,23 @@ for language in LANGUAGE:
         header(
             h1($strings.meta.title),
             p($strings.meta.desc),
+            `div`(
+                p(
+                    <$> $strings.data.score.correctAbsolute,
+                    strong("0").setId(idScoreAbsoluteLeft),
+                    <$> "/",
+                    strong("0").setId(idScoreAbsoluteRight)
+                ),
+                p(
+                    <$> $strings.data.score.correctUnique,
+                    strong("0").setId(idScoreUniqueLeft),
+                    <$> "/",
+                    strong("0").setId(idScoreUniqueMiddle),
+                    <$> "(",
+                    <$> i("0").setId(idScoreUniqueRight),
+                    <$> ")"
+                )
+            ).setClass(classFlexContainer),
             nav(
                 button($strings.data.button.start, "whoSaidWhatStart();").setId(idButtonStartQuestions).addStyle("display" := "block"),
                 button($strings.data.button.skip, "whoSaidWhatSkip();").setId(idButtonSkipQuestion).addStyle("display" := "none"),
