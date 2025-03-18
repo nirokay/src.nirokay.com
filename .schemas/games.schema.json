@@ -22,7 +22,7 @@
             }
         },
         "required": [
-            "name", "desc", "file"
+            "name", "desc", "title"
         ]
     }
 }
