@@ -76,13 +76,30 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
     )
 
 proc getTopBar(html: HtmlDocument): HtmlElement =
+    proc newElem(href, text: string): HtmlElement =
+        a(href, text).addStyle(
+            "color" := "#e8e6e3",
+            "justify-self" := "flex-start"
+        )
     var items: seq[HtmlElement] = @[
-        a("/", $h2("nirokay.com").addStyle(
-            "color" := "#e8e6e3"
-        )),
-        html.getNavSelector()
+        newElem("/", "nirokay.com")
     ]
-    result = `div`(items).setClass("div-menu-bar-container")
+    let pathComponents: seq[string] = html.file.split("/")
+    if pathComponents.len() != 0:
+        var subUrl: string = pathComponents[0].split(".")[0]
+        if subUrl notin ["index"]:
+            if subUrl == "game": subUrl = "games"
+            items.add newElem("/" & subUrl & ".html", subUrl.capitalizeAscii())
+
+    var finalItems: seq[HtmlElement]
+    for i, item in items:
+        finalItems.add item
+        if i < items.len() - 1: finalItems.add <$>" › "
+
+    result = `div`(
+        nav(h2(finalItems)).setClass("flex-container").addStyle("display" := "flex"),
+        html.getNavSelector().addStyle("justify-self" := "flex-end")
+    ).setClass("div-menu-bar-container").setClass("flex-container")
 
 proc generatePage*(page: HtmlDocument) =
     ## Alternative for `writeFile(html)`, adding some final touches before generating the document

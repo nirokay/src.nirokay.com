@@ -31,8 +31,14 @@ const strings = (
     meta: (
         title: lang("Who said what?", "Wer hat was gesagt?"),
         desc: lang(
-            "Who said what, an AfD member or another fascist? A depressing game about the (re-)rise of fascism in Germany.",
-            "Wer hat was gesagt, ein AfD Mitglied oder ein anderer Faschist? Ein deprimierendes Spiel über den (Wieder-)Anstieg des Faschismus in Deutschland."
+            @[
+                "Who said what, an AfD member or another fascist? A depressing game about the (re-)rise of fascism in Germany.",
+                "The source to the quote is featured after submitting your answer. If you discover an error or would like to submit more quotes, feel free to " & $a("https://github.com/nirokay/src.nirokay.com/blob/master/resources/game/who-said-what.json", "send a pull request on GitHub") & "."
+            ].join("\n"),
+            @[
+                "Wer hat was gesagt, ein AfD Mitglied oder ein anderer Faschist? Ein deprimierendes Spiel über den (Wieder-)Anstieg des Faschismus in Deutschland.",
+                "Die Quelle des Zitats is nach dem Einreichen einer Antwort zu Sehen. Falls Sie einen Fehler bemerken oder ein weiteres Zitat einreichen wollen, können Sie gerne " & $a("https://github.com/nirokay/src.nirokay.com/blob/master/resources/game/who-said-what.json", "ein Pull-Request via GitHub senden") & "."
+            ].join("\n")
         ),
         file: lang("en.html", "de.html")
     ),
