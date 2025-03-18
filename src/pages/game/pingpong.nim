@@ -1,5 +1,6 @@
 import std/[os, strutils]
-import ../../generator, ../../css/styles
+import ../../css/styles
+import generator
 
 const
     ballWidth: string = "15px"

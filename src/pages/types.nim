@@ -15,6 +15,9 @@ var translationTarget: Language = enGB
 proc setTranslationTarget*(language: Language) =
     ## Sets the target language
     translationTarget = language
+proc getTranslationTarget*(): Language =
+    ## Gets the target language
+    result = translationTarget
 
 proc `$$`(str: LanguageString): string =
     ## Standard stringification for object, for debugging purposes only
@@ -26,3 +29,9 @@ proc `$`*(str: LanguageString): string =
         echo "Failed to translate language string '" & $$str & "'!"
         return ""
     return str[translationTarget]
+
+proc toUrlRepr*(language: Language): string =
+    ## Representation of language in URL
+    case language:
+    of enGB: "en"
+    of deDE: "de"

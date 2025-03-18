@@ -1,6 +1,5 @@
 import std/[tables]
-import ../../generator
-import ../types
+import generator
 
 const
     idFoodCheckbox: string = "i-would-give-food-to-findus"
@@ -18,10 +17,6 @@ const strings = (
         desc: toTable {
             enGB: "Silly game to determine if Findus, the cat, loves you.",
             deDE: "Dummes Spiel, das ausrechnet, ob Findus, der Kater, dich liebt."
-        },
-        file: toTable {
-            enGB: "en.html",
-            deDE: "de.html"
         }
     ),
     request: (
@@ -114,16 +109,12 @@ var
     htmlEN: HtmlDocument
     htmlDE: HtmlDocument
 
-proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
-    htmlTarget = htmlSource
-    htmlTarget.file = "game/findus/" & $strings.meta.file
-
 for language in Language:
     setTranslationTarget(language)
-    var html: HtmlDocument = newHtmlPage(
+    var html: HtmlDocument = newHtmlLanguagedPage(
         $strings.meta.title,
         $strings.meta.desc,
-        $strings.meta.file,
+        "findus",
         includeInMenuBar = false
     )
     html.addToHead(
@@ -167,9 +158,7 @@ for language in Language:
             )
         )
     )
-    case language:
-    of enGB: htmlEN -> html
-    of deDE: htmlDE -> html
+    generateHtml()
 
 
 incl htmlEN

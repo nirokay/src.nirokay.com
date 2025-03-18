@@ -1,6 +1,6 @@
 import std/[tables, strutils, strformat, options]
-import ../../generator, ../../resources, ../../css/styles
-import ../types
+import ../../resources, ../../css/styles
+import generator
 
 const
     # Questions:
@@ -39,8 +39,7 @@ const strings = (
                 "Wer hat was gesagt, ein AfD Mitglied oder ein anderer Faschist? Ein deprimierendes Spiel über den (Wieder-)Anstieg des Faschismus in Deutschland.",
                 "Die Quelle des Zitats is nach dem Einreichen einer Antwort zu Sehen. Falls Sie einen Fehler bemerken oder ein weiteres Zitat einreichen wollen, können Sie gerne " & $a("https://github.com/nirokay/src.nirokay.com/blob/master/resources/game/who-said-what.json", "ein Pull-Request via GitHub senden") & "."
             ].join("\n")
-        ),
-        file: lang("en.html", "de.html")
+        )
     ),
     data: (
         source: lang("Source", "Quelle"),
@@ -113,9 +112,6 @@ css.add(
 var
     htmlEN: HtmlDocument
     htmlDE: HtmlDocument
-proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
-    htmlTarget = htmlSource
-    htmlTarget.file = "game/who-said-what/" & $strings.meta.file
 
 proc getAuthor(thesis: WhoSaidWhatThesis): WhoSaidWhatAuthor =
     result = block:
@@ -183,10 +179,10 @@ proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
 
 for language in LANGUAGE:
     setTranslationTarget(language)
-    var html: HtmlDocument = newHtmlPage(
+    var html: HtmlDocument = newHtmlLanguagedPage(
         $strings.meta.title,
         $strings.meta.desc,
-        $strings.meta.file,
+        "who-said-what",
         includeInMenuBar = false
     )
     block `overwrite funky css file name stuff lol`:
@@ -235,10 +231,7 @@ for language in LANGUAGE:
         )
     )
 
-    case language:
-    of enGB: htmlEN -> html
-    of deDE: htmlDE -> html
-
+    generateHtml()
 
 
 incl htmlEN

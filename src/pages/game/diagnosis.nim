@@ -1,6 +1,6 @@
 import std/[tables, strutils, algorithm]
-import ../../generator, ../../snippets
-import ../types
+import ../../snippets
+import generator
 
 const
     urlObnoxiousCss: string = "https://tholman.com/obnoxious/obnoxious.css"
@@ -31,10 +31,6 @@ const strings = (
         desc: toTable {
             enGB: "✨ Super-duper blazingly fast AI tool to diagnose ANY illness, better than your doctor!! 🚀",
             deDE: "✨ Ultra super-duper schnelles KI Tool, um JEGLICHE Erkrankung zu diagnostizieren, besser als Ihr Arzt!! 🚀"
-        },
-        file: toTable {
-            enGB: "en.html",
-            deDE: "de.html"
         }
     ),
     button: (
@@ -208,9 +204,6 @@ const strings = (
 var
     htmlEN: HtmlDocument
     htmlDE: HtmlDocument
-proc `->`(htmlTarget: var HtmlDocument, htmlSource: HtmlDocument) =
-    htmlTarget = htmlSource
-    htmlTarget.file = "game/ai-doctor-diagnosis/" & $strings.meta.file
 
 proc newQuestion(id, text: string, inputAttrs: seq[HtmlElementAttribute] = @[]): HtmlElement =
     result = `div`(
@@ -230,10 +223,10 @@ proc newButton(text: string, action: string): HtmlElement =
 
 for language in Language:
     setTranslationTarget(language)
-    var html: HtmlDocument = newHtmlPage(
+    var html: HtmlDocument = newHtmlLanguagedPage(
         $strings.meta.title,
         $strings.meta.desc,
-        $strings.meta.file,
+        "ai-doctor-diagnosis",
         includeInMenuBar = false
     )
     html.setStylesheet(websitegenerator.newCssStyleSheet(urlObnoxiousCss))
@@ -306,9 +299,7 @@ for language in Language:
         )
     )
 
-    case language:
-    of enGB: htmlEN -> html
-    of deDE: htmlDE -> html
+    generateHtml()
 
 incl htmlEN
 incl htmlDE
