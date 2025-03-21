@@ -92,13 +92,8 @@ proc getTopBar(html: HtmlDocument): HtmlElement =
             if subUrl == "game": subUrl = "games"
             items.add newElem("/" & subUrl & ".html", subUrl.capitalizeAscii())
 
-    var finalItems: seq[HtmlElement]
-    for i, item in items:
-        finalItems.add item
-        if i < items.len() - 1: finalItems.add <$>" › "
-
     result = `div`(
-        nav(h2(finalItems)).setClass("flex-container").addStyle("display" := "flex"),
+        nav(h2(items.join(<$>" › "))).setClass("flex-container").addStyle("display" := "flex"),
         html.getNavSelector().addStyle("justify-self" := "flex-end")
     ).setClass("div-menu-bar-container").setClass("flex-container")
 
