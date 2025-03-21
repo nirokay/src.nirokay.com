@@ -2,6 +2,7 @@ import std/[strutils, strformat]
 import ../generator
 import colours
 
+const roundedCorners*: CssAttribute = "border-radius" := "15px"
 
 proc newTextGradientClass*(className: string, colourLeft, colourRight: string|CssColour): CssElement =
     ## Generates a new text gradient CSS class
@@ -19,7 +20,7 @@ proc newTextGradientRainbowBackgroundClass*(): CssElement =
 proc newTextGradientRainbowClass*(): CssElement =
     result = ".text-gradient-rainbow"{
         #[
-        # Should not be necessarry:
+        # Should not be necessary:
         "background" := "red",
         "background" := "-webkit-linear-gradient(left, " & colours & ")",
         "background" := "-o-linear-gradient(right, " & colours & ")",
@@ -78,8 +79,8 @@ const
         "max-width" := "500px",
         "min-width" := "300px",
         "background" := colourBackgroundMiddle,
-        "border-radius" := "10px",
-        "padding" := "10px"
+        "padding" := "10px",
+        roundedCorners
     }
     classCodeShowcaseLanguageImage*: CssElement = ".code-showcase-language-image"{
         "max-height" := "1rem",

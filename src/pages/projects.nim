@@ -5,7 +5,7 @@ import ../css/styles
 
 var html: HtmlDocument = newHtmlPage(
     "Projects",
-    "Showcase of projects and links to documentation.",
+    "Showcase of my projects and links to their documentation.",
     "projects.html"
 )
 

@@ -3,10 +3,18 @@ import websitegenerator
 
 # Import pages and css:
 import pages/[
-    index, links, projects, games, fourOhFour
+    index,
+    links,
+    projects,
+    games,
+    fourOhFour
 ]
 export
-    index, links, projects, games, fourOhFour
+    index,
+    links,
+    projects,
+    games,
+    fourOhFour
 
 import css/[
     styles

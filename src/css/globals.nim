@@ -30,7 +30,7 @@ globalCssTemplate.add(
 
     # --- Images: -------------------------------------------------------------
     "img"{
-        "border-radius" := "10px",
+        roundedCorners,
         # "background-color" := colourBackgroundLight, # breaks transparent images
         "color" := colourTextGrey
     },
@@ -44,18 +44,17 @@ globalCssTemplate.add(
     # --- User input: ---------------------------------------------------------
     "select"{
         "margin" := "20px",
-        "border-style" := "solid",
-        "border-radius" := "10px",
         "background-color" := colourBackgroundLight,
         "color" := colourText,
-        "border" := "3px solid " & colourBackgroundLight
+        "border" := "3px solid " & colourBackgroundLight,
+        roundedCorners
     },
     "textarea, input"{
         "color" := colourText,
         "background-color" := colourBackgroundLight,
         "border-style" := "solid",
-        "border-radius" := "10px",
         "border-color" := colourBackgroundLight,
+        roundedCorners,
         "padding" := "5px 10px",
         "margin" := "4px 5px",
         "accent-color" := $colourPalettePrimary
@@ -65,8 +64,8 @@ globalCssTemplate.add(
     "dialog"{
         "color" := colourText,
         "background-color" := colourBackgroundMiddle,
-        "border-radius" := "10px",
         "border-color" := colourBackgroundLight,
+        roundedCorners,
         "width" := "50%",
         "max-width" := "800px"
     },
@@ -76,7 +75,7 @@ globalCssTemplate.add(
         "color" := colourText,
         "background-color" := colourBackgroundTransparentDarken,
         "padding" := "10px",
-        "border-radius" := "10px"
+        roundedCorners
     },
 
     "pre > kbd"{
@@ -85,7 +84,7 @@ globalCssTemplate.add(
     "kbd"{
         "background-color" := colourBackgroundLight,
         "padding" := "5px",
-        "border-radius" := "10px",
+        roundedCorners,
         "border-style" := "outset",
         "border-color" := colourBackgroundLight,
         "font-weight" := "bold"
@@ -96,7 +95,7 @@ globalCssTemplate.add(
         "background-color" := colourBackgroundLight,
         "margin" := "10px auto",
         "padding" := "15px",
-        "border-radius" := "10px"
+        roundedCorners
     },
 
     "blockquote p::before"{
@@ -118,15 +117,24 @@ globalCssTemplate.add(
     },
 
     # --- Tables: -------------------------------------------------------------
+    "table"{
+        "background-color" := colourBackgroundMiddle,
+        "padding" := "5px",
+        roundedCorners
+    },
     "th, td"{
         "padding" := "10px"
     },
-
+    "thead > tr > th"{
+        "background-color" := colourBackgroundLight,
+        "text-align" := "start",
+        roundedCorners
+    },
     # --- Definitions: --------------------------------------------------------
     "dl"{
         "background-color" := colourBackgroundTransparentDarken,
         "padding" := "10px",
-        "border-radius" := "10px"
+        roundedCorners
     },
     "dl > dt"{
         "text-decoration" := "underline"
@@ -146,7 +154,7 @@ globalCssTemplate.add(
     # --- Fieldset: -----------------------------------------------------------
     "fieldset"{
         "background-color" := colourBackgroundTransparentLighten, #colourBackgroundTransparentDarken,
-        "border-radius" := "10px"
+        roundedCorners
     },
     "fieldset > legend"{
         "text-decoration" := "underline"
@@ -181,21 +189,21 @@ globalCssTemplate.add(
 # Progress bar and meter: -----------------------------------------------------
 globalCssTemplate.add(
     "progress"{
-        "border-radius" := "10px",
         "border-color" := colourText,
-        "border-width" := "2px"
+        "border-width" := "2px",
+        roundedCorners
     },
     "progress::-webkit-progress-bar"{
         "background-color" := colourText,
-        "border-radius" := "10px"
+        roundedCorners
     },
     "progress::-webkit-progress-value"{
         "background-color" := $colourPalettePrimary,
-        "border-radius" := "10px"
+        roundedCorners
     },
     "progress::-moz-progress-bar"{
         "background-color" := $colourPalettePrimary,
-        "border-radius" := "10px"
+        roundedCorners
     },
 
     "meter"{
@@ -205,15 +213,15 @@ globalCssTemplate.add(
         "--sub-sub-optimum" := $Crimson,
 
         "background" := "var(--background)",
-        "border-radius" := "10px",
         "border-color" := colourText,
-        "border-width" := "2px"
+        "border-width" := "2px",
+        roundedCorners
     },
     "meter::-webkit-meter-bar"{
         "background" := "var(--background)",
-        "border-radius" := "10px",
         "border-color" := colourText,
-        "border-width" := "2px"
+        "border-width" := "2px",
+        roundedCorners
     },
 
     "meter:-moz-meter-optimum::-moz-meter-bar"{
@@ -246,7 +254,6 @@ for i in ["button", ".button"]:
         "margin" := "4px 2px",
         "font-size" := "20px",
         "transition" := "0.3s",
-        "border-radius" := "10px",
         "display" := "inline-block",
         "border" := "none",
         "padding" := "10px 20px",
@@ -254,6 +261,7 @@ for i in ["button", ".button"]:
         "cursor" := "pointer",
         "text-decoration" := "none",
         "text-align" := "center",
+        roundedCorners
     }
     globalCssTemplate.add(
         (i & ":hover"){
