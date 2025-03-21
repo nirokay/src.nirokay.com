@@ -96,7 +96,7 @@ proc getTopBar(html: HtmlDocument): HtmlElement =
     result = `div`(
         nav(h2(items.join(<$>" › "))).setClass(classFlexContainer).addStyle("display" := "flex"),
         html.getNavSelector().addStyle("justify-self" := "flex-end")
-    ).setClass(classDivMenuBarContainer).setClass(classFlexContainer)
+    ).setClass(classDivMenuBarContainer).setClass(classFlexContainer).addStyle("justify-content" := "flex-start")
 
 proc generatePage*(page: HtmlDocument) =
     ## Alternative for `writeFile(html)`, adding some final touches before generating the document
