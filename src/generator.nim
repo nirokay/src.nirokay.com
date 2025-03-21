@@ -1,7 +1,8 @@
 import std/[tables, times, strutils]
 import websitegenerator
 export websitegenerator except newHtmlDocument, newDocument, writeFile
-import resources, snippets
+import resources, snippets, css/[colours, classes]
+import css/globals except newCssStyleSheet
 export snippets
 
 proc timeStamp(): string =
@@ -79,7 +80,7 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
 proc getTopBar(html: HtmlDocument): HtmlElement =
     proc newElem(href, text: string): HtmlElement =
         a(href, text).addStyle(
-            "color" := "#e8e6e3",
+            "color" := colourText,
             "justify-self" := "flex-start"
         )
     var items: seq[HtmlElement] = @[
@@ -93,9 +94,9 @@ proc getTopBar(html: HtmlDocument): HtmlElement =
             items.add newElem("/" & subUrl & ".html", subUrl.capitalizeAscii())
 
     result = `div`(
-        nav(h2(items.join(<$>" › "))).setClass("flex-container").addStyle("display" := "flex"),
+        nav(h2(items.join(<$>" › "))).setClass(classFlexContainer).addStyle("display" := "flex"),
         html.getNavSelector().addStyle("justify-self" := "flex-end")
-    ).setClass("div-menu-bar-container").setClass("flex-container")
+    ).setClass(classDivMenuBarContainer).setClass(classFlexContainer)
 
 proc generatePage*(page: HtmlDocument) =
     ## Alternative for `writeFile(html)`, adding some final touches before generating the document
@@ -103,9 +104,9 @@ proc generatePage*(page: HtmlDocument) =
     html.body = @[
         `div`(
             `div`(
-                `div`(page.body).setClass("div-centering-inner")
-            ).setClass("div-centering-middle")
-        ).setClass("div-centering-outer"),
+                `div`(page.body).setClass(classDivCenteringInner)
+            ).setClass(classDivCenteringMiddle)
+        ).setClass(classDivCenteringOuter),
         html.getTopBar()
     ]
     html.writeFile()
@@ -116,9 +117,9 @@ proc generateCss*(stylesheet: CssStyleSheet) =
     css.add cssComment(@[
         "@name nirokay.com stylesheet",
         "@author nirokay",
-        "@source https://github.com/nirokay/src.nirokay.com",
-        "@website https://nirokay.com",
-        "HTML and CSS is generated using https://github.com/nirokay/websitegenerator",
+        "@source https://github.com/nirokay/src.nirokay.com/",
+        "@website https://nirokay.com/",
+        "HTML and CSS is generated using https://github.com/nirokay/websitegenerator/",
         "Generated at " & timeStamp()
     ])
     css.elements = css.elements & stylesheet.elements

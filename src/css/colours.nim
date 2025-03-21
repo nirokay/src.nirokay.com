@@ -1,4 +1,4 @@
-import ../generator
+import websitegenerator
 
 const
     # Backgrounds:

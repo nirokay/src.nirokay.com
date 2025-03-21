@@ -1,5 +1,5 @@
 import std/[strutils, strformat]
-import ../generator
+import websitegenerator
 import colours
 
 const roundedCorners*: CssAttribute = "border-radius" := "15px"

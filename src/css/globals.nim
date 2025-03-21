@@ -1,4 +1,4 @@
-import ../generator as GENERATOR
+import websitegenerator as GENERATOR
 import classes, colours
 export classes, colours
 
