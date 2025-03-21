@@ -39,6 +39,22 @@
         "Alois Ostermair": {
             "allegiances": ["Ex-AfD"]
         },
+        "Andreas Gehlmann": {
+            "imageUrl": "https://www.landtag.sachsen-anhalt.de/fileadmin/_processed_/0/d/csm_0000bc_701284761b.jpg",
+            "allegiances": ["AfD"]
+        },
+        "Dubravko Mandic": {
+            "imageUrl": "dubravko-mandic.webp",
+            "allegiances": ["Ex-AfD"]
+        },
+        "Jan Petersen-Brendel": {
+            "imageUrl": "jan-petersen-brendel.jpg",
+            "allegiances": ["AfD"]
+        },
+        "Petr Bystron": {
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b3/2020-02-14_Deutscher_Bundestag_IMG_3615_by_Stepro.jpg",
+            "allegiances": ["AfD"]
+        },
         "Adolf Hitler": {
             "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Bundesarchiv_Bild_183-H1216-0500-002%2C_Adolf_Hitler.jpg",
             "allegiances": ["NSDAP"]
@@ -188,6 +204,48 @@
             "deDE": "Ich will auch gar nicht, dass Sie dafür stimmen! Deutschland soll frei werden, aber nicht durch Sie [SPD Politiker].",
             "source": "https://gutezitate.com/zitat/235484",
             "author": "Adolf Hitler"
+        },
+        {
+            "enGB": "We should also [put queer people into prison] in Germany!",
+            "deDE": "[Gefängnisstrafen für Queere Menschen] sollten wir in Deutschland auch machen!",
+            "source": "https://www.volksverpetzer.de/analyse/afd-zitate/",
+            "author": "Andreas Gehlmann"
+        },
+        {
+            "enGB": "",
+            "deDE": "Von der [Nazi Partei] unterscheiden wir uns [...] nicht so sehr durch Inhalte.",
+            "source": "https://afd-verbot.de/beweise/33330",
+            "author": "Dubravko Mandic"
+        },
+        {
+            "enGB": "",
+            "deDE": "Der schwarze Mensch schaut zu Weißen auf, wenn sie hart und gerecht regieren",
+            "source": "https://afd-verbot.de/beweise/62081",
+            "author": "Dubravko Mandic"
+        },
+        {
+            "enGB": "The big problem is, labeling Hitler as the absolute evil. Of course we know that [...] no such thing as black and white exists.",
+            "deDE": "Das große Problem ist, dass Hitler als absolut böse dargestellt wird. Aber selbstverständlich wissen wir, dass es [...] kein Schwarz und Weiß gibt.",
+            "source": "https://afd-verbot.de/beweise/74588",
+            "author": "Björn Höcke"
+        },
+        {
+            "enGB": "Today on [Hitlers birthday (20/04)], I congratulate the [anniversary] of the German people retaking a part of their freedoms.",
+            "deDE": "Heute am [Geburtstag Hitlers (20.04.)] gratuliere ich zum Geburtstag dem deutschen Volke zur Wiedererlangung eines Teil seiner Freiheiten",
+            "source": "https://afd-verbot.de/beweise/28240",
+            "author": "Jan Petersen-Brendel"
+        },
+        {
+            "enGB": "My friend [high-ranking politician of the same party] is 100 percent correct; we must get rid of such people ourselves.",
+            "deDE": "Und da hat mein Freund [hochrangiger Politiker der selben Partei] 100-prozentig Recht; solche Menschen müssen wir selbstverständlich entsorgen.",
+            "source": "https://www.volksverpetzer.de/analyse/afd-zitate/",
+            "author": "Petr Bystron"
+        },
+        {
+            "enGB": "The political correctness belongs on the trash pile of history.",
+            "deDE": "Die politische Korrektheit gehört auf den Müllhaufen der Geschichte.",
+            "source": "https://www.volksverpetzer.de/analyse/afd-zitate/",
+            "author": "Alice Weidel"
         }
     ]
 }

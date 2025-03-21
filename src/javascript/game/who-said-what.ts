@@ -1,5 +1,5 @@
 // Settings:
-const questionsWithoutRepeating: number = 10;
+const questionsWithoutRepeating: number = 25;
 
 // Questions:
 const idThesisDivPrefix: string = "id-thesis-div-";
