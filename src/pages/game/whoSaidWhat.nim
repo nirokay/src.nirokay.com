@@ -138,7 +138,7 @@ proc getAuthorDiv(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
         if thesis.source.strip() == "":
             $strings.data.sourceMissing
         else:
-            $a(thesis.source, $strings.data.source)
+            $a(thesis.source, $strings.data.source).addattr("target", "_blank")
     )
 
     result = `div`(
