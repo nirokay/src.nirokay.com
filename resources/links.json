@@ -1,5 +1,10 @@
 [
     {
+        "name": "Codeberg",
+        "img": "codeberg.svg",
+        "url": "https://codeberg.org/nirokay"
+    },
+    {
         "name": "GitHub",
         "img": "github.svg",
         "url": "https://github.com/nirokay"

@@ -32,7 +32,7 @@ proc newLink(name, img, url: string): HtmlElement =
     a(
         url,
         $img(pathImagesLinks & "/" & img, "Link to " & name).setClass(classClickableImage)
-    )
+    ).addattr("target", "_blank").setTitle("Link to my " & name)
 var links: seq[HtmlElement]
 for link in linksToSocials:
     links.add newLink(link.name, link.img, link.url)
