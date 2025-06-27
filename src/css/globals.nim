@@ -27,6 +27,18 @@ globalCssTemplate.add(
     "article > p"{
         "text-align" := "left"
     },
+    "article > section"{
+        roundedCorners,
+        "background-color" := colourBackgroundMiddle,
+        "margin" := "30px",
+        "padding" := "20px"
+    },
+    "article > section :first-child"{
+        "margin-top" := "0px !important"
+    },
+    "article > section :last-child"{
+        "margin-bottom" := "0px !important"
+    },
 
     # --- Images: -------------------------------------------------------------
     "img"{
@@ -295,4 +307,3 @@ proc newCssStyleSheet*(path: string): CssStyleSheet =
     ## Override for `websitegenerator.newCssStyleSheet(path)` to include global css variables
     result = GENERATOR.newCssStyleSheet(path)
     result.elements = globalCssTemplate.elements
-
