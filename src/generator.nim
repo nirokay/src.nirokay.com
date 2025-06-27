@@ -25,7 +25,7 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
     # Html header stuff:
     result.addToHead(
         htmlComment("HTML and CSS is generated using https://github.com/nirokay/websitegenerator"),
-        htmlComment("Generated: " & timeStamp()),
+        # htmlComment("Generated: " & timeStamp()),
         charset("utf-8"),
         "meta"[
             "name" -= "viewport",

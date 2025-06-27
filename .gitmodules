@@ -1,0 +1,4 @@
+[submodule "nirokay.com"]
+	path = nirokay.com
+	url = git@github.com:nirokay/nirokay.com.git
+	branch = master
