@@ -35,9 +35,9 @@ COMMIT_MSG="Automated deployment @ $(date)"
 
 cdGitModule
     git add .
-    if ! git commit -S -m COMMIT_MSG; then
+    if ! git commit -S -m "$COMMIT_MSG"; then
         echo -e "Failed signed commit, retrying without signing..."
-        if ! git commit -m COMMIT_MSG; then
+        if ! git commit -m "$COMMIT_MSG"; then
             echo -e "Failed to commit changes"
             cd -
             exit 1

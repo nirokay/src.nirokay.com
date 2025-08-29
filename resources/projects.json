@@ -22,6 +22,13 @@
             "lang": "nim"
         },
         {
+            "name": "CatTag",
+            "desc": "is also a library for generating static HTML/XML and CSS. This is the spiritual successor to WebsiteGenerator",
+            "repo": "https://github.com/nirokay/CatTag",
+            "docs": "https://nirokay.github.io/nim-docs/cattag/cattag.html",
+            "lang": "nim"
+        },
+        {
             "name": "HolidAPI",
             "desc": "is a collection of API wrappers for Holiday APIs, which supports many countries.",
             "repo": "https://github.com/nirokay/holidapi",
