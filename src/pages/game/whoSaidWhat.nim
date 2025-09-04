@@ -145,7 +145,7 @@ proc getAuthorDiv(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
         img(imgUrl, $strings.data.authorImgAlt).setClass(classAuthorImage),
         p(thesis.author & allegiances),
         source
-    ).setId(idThesisAuthorPrefix & $id).addStyle("display" := "none")
+    ).setId(idThesisAuthorPrefix & $id).setStyle("display" := "none")
 
 proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
     let
@@ -170,11 +170,11 @@ proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
             authorDiv,
             `div`(
                 p($strings.data.question),
-                button($strings.data.button.yes, buttonWasSaidByAfd).addStyle("background-color" := colourGreen).setId(idThesisButtonAfdPrefix & $id).setClass(classButton),
-                button($strings.data.button.no, buttonWasNotSaidByAfd).addStyle("background-color" := colourRed).setId(idThesisButtonOtherPrefix & $id).setClass(classButton)
+                button($strings.data.button.yes, buttonWasSaidByAfd).setStyle("background-color" := colourGreen).setId(idThesisButtonAfdPrefix & $id).setClass(classButton),
+                button($strings.data.button.no, buttonWasNotSaidByAfd).setStyle("background-color" := colourRed).setId(idThesisButtonOtherPrefix & $id).setClass(classButton)
             ).setId(idThesisButtonsDiv & $id)
-        ).setClass(classFlexContainer).addStyle("align-items" := "center")
-    ).setId(idThesisDivPrefix & $id).setClass(classQuestionBlock).addStyle("display" := "none")
+        ).setClass(classFlexContainer).setStyle("align-items" := "center")
+    ).setId(idThesisDivPrefix & $id).setClass(classQuestionBlock).setStyle("display" := "none")
 
 
 for language in LANGUAGE:
@@ -213,9 +213,9 @@ for language in LANGUAGE:
                 )
             ).setClass(classFlexContainer),
             nav(
-                button($strings.data.button.start, "whoSaidWhatStart();").setId(idButtonStartQuestions).addStyle("display" := "block"),
-                button($strings.data.button.skip, "whoSaidWhatSkip();").setId(idButtonSkipQuestion).addStyle("display" := "none"),
-                button($strings.data.button.next, "whoSaidWhatNext();").setId(idButtonNextQuestion).addStyle("display" := "none")
+                button($strings.data.button.start, "whoSaidWhatStart();").setId(idButtonStartQuestions).setStyle("display" := "block"),
+                button($strings.data.button.skip, "whoSaidWhatSkip();").setId(idButtonSkipQuestion).setStyle("display" := "none"),
+                button($strings.data.button.next, "whoSaidWhatNext();").setId(idButtonNextQuestion).setStyle("display" := "none")
             ).setClass(classFlexContainer)
         )
     )

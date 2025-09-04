@@ -49,63 +49,63 @@ html.add(
         ).setClass(classFlexContainer),
         `div`(
             `div`(
-                h1("0").setId("id-cat-left-score").setTitle("Current wins").addStyle(
+                h1("0").setId("id-cat-left-score").setTitle("Current wins").setStyle(
                     "scale" := "3"
                 ),
                 h2("0").setId("id-cat-left-highscore").setTitle("All-time wins"),
             ),
             h2(":"),
             `div`(
-                h1("0").setId("id-cat-right-score").setTitle("Current wins").addStyle(
+                h1("0").setId("id-cat-right-score").setTitle("Current wins").setStyle(
                     "scale" := "3"
                 ),
                 h2("0").setId("id-cat-right-highscore").setTitle("All-time wins")
             )
-        ).setClass(classFlexContainer).addStyle(
+        ).setClass(classFlexContainer).setStyle(
             "margin" := "20px"
         ),
         `div`(
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("-", "Ball Left - Game Over").setId("id-ball-left-game-over").addStyle(
+            img("-", "Ball Left - Game Over").setId("id-ball-left-game-over").setStyle(
                 "max-width" := ballWidth,
                 "align-self" := "end"
             ),
             # -----------------------------------------------------------------
-            img("-", "Left cat").setId("id-cat-left-picture").addStyle(
+            img("-", "Left cat").setId("id-cat-left-picture").setStyle(
                 "max-height" := maxCatHeight,
                 "max-width" := maxCatWidth,
                 "width" := itemsWidth
             ),
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("-", "Ball Left").setId("id-ball-left").addStyle(
+            img("-", "Ball Left").setId("id-ball-left").setStyle(
                 "max-width" := ballWidth,
                 "align-self" := "baseline"
             ),
             # =================================================================
-            img("../resources/images/games/pingpong/table.png", "Ping pong table").addStyle(
+            img("../resources/images/games/pingpong/table.png", "Ping pong table").setStyle(
                 "max-height" := maxTableHeight,
                 "max-width" := maxTableWidth,
                 "width" := itemsWidth
             ),
             # =================================================================
-            img("-", "Ball Right").setId("id-ball-right").addStyle(
+            img("-", "Ball Right").setId("id-ball-right").setStyle(
                 "max-width" := ballWidth,
                 "align-self" := "baseline"
             ),
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            img("-", "Right cat").setId("id-cat-right-picture").addStyle(
+            img("-", "Right cat").setId("id-cat-right-picture").setStyle(
                 "max-height" := maxCatHeight,
                 "max-width" := maxCatWidth,
                 "width" := itemsWidth,
                 "transform" := "scaleX(-1)"
             ),
             # -----------------------------------------------------------------
-            img("-", "Ball Right - Game Over").setId("id-ball-right-game-over").addStyle(
+            img("-", "Ball Right - Game Over").setId("id-ball-right-game-over").setStyle(
                 "max-width" := ballWidth,
                 "align-self" := "end"
             )
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        ).setClass(classFlexContainer).addStyle(
+        ).setClass(classFlexContainer).setStyle(
             "align-items" := "end",
             "min-height" := "400px"
         )

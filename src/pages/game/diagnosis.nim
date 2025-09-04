@@ -114,7 +114,7 @@ proc newQuestion(id, text: string, inputAttrs: seq[HtmlElementAttribute] = @[]):
 proc newButton(text: string, action: string): HtmlElement =
     result = `div`(
         button(text, action)
-    ).addStyle(
+    ).setStyle(
         "margin" := "20px auto",
         "text-align" := "center"
     )
@@ -136,7 +136,7 @@ for language in Language:
             case language:
             of enGB: "enGB"
             of deDE: "deDE"
-        ).setId(idPageLanguage).addStyle(
+        ).setId(idPageLanguage).setStyle(
             "display" := "none"
         )
     )
@@ -169,7 +169,7 @@ for language in Language:
             `div`(
                 pc($strings.introduction),
                 newButton($strings.button.start, "startQuiz();").setId(idButtonStartQuiz)
-            ).setId(idSectionStartQuiz).addStyle("display" := "initial"),
+            ).setId(idSectionStartQuiz).setStyle("display" := "initial"),
 
             # Quiz screen:
             `div`(
@@ -177,12 +177,12 @@ for language in Language:
                     @[legend($strings.question.instructions)] & questions
                 ),
                 newButton($strings.button.submit, "submitQuiz();").setId(idButtonSubmit)
-            ).setId(idSectionQuiz).addStyle("display" := "none"),
+            ).setId(idSectionQuiz).setStyle("display" := "none"),
 
             # Computing screen:
             `div`(
                 h2($strings.loading).setId(idLoadingText).setClass(obnoxiousCssElement),
-            ).setId(idSectionComputing).addStyle("display" := "none"),
+            ).setId(idSectionComputing).setStyle("display" := "none"),
 
             # Results display screen:
             `div`(
@@ -190,8 +190,8 @@ for language in Language:
                 h2("???").setId(idDiagnosisResultText),
                 pc($strings.diagnosis.youHaveEnd),
                 newButton($strings.button.retry, "restartQuiz();").setId(idButtonRetryQuiz).setId(idButtonRetryQuiz)
-            ).setId(idSectionShowingResults).addStyle("display" := "none")
-        ).addStyle(
+            ).setId(idSectionShowingResults).setStyle("display" := "none")
+        ).setStyle(
             "margin" := "50px 10%"
         )
     )
