@@ -2,5 +2,5 @@ import ../generator except newCssStyleSheet
 import globals
 export classes, colours
 
-var css: CssStyleSheet = newCssStyleSheet("styles.css")
+var css: CssStylesheet = newCssStylesheet("styles.css")
 incl css

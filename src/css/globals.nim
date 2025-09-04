@@ -1,8 +1,8 @@
-import websitegenerator as GENERATOR
+import cattag as GENERATOR
 import classes, colours
 export classes, colours
 
-var globalCssTemplate*: CssStyleSheet = GENERATOR.newCssStyleSheet("---global-css---")
+var globalCssTemplate*: CssStylesheet = GENERATOR.newCssStylesheet("---global-css---")
 
 globalCssTemplate.add(
     # --- Global: -------------------------------------------------------------
@@ -303,7 +303,7 @@ globalCssTemplate.add(
 )
 
 # Overrides: ------------------------------------------------------------------
-proc newCssStyleSheet*(path: string): CssStyleSheet =
-    ## Override for `websitegenerator.newCssStyleSheet(path)` to include global css variables
-    result = GENERATOR.newCssStyleSheet(path)
-    result.elements = globalCssTemplate.elements
+proc newCssStylesheet*(path: string): CssStyleSheet =
+    ## Override for `cattag.newCssStylesheet(path)` to include global css variables
+    result = GENERATOR.newCssStylesheet(path)
+    result.children = globalCssTemplate.children

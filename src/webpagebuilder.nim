@@ -1,5 +1,5 @@
-import generator except websitegenerator
-import websitegenerator
+import generator except cattag
+import cattag
 
 # Import pages and css:
 import pages/[
@@ -21,10 +21,6 @@ import css/[
 ]
 export
     styles
-
-# Write files to disk:
-const target: string = "nirokay.com"
-setTargetDirectory(target)
 
 proc `/`[T](current: int, sequence: openArray[T]): string =
     result = $(current + 1) & "/" & $sequence.len()

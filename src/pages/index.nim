@@ -8,21 +8,21 @@ var html: HtmlDocument = newHtmlPage(
 
 html.add(
     header(
-        h1("nirokay.com"),
-        p("Welcome to my little homepage!").setClass(classGradientRainbowBackground).setClass(classGradientTextRainbow).addStyle(
-            "width" := "fit-content",
-            "margin" := "auto"
+        h1(html"nirokay.com"),
+        p(html"Welcome to my little homepage!").setClass(classGradientRainbowBackground).setClass(classGradientTextRainbow).setStyle(
+            width := "fit-content",
+            margin := "auto"
         )
     ),
     article(
         section(
-            h2("Welcome!"),
-            p("Feel free to look around using the nav bar at the top! :3")
+            h2(html"Welcome!"),
+            p(html"Feel free to look around using the nav bar at the top! :3")
         ),
         section(
-           h2("HzgShowAround"),
-           p("🇩🇪 Für HzgShowAround, klicke einfach auf " & $a("/HzgShowAround/index.html", "diesen Hyperlink") & "!").setLang("de"),
-           p("🇬🇧 If you are here for HzgShowAround, just click " & $a("/HzgShowAround/index.html", "this hyperlink") & "!").setLang("en"),
+           h2(html"HzgShowAround"),
+           p(html("🇩🇪 Für HzgShowAround, klicke einfach auf " & $a("/HzgShowAround/index.html", "diesen Hyperlink") & "!")).setLang("de"),
+           p(html("🇬🇧 If you are here for HzgShowAround, just click " & $a("/HzgShowAround/index.html", "this hyperlink") & "!")).setLang("en"),
         )
     )
 )

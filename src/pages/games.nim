@@ -10,8 +10,8 @@ var html: HtmlDocument = newHtmlPage(
 
 html.add(
     header(
-        h1("Games"),
-        p("This is a collection of games and other interactive media.")
+        h1(html"Games"),
+        p(html"This is a collection of games and other interactive media.")
     )
 )
 
@@ -26,8 +26,8 @@ for game in gamesJson:
             links.add(li a(game.title.getHtmlLanguagedPagePath(language), lang.long))
 
     gamesHtml.add `div`(
-        h3(game.name),
-        p(game.desc),
+        h3(html game.name),
+        p(html game.desc),
         ul(links)
     ).setClass(classCodeShowcaseElement)
 

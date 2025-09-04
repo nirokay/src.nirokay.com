@@ -24,8 +24,8 @@ proc newHtmlLanguagedPage*(title, description, gameTitle: string, cssPath: strin
     var html: HtmlDocument = newHtmlPage(title & " (Language Picker)", description & " (Language Picker)", newPath, false)
     html.add(
         header(
-            h1("Choose language"),
-            p("Pick the language you want to use for the game/interactive media.")
+            h1(html"Choose language"),
+            p(html"Pick the language you want to use for the game/interactive media.")
         )
     )
 
@@ -34,7 +34,7 @@ proc newHtmlLanguagedPage*(title, description, gameTitle: string, cssPath: strin
         let lang: LanguageObject = language.get()
         var button: HtmlElement = a(
             gameTitle & "/" & lang.short & ".html",
-            $pc(lang.flag & $br() & lang.long).addStyle("font-size" := "2em")
+            $pc(lang.flag & $br() & lang.long).setStyle(fontSize := 2'em)
         )
         buttonList.add button
 
@@ -55,4 +55,3 @@ template generateHtml*(): untyped =
     case language:
     of enGB: htmlEN.setAs(html)
     of deDE: htmlDE.setAs(html)
-

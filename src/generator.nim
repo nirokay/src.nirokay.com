@@ -1,9 +1,17 @@
 import std/[tables, times, strutils]
-import websitegenerator
-export websitegenerator except newHtmlDocument, newDocument, writeFile
+import cattag
+export cattag except newHtmlDocument, newDocument, writeFile
 import resources, snippets, css/[colours, classes]
 import css/globals except newCssStyleSheet
 export snippets
+
+proc join*(elements: seq[HtmlElement], sep: HtmlElement): seq[HtmlElement] =
+    ## Joins `HtmlElement`s by an `HtmlElement` as separator
+    result = @[]
+    for i, element in elements:
+        result.add element
+        if i == elements.len() - 1: break
+        result.add sep
 
 proc timeStamp(): string =
     result = now().format("yyyy-MM-dd ---- hh---mm--ss")
@@ -24,34 +32,38 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
     result = newHtmlDocument(path)
     # Html header stuff:
     result.addToHead(
-        htmlComment("HTML and CSS is generated using https://github.com/nirokay/websitegenerator"),
-        # htmlComment("Generated: " & timeStamp()),
-        charset("utf-8"),
-        "meta"[
-            "name" -= "viewport",
-            "content" -= "width=device-width, initial-scale=1"
-        ],
-        title(title),
-        ogTitle(title),
-        description(description),
-        ogDescription(description),
-        icon(pathImages & "/favicon.gif", imageGif, "32x32"),
-        "link"[
-            "rel" -= "stylesheet",
-            "href" -= "/styles.css",
-            "title" -= "Absolute path to global css"
-        ],
-        importScript("/javascript/menu-bar.js")
+        newHtmlComment("HTML and CSS is generated using https://github.com/nirokay/websitegenerator"),
+        newHtmlElement("meta", @[charset <=> "utf-8"]),
+        newHtmlElement("meta", @[
+            "name" <=> "viewport",
+            "content" <=> "width=device-width, initial-scale=1"
+        ]),
+        title(html title),
+        newHtmlElement("meta", @["property" <=> "og:title", "content" <=> title]),
+        newHtmlElement("meta", @["property" <=> "description", "content" <=> description]),
+        newHtmlElement("meta", @["property" <=> "og:description", "content" <=> description]),
+        newHtmlElement("meta", @["property" <=> "", "content" <=> ""]),
+        link(@[
+            href <=> pathImages & "/favicon.gif",
+            sizes <=> "32x32",
+            `type` <=> "image/gif"
+        ]),
+        link(@[
+            rel <=> "stylesheet",
+            href <=> "/styles.css",
+            title <=> "Absolute path to global css"
+        ]),
+        script(true).setSrc("/javascript/menu-bar.js")
     )
     if includeInMenuBar: menuBarPages[title] = path
 
     # Site-specific stylesheet:
     if cssPath != "":
         result.addToHead(
-            "link"[
-                "rel" -= "stylesheet",
-                "href" -= "/" & cssPath
-            ]
+            link(@[
+                rel <=> "stylesheet",
+                href <=> "/" & cssPath
+            ])
         )
 
 proc getNavSelector(page: HtmlDocument): HtmlElement =
@@ -70,8 +82,8 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
         ]#
         options.add newOption
     if not itemWasSelected:
-        options[0].addattr("selected")
-    result = select("Menu bar", "id-menu-bar", options).add(
+        options[0].add(newAttribute("selected"))
+    result = select("id-menu-bar", options).add(
         attr("onchange", "changeToSelectedPage();"),
         attr("onfocus", "setSelectedToNavigation();"),
         attr("id", "id-menu-bar")
@@ -79,9 +91,9 @@ proc getNavSelector(page: HtmlDocument): HtmlElement =
 
 proc getTopBar(html: HtmlDocument): HtmlElement =
     proc newElem(href, text: string): HtmlElement =
-        a(href, text).addStyle(
-            "color" := colourText,
-            "justify-self" := "flex-start"
+        a(href, text).setStyle(
+            color := colourText,
+            justifySelf := "flex-start"
         )
     var items: seq[HtmlElement] = @[
         newElem("/", "nirokay.com")
@@ -94,9 +106,9 @@ proc getTopBar(html: HtmlDocument): HtmlElement =
             items.add newElem("/" & subUrl & ".html", subUrl.capitalizeAscii())
 
     result = `div`(
-        nav(h2(items.join(<$>" › "))).setClass(classFlexContainer).addStyle("display" := "flex"),
-        html.getNavSelector().addStyle("justify-self" := "flex-end")
-    ).setClass(classDivMenuBarContainer).setClass(classFlexContainer).addStyle("justify-content" := "flex-start")
+        nav(h2(items.join(html" › "))).setClass(classFlexContainer).setStyle(display := "flex"),
+        html.getNavSelector().setStyle(justifySelf := "flex-end")
+    ).setClass(classDivMenuBarContainer).setClass(classFlexContainer).setStyle(justifyContent := "flex-start")
 
 proc generatePage*(page: HtmlDocument) =
     ## Alternative for `writeFile(html)`, adding some final touches before generating the document
@@ -111,10 +123,10 @@ proc generatePage*(page: HtmlDocument) =
     ]
     html.writeFile()
 
-proc generateCss*(stylesheet: CssStyleSheet) =
+proc generateCss*(stylesheet: CssStylesheet) =
     ## Alternative for `writeFile(css)`, adding some final touches before generating the stylesheet
-    var css: CssStyleSheet = newCssStyleSheet(stylesheet.file)
-    css.add cssComment(@[
+    var css: CssStylesheet = newCssStylesheet(stylesheet.file)
+    css.add newCssComment(@[
         "@name nirokay.com stylesheet",
         "@author nirokay",
         "@source https://github.com/nirokay/src.nirokay.com/",
@@ -122,5 +134,5 @@ proc generateCss*(stylesheet: CssStyleSheet) =
         "HTML and CSS is generated using https://github.com/nirokay/websitegenerator/",
         "Generated at " & timeStamp()
     ])
-    css.elements = css.elements & stylesheet.elements
+    css.children = css.children & stylesheet.children
     css.writeFile()

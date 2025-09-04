@@ -1,24 +1,24 @@
 import std/[strutils, strformat]
-import websitegenerator
+import cattag
 import colours
 
-const roundedCorners*: CssAttribute = "border-radius" := "15px"
+const roundedCorners*: CssElementProperty = borderRadius := 15'px
 
 proc newTextGradientClass*(className: string, colourLeft, colourRight: string|CssColour): CssElement =
     ## Generates a new text gradient CSS class
-    result = ("." & className){
-        "background" := &"linear-gradient(45deg, {colourLeft}, {colourRight})",
-        "background-clip" := "text",
+    result = newCssClass(className,
+        background := &"linear-gradient(45deg, {colourLeft}, {colourRight})",
+        backgroundClip := "text",
         "-webkit-background-clip" := "text",
         "-webkit-text-fill-color" := "transparent"
-    }
+    )
 proc newTextGradientRainbowBackgroundClass*(): CssElement =
     let colours: string = coloursGradientRainbow.join(", ")
-    result = ".text-gradient-background-rainbow"{
-        "background" := "linear-gradient(to right, " & colours & ")"
-    }
+    result = newCssClass("text-gradient-background-rainbow",
+        background := "linear-gradient(to right, " & colours & ")"
+    )
 proc newTextGradientRainbowClass*(): CssElement =
-    result = ".text-gradient-rainbow"{
+    result = newCssClass("text-gradient-rainbow",
         #[
         # Should not be necessary:
         "background" := "red",
@@ -28,77 +28,77 @@ proc newTextGradientRainbowClass*(): CssElement =
         ]#
         "-webkit-background-clip" := "text",
         "-webkit-text-fill-color" := "transparent",
-        "background-clip" := "text"
-    }
+        backgroundClip := "text"
+    )
 
 
 const
     # Centering divs (around every page): -------------------------------------
     menuBarHeight* = "72px"
-    classDivCenteringOuter*: CssElement = ".div-centering-outer"{
-        "position" := "absolute",
-        "display" := "table",
-        "width" := "100%",
-        "height" := "calc(100% - " & menuBarHeight & ")",
-        "left" := "0",
-        "top" := "calc(" & menuBarHeight & ")"
-    }
-    classDivCenteringMiddle*: CssElement = ".div-centering-middle"{
-        "vertical-align" := "middle",
-        "display" := "table-cell"
-    }
-    classDivCenteringInner*: CssElement = ".div-centering-inner"{
-        "width" := "100%",
-        "margin-left" := "auto",
-        "margin-right" := "auto"
-    }
-    classDivMenuBarContainer*: CssElement = ".div-menu-bar-container"{
-        "position" := "fixed",
-        "display" := "flex",
-        "width" := "100%",
-        "height" := menuBarHeight,
-        "left" := "0",
-        "top" := "0",
-        "padding-left" := "10px",
-        "background-color" := colourBackgroundMiddle
-    }
+    classDivCenteringOuter*: CssElement = newCssClass("div-centering-outer",
+        position := "absolute",
+        display := "table",
+        width := "100%",
+        height := "calc(100% - " & menuBarHeight & ")",
+        left := "0",
+        top := "calc(" & menuBarHeight & ")"
+    )
+    classDivCenteringMiddle*: CssElement = newCssClass("div-centering-middle",
+        verticalAlign := "middle",
+        display := "table-cell"
+    )
+    classDivCenteringInner*: CssElement = newCssClass("div-centering-inner",
+        width := "100%",
+        marginLeft := "auto",
+        marginRight := "auto"
+    )
+    classDivMenuBarContainer*: CssElement = newCssClass("div-menu-bar-container",
+        position := "fixed",
+        display := "flex",
+        width := "100%",
+        height := menuBarHeight,
+        left := "0",
+        top := "0",
+        paddingLeft := 10'px,
+        backgroundColor := colourBackgroundMiddle
+    )
 
     # Links page: -------------------------------------------------------------
-    classClickableImage*: CssElement = ".image-clickable-link"{
-        "display" := "inline-flex",
-        "margin" := "5px 5px",
-        "padding" := "5px",
-        "width" := "5rem",
-        "max-width" := "150px"
-    }
-    classCodeShowcaseElement*: CssElement = ".code-showcase-element"{
-        "display" := "inline-block",
-        "margin" := "5px 5px",
-        "padding" := "5px",
-        "width" := "30%",
-        "max-width" := "500px",
-        "min-width" := "300px",
-        "background" := colourBackgroundMiddle,
-        "padding" := "10px",
+    classClickableImage*: CssElement = newCssClass("image-clickable-link",
+        display := "inline-flex",
+        margin := "5px 5px",
+        padding := "5px",
+        width := "5rem",
+        maxWidth := "150px"
+    )
+    classCodeShowcaseElement*: CssElement = newCssClass("code-showcase-element",
+        display := "inline-block",
+        margin := "5px 5px",
+        padding := 5'px,
+        width := 30'percent,
+        maxWidth := 500'px,
+        minWidth := 300'px,
+        background := colourBackgroundMiddle,
+        padding := 10'px,
         roundedCorners
-    }
-    classCodeShowcaseLanguageImage*: CssElement = ".code-showcase-language-image"{
-        "max-height" := "1rem",
-        "border-radius" := "0px"
-    }
-    classFlexContainer*: CssElement = ".container-flex"{
-        "text-align" := "center",
-        "display" := "flex",
-        "align-items" := "baseline",
-        "justify-content" := "space-evenly",
-        "flex-wrap" := "wrap"
-    }
-    classCodeShowcaseContainer*: CssElement = ".container-code-showcase"{
-        "align-items" := "center",
-        "display" := "flex",
-        "flex-wrap" := "wrap",
-        "justify-content" := "center"
-    }
+    )
+    classCodeShowcaseLanguageImage*: CssElement = newCssClass("code-showcase-language-image",
+        maxHeight := 1'rem,
+        borderRadius := 0'px
+    )
+    classFlexContainer*: CssElement = newCssClass("container-flex",
+        textAlign := "center",
+        display := "flex",
+        alignItems := "baseline",
+        justifyContent := "space-evenly",
+        flexWrap := "wrap"
+    )
+    classCodeShowcaseContainer*: CssElement = newCssClass("container-code-showcase",
+        alignItems := "center",
+        display := "flex",
+        flexWrap := "wrap",
+        justifyContent := "center"
+    )
 
     # Fancy text: -------------------------------------------------------------
     classGradientTextPrimaryToSecondary*: CssElement = newTextGradientClass("text-gradient-one", colourPalettePrimary, colourPaletteSecondary)

@@ -46,16 +46,17 @@ proc question(question: LanguageString, questionType: QuestionType = yesNo, id: 
             of typingShort: "text"
         )
     var
-        input = "input"[
-            "type" -= inputType,
-            "name" -= questionName
-        ]
-        label = "label"[
-            "for" -= questionName
-        ]
-    if id != "": input.tagAttributes.add(attr("id", id))
-    if inputType == "text": input.addattr("placeholder", $strings.request.typeHere)
-    label.add(input, rawText($question))
+        input = input(@[
+
+            "type" <=> inputType,
+            "name" <=> questionName
+        ])
+        label = label(@[
+            "for" <=> questionName
+        ])
+    if id != "": input.add("id" <=> id)
+    if inputType == "text": input.add(placeholder <=> $strings.request.typeHere)
+    label.add(input, html($question))
     result = `div`(label)
     inc questionCounter
 

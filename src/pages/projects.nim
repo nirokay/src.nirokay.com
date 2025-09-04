@@ -11,17 +11,17 @@ var html: HtmlDocument = newHtmlPage(
 
 html.add(
     header(
-        h1("Projects"),
-        p("This is a showcase of some of my projects and their code documentation.")
+        h1(html"Projects"),
+        p(html"This is a showcase of some of my projects and their code documentation.")
     )
 )
-proc linkTo(name, url: string): HtmlElement = li(
+proc linkTo(name, url: string): HtmlElement = li(html(
     $a(url, "&lt;" & name & " /&gt;").setClass(classGradientRainbowBackground).setClass(classGradientTextRainbow)
-)
+))
 var docs: seq[HtmlElement]
 for topic, elements in projectShowcase:
     if elements.len() == 0: continue
-    docs.add h2(topic)
+    docs.add h2(html topic)
     var newElements: seq[HtmlElement]
     for element in elements:
         let image: HtmlElement = img(
@@ -34,8 +34,8 @@ for topic, elements in projectShowcase:
             element.lang
         ).setClass(classCodeShowcaseLanguageImage)
         var e: seq[HtmlElement] = @[
-            h3(element.name & " " & $image),
-            p($b(element.name) & " " & element.desc)
+            h3(html(element.name & " " & $image)),
+            p(html($b(html element.name) & " " & element.desc))
         ]
         var items: seq[HtmlElement]
 

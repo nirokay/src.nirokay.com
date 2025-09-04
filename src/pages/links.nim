@@ -10,8 +10,8 @@ var html: HtmlDocument = newHtmlPage(
 
 html.add(
     header(
-        h1("Links"),
-        p("Links to all my socials.")
+        h1(html"Links"),
+        p(html"Links to all my socials.")
     )
 )
 
@@ -24,8 +24,8 @@ proc email(reason: string, emailSuffix: string = "", generateSuffix: bool = true
             if generateSuffix: "nirokay-public+" & suffix & "@protonmail.com?subject=[nirokay.com -> " & reason & "] Your subject here..."
             else: "nirokay-public@protonmail.com"
     result = tr(
-        td(reason),
-        td(a("mailto:" & email, email.split("?")[0]))
+        td(html reason),
+        td(html a("mailto:" & email, email.split("?")[0]))
     )
 
 proc newLink(name, img, url: string): HtmlElement =
@@ -39,26 +39,26 @@ for link in linksToSocials:
 
 html.add(
     article(
-        `div`(links).setClass(classFlexContainer).addStyle(
-            "margin" := "25px 0px"
+        `div`(links).setClass(classFlexContainer).setStyle(
+            margin := "25px 0px"
         ),
         `div`(
             table(
                 thead(
                     tr(
-                        th("Contact reason"),
-                        th("Contact E-Mail or Webpage")
+                        th(html"Contact reason"),
+                        th(html"Contact E-Mail or Webpage")
                     ),
                 ),
                 tbody(
                     tr(
-                        td("Bug Fixes / Website issues"),
+                        td(html"Bug Fixes / Website issues"),
                         td(a("https://github.com/nirokay/src.nirokay.com/issues", "GitHub Repository"))
                     ),
                     email("Legal"),
                     email("Other", generateSuffix = false)
                 ),
-            ).addStyle("margin" := "auto")
+            ).setStyle(margin := "auto")
         )
     )
 )

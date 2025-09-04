@@ -1,8 +1,8 @@
-import websitegenerator
+import cattag
 
 const
     # Backgrounds:
-    colourBackgroundDark* = rgb(23, 25, 33) # Stolen from Nim doc generator with love <3
+    colourBackgroundDark* = "rgb(23, 25, 33)" # Stolen from Nim doc generator with love <3
     colourBackgroundMiddle* = "#23252c"
     colourBackgroundLight* = "#2f3139"
 
@@ -65,5 +65,3 @@ const
         rgb(214, 61, 194)
     ]
     ]#
-
-
