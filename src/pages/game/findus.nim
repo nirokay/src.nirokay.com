@@ -72,25 +72,25 @@ for language in Language:
         "findus"
     )
     html.addToHead(
-        importScript("/javascript/game/findus.js").addattr("defer"),
+        script(true, "/javascript/game/findus.js"),
         ogImage("/resources/images/games/findus/success.jpg")
     )
     html.add(
         header(
-            h1($strings.meta.title),
-            p($strings.meta.desc)
+            h1(html $strings.meta.title),
+            p(html $strings.meta.desc)
         ),
         article(
             dialog(false,
-                p($strings.response.passed),
+                p(html $strings.response.passed),
                 img("/resources/images/games/findus/success.jpg", "Image success").addattr("width", "200px")
             ).addattr("id", idTestPassed),
             dialog(false,
-                p($strings.response.failed),
+                p(html $strings.response.failed),
                 img("/resources/images/games/findus/failure.jpg", "Image failure").addattr("width", "200px")
             ).addattr("id", idTestFailed),
             fieldset(
-                legend($strings.request.legend),
+                legend(html $strings.request.legend),
                 # Cat questions
                 question strings.question.loveCats,
                 question strings.question.catsLoveYou,
@@ -108,7 +108,7 @@ for language in Language:
                     questionType = typingShort,
                     id = idCreditCardStealer
                 ),
-                button($strings.response.submit, "submitForm();")
+                button(strings.response.submit).addattr("onclick" <=> "submitForm();")
             )
         )
     )

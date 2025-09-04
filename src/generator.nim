@@ -5,6 +5,17 @@ import resources, snippets, css/[colours, classes]
 import css/globals except newCssStyleSheet
 export snippets
 
+
+# Implement these in cattag eventually:
+proc metaPropertyContent*(property: string, content: string): HtmlElement = newHtmlElement("meta", @[
+    "property" <=> property,
+    "content" <=> content
+])
+proc og*(property: string, content: string): HtmlElement = metaPropertyContent("og:" & property, content)
+proc ogTitle*(content: string): HtmlElement = og("title", content)
+proc ogDescription*(content: string): HtmlElement = og("description", content)
+proc ogImage*(content: string): HtmlElement = og("image", content)
+
 proc join*(elements: seq[HtmlElement], sep: HtmlElement): seq[HtmlElement] =
     ## Joins `HtmlElement`s by an `HtmlElement` as separator
     result = @[]
@@ -12,6 +23,8 @@ proc join*(elements: seq[HtmlElement], sep: HtmlElement): seq[HtmlElement] =
         result.add element
         if i == elements.len() - 1: break
         result.add sep
+
+
 
 proc timeStamp(): string =
     result = now().format("yyyy-MM-dd ---- hh---mm--ss")
@@ -39,10 +52,9 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
             "content" <=> "width=device-width, initial-scale=1"
         ]),
         title(html title),
-        newHtmlElement("meta", @["property" <=> "og:title", "content" <=> title]),
-        newHtmlElement("meta", @["property" <=> "description", "content" <=> description]),
-        newHtmlElement("meta", @["property" <=> "og:description", "content" <=> description]),
-        newHtmlElement("meta", @["property" <=> "", "content" <=> ""]),
+        ogTitle(title),
+        metaPropertyContent("description", description),
+        ogDescription(description),
         link(@[
             href <=> pathImages & "/favicon.gif",
             sizes <=> "32x32",
