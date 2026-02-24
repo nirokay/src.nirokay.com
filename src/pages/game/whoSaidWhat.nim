@@ -63,7 +63,8 @@ const strings = (
 
 # CSS -------------------------------------------------------------------------
 
-var css: CssStyleSheet = newCssStyleSheet("game/who-said-what/who-said-what-styles.css")
+const customSheetName: string = "who-said-what-styles.css"
+var css: CssStyleSheet = newCssStyleSheet("game/who-said-what/" & customSheetName)
 
 const
     classQuestionBlock = ".thesis-question-div"{
@@ -132,18 +133,18 @@ proc getAuthorDiv(thesis: WhoSaidWhatThesis, id: int): HtmlElement =
         if author.allegiances.len() == 0:
             ""
         else:
-            ": " & $i(author.allegiances.join(", "))
+            ": " & $i(html author.allegiances.join(", "))
 
-    let source: HtmlElement = p(
+    let source: HtmlElement = p(html(
         if thesis.source.strip() == "":
             $strings.data.sourceMissing
         else:
-            $a(thesis.source, $strings.data.source).addattr("target", "_blank")
-    )
+            $a(thesis.source, $strings.data.source).add("target" <=> "_blank")
+    ))
 
     result = `div`(
         img(imgUrl, $strings.data.authorImgAlt).setClass(classAuthorImage),
-        p(thesis.author & allegiances),
+        p(html thesis.author & allegiances),
         source
     ).setId(idThesisAuthorPrefix & $id).setStyle("display" := "none")
 
@@ -165,13 +166,13 @@ proc thesisHtmlBlock(id: int, thesis: WhoSaidWhatThesis): HtmlElement =
         buttonWasNotSaidByAfd: string = if not afdQuote: buttonFunctionCorrect else: buttonFunctionIncorrect
 
     result = `div`(
-        q($quote).setId(idThesisQuotePrefix & $id).setClass(classBullshitQuote),
+        q(@[], $quote).setId(idThesisQuotePrefix & $id).setClass(classBullshitQuote),
         `div`(
             authorDiv,
             `div`(
-                p($strings.data.question),
-                button($strings.data.button.yes, buttonWasSaidByAfd).setStyle("background-color" := colourGreen).setId(idThesisButtonAfdPrefix & $id).setClass(classButton),
-                button($strings.data.button.no, buttonWasNotSaidByAfd).setStyle("background-color" := colourRed).setId(idThesisButtonOtherPrefix & $id).setClass(classButton)
+                p(html $strings.data.question),
+                button("button", onclick = buttonWasSaidByAfd, html $strings.data.button.yes).setStyle("background-color" := colourGreen).setId(idThesisButtonAfdPrefix & $id).setClass(classButton),
+                button("button", onclick = buttonWasNotSaidByAfd, html $strings.data.button.no).setStyle("background-color" := colourRed).setId(idThesisButtonOtherPrefix & $id).setClass(classButton)
             ).setId(idThesisButtonsDiv & $id)
         ).setClass(classFlexContainer).setStyle("align-items" := "center")
     ).setId(idThesisDivPrefix & $id).setClass(classQuestionBlock).setStyle("display" := "none")
@@ -184,38 +185,37 @@ for language in LANGUAGE:
         split($strings.meta.desc, "\n")[0],
         "who-said-what"
     )
-    block `overwrite funky css file name stuff lol`:
-        let cssOverride: CssStyleSheet = newCssStyleSheet(css.file.split("/")[^1])
-        html.setStylesheet(cssOverride)
+
     html.addToHead(
-        importScript("/javascript/game/who-said-what.js").addattr("defer")
+        importScript(true, "/javascript/game/who-said-what.js"),
+        link("stylesheet", customSheetName)
     )
 
     html.add(
         header(
-            h1($strings.meta.title),
-            p($strings.meta.desc),
+            h1(html $strings.meta.title),
+            p(html $strings.meta.desc),
             `div`(
                 p(
-                    <$> $strings.data.score.correctAbsolute,
-                    strong("0").setId(idScoreAbsoluteLeft),
-                    <$> "/",
-                    strong("0").setId(idScoreAbsoluteRight)
+                    html $strings.data.score.correctAbsolute,
+                    strong(html "0").setId(idScoreAbsoluteLeft),
+                    html "/",
+                    strong(html "0").setId(idScoreAbsoluteRight)
                 ),
                 p(
-                    <$> $strings.data.score.correctUnique,
-                    strong("0").setId(idScoreUniqueLeft),
-                    <$> "/",
-                    strong("0").setId(idScoreUniqueMiddle),
-                    <$> "(",
-                    <$> i("0").setId(idScoreUniqueRight),
-                    <$> ")"
+                    html $strings.data.score.correctUnique,
+                    strong(html "0").setId(idScoreUniqueLeft),
+                    html "/",
+                    strong(html "0").setId(idScoreUniqueMiddle),
+                    html "(",
+                    i(html "0").setId(idScoreUniqueRight),
+                    html ")"
                 )
             ).setClass(classFlexContainer),
             nav(
-                button($strings.data.button.start, "whoSaidWhatStart();").setId(idButtonStartQuestions).setStyle("display" := "block"),
-                button($strings.data.button.skip, "whoSaidWhatSkip();").setId(idButtonSkipQuestion).setStyle("display" := "none"),
-                button($strings.data.button.next, "whoSaidWhatNext();").setId(idButtonNextQuestion).setStyle("display" := "none")
+                button("button", onclick = "whoSaidWhatStart();", html $strings.data.button.start).setId(idButtonStartQuestions).setStyle("display" := "block"),
+                button("button", onclick = "whoSaidWhatSkip();", html $strings.data.button.skip).setId(idButtonSkipQuestion).setStyle("display" := "none"),
+                button("button", onclick = "whoSaidWhatNext();", html $strings.data.button.next).setId(idButtonNextQuestion).setStyle("display" := "none")
             ).setClass(classFlexContainer)
         )
     )

@@ -25,12 +25,7 @@ proc join*(elements: seq[HtmlElement], sep: HtmlElement): seq[HtmlElement] =
         result.add sep
 
 
-
-proc timeStamp(): string =
-    result = now().format("yyyy-MM-dd ---- hh---mm--ss")
-        .replace("----", "@")
-        .replace("---", ":")
-        .replace("--", ".")
+proc importScript*(shouldDefer: bool, path: string): HtmlElement = script(shouldDefer, "").add("src" <=> path)
 
 var
     menuBarPages*: OrderedTable[string, string]
@@ -45,9 +40,9 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
     result = newHtmlDocument(path)
     # Html header stuff:
     result.addToHead(
-        newHtmlComment("HTML and CSS is generated using https://github.com/nirokay/websitegenerator"),
-        newHtmlElement("meta", @[charset <=> "utf-8"]),
-        newHtmlElement("meta", @[
+        newHtmlComment("HTML and CSS is generated using https://github.com/nirokay/cattag"),
+        meta(charset = "utf-8"),
+        meta(@[
             "name" <=> "viewport",
             "content" <=> "width=device-width, initial-scale=1"
         ]),
@@ -63,7 +58,7 @@ proc newHtmlPage*(title, description, path: string, includeInMenuBar: bool = tru
         link(@[
             rel <=> "stylesheet",
             href <=> "/styles.css",
-            title <=> "Absolute path to global css"
+            "title" <=> "Absolute path to global css"
         ]),
         script(true).setSrc("/javascript/menu-bar.js")
     )
@@ -135,6 +130,10 @@ proc generatePage*(page: HtmlDocument) =
     ]
     html.writeFile()
 
+proc timeStamp(): string = now().format("yyyy-MM-dd ---- hh---mm--ss")
+    .replace("----", "@")
+    .replace("---", ":")
+    .replace("--", ".")
 proc generateCss*(stylesheet: CssStylesheet) =
     ## Alternative for `writeFile(css)`, adding some final touches before generating the stylesheet
     var css: CssStylesheet = newCssStylesheet(stylesheet.file)

@@ -10,8 +10,8 @@ var html: HtmlDocument = newHtmlPage(
 
 html.add(
     header(
-        h1("404: Not found"),
-        p("The page you requested does not exist :/")
+        h1(html "404: Not found"),
+        p(html "The page you requested does not exist :/")
     )
 )
 

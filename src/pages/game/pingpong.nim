@@ -20,7 +20,7 @@ var html: HtmlDocument = newHtmlUniversalPage(
 )
 
 html.addToHead(
-    importScript("../javascript/game/pingpong.js").addattr("defer"),
+    importScript(true, "../javascript/game/pingpong.js"),
     ogImage("../resources/images/games/pingpong/cat/pong.png")
 )
 
@@ -32,34 +32,34 @@ for path in walkDirRec("nirokay.com/resources/images/games/pingpong/"):
     paths.add path
 for path in paths:
     let href: string = path.replace("nirokay.com", "..")
-    html.addToHead("link"[
-        "rel" -= "preload",
-        "href" -= href,
-        "as" -= "image"
-    ])
+    html.addToHead(link(@[
+        "rel" <=> "preload",
+        "href" <=> href,
+        "as" <=> "image"
+    ]))
 
 html.add(
     header(
-        h1("Cat Ping-Pong"),
-        p("Bored of coin flipping? Me too: " & $i($b("CATS PLAYING PING-PONG!")))
+        h1(html "Cat Ping-Pong"),
+        p(html "Bored of coin flipping? Me too: ", i(b(html "CATS PLAYING PING-PONG!")))
     ),
     article(
         `div`(
-            button("Start game", "game();").setId("id-button-start-game")
+            button("button", onclick = "game();", html "Start game").setId("id-button-start-game")
         ).setClass(classFlexContainer),
         `div`(
             `div`(
-                h1("0").setId("id-cat-left-score").setTitle("Current wins").setStyle(
+                h1(html "0").setId("id-cat-left-score").setTitle("Current wins").setStyle(
                     "scale" := "3"
                 ),
-                h2("0").setId("id-cat-left-highscore").setTitle("All-time wins"),
+                h2(html "0").setId("id-cat-left-highscore").setTitle("All-time wins"),
             ),
-            h2(":"),
+            h2(html ":"),
             `div`(
-                h1("0").setId("id-cat-right-score").setTitle("Current wins").setStyle(
+                h1(html "0").setId("id-cat-right-score").setTitle("Current wins").setStyle(
                     "scale" := "3"
                 ),
-                h2("0").setId("id-cat-right-highscore").setTitle("All-time wins")
+                h2(html "0").setId("id-cat-right-highscore").setTitle("All-time wins")
             )
         ).setClass(classFlexContainer).setStyle(
             "margin" := "20px"

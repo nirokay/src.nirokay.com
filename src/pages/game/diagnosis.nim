@@ -46,11 +46,11 @@ const strings = (
     introduction: lang(
         @[
             "Our AI model is trained exclusively on legally-dubious acquired patient data from data brokers and health insurances. This allows us to provide you with a 99.999% accurate diagnosis!",
-            "9/10 doctors recommend our service" & $sup("[Citation needed]") & "!"
+            "9/10 doctors recommend our service" & $sup(html"[Citation needed]") & "!"
         ].join("\n"),
         @[
             "Unser KI Modell ist exklusiv auf legal-fragwürdig beschaffenen Patienteninformation von Data Brokern und Gesundheitsversicherungen trainiert. Dies erlaubt uns Ihnen eine 99.999% korrekte Diagnosis zu Stellen!",
-            "9 von 10 Ärzte empfehlen unser KI Modell" & $sup("[Quelle gebraucht]") & "!"
+            "9 von 10 Ärzte empfehlen unser KI Modell" & $sup(html"[Quelle gebraucht]") & "!"
         ].join("\n")
     ),
     question: (
@@ -103,17 +103,17 @@ var
     htmlEN: HtmlDocument
     htmlDE: HtmlDocument
 
-proc newQuestion(id, text: string, inputAttrs: seq[HtmlElementAttribute] = @[]): HtmlElement =
+proc newQuestion(id, text: string, inputAttrs: seq[Attribute] = @[]): HtmlElement =
     result = `div`(
         label(id, "").add(
             input("checkbox", id).add(inputAttrs),
-            rawText text
+            html text
         )
     )
 
 proc newButton(text: string, action: string): HtmlElement =
     result = `div`(
-        button(text, action)
+        button("button", action, html text)
     ).setStyle(
         "margin" := "20px auto",
         "text-align" := "center"
@@ -126,16 +126,18 @@ for language in Language:
         $strings.meta.desc,
         "ai-doctor-diagnosis"
     )
-    html.setStylesheet(websitegenerator.newCssStyleSheet(urlObnoxiousCss))
     html.addToHead(
-        importScript("/javascript/game/blazingly-fast-health-diagnosis.js").addattr("defer")
+        importScript(true, "/javascript/game/blazingly-fast-health-diagnosis.js"),
+        link("stylesheet", urlObnoxiousCss)
     )
 
     html.add( # Wtf is this monstrosity??
         `var`(
-            case language:
-            of enGB: "enGB"
-            of deDE: "deDE"
+            html(
+                case language:
+                of enGB: "enGB"
+                of deDE: "deDE"
+            )
         ).setId(idPageLanguage).setStyle(
             "display" := "none"
         )
@@ -159,8 +161,8 @@ for language in Language:
     html.add(
         # Static header:
         header(
-            h1($strings.meta.title),
-            p($strings.meta.desc)
+            h1(html $strings.meta.title),
+            p(html $strings.meta.desc)
         ),
 
         # Semi-dynamic content:
@@ -174,20 +176,20 @@ for language in Language:
             # Quiz screen:
             `div`(
                 fieldset(
-                    @[legend($strings.question.instructions)] & questions
+                    @[legend(html $strings.question.instructions)] & questions
                 ),
                 newButton($strings.button.submit, "submitQuiz();").setId(idButtonSubmit)
             ).setId(idSectionQuiz).setStyle("display" := "none"),
 
             # Computing screen:
             `div`(
-                h2($strings.loading).setId(idLoadingText).setClass(obnoxiousCssElement),
+                h2(html $strings.loading).setId(idLoadingText).setClass(obnoxiousCssElement),
             ).setId(idSectionComputing).setStyle("display" := "none"),
 
             # Results display screen:
             `div`(
                 pc($strings.diagnosis.youHaveStart),
-                h2("???").setId(idDiagnosisResultText),
+                h2(html "???").setId(idDiagnosisResultText),
                 pc($strings.diagnosis.youHaveEnd),
                 newButton($strings.button.retry, "restartQuiz();").setId(idButtonRetryQuiz).setId(idButtonRetryQuiz)
             ).setId(idSectionShowingResults).setStyle("display" := "none")

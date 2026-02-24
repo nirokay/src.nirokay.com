@@ -72,7 +72,7 @@ for language in Language:
         "findus"
     )
     html.addToHead(
-        script(true, "/javascript/game/findus.js"),
+        importScript(true, "/javascript/game/findus.js"),
         ogImage("/resources/images/games/findus/success.jpg")
     )
     html.add(
@@ -108,7 +108,7 @@ for language in Language:
                     questionType = typingShort,
                     id = idCreditCardStealer
                 ),
-                button(strings.response.submit).addattr("onclick" <=> "submitForm();")
+                button("button", html $strings.response.submit).add("onclick" <=> "submitForm();")
             )
         )
     )

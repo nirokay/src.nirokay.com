@@ -40,7 +40,7 @@ html.add(
 incl html
 
 import game/[
-    findus, pingpong, diagnosis, whoSaidWhat
+    findus, pingpong, diagnosis, whoSaidWhat, popcat
 ]
 export
-    findus, pingpong, diagnosis, whoSaidWhat
+    findus, pingpong, diagnosis, whoSaidWhat, popcat
