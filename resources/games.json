@@ -6,6 +6,12 @@
         "universal": true
     },
     {
+        "name": "Pop Cat",
+        "desc": "Feed Pop Cat with food falling from the sky.",
+        "title": "popcat",
+        "universal": true
+    },
+    {
         "name": "✨ AI Doctor Diagnosis ✨",
         "desc": "✨ Super-duper blazingly fast AI tool to diagnose ANY illness, better than your doctor!! 🚀",
         "title": "ai-doctor-diagnosis"
