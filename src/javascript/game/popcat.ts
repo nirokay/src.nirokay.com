@@ -3,9 +3,9 @@ const popcatCanvasHeight: number = 500;
 const popcatResources: string = "../resources/images/games/popcat/";
 const popcatResourcesSounds: string = "../resources/sounds/games/popcat/";
 
-const popcatFallingInitSpeedCONST: number = 2;
+const popcatFallingInitSpeedCONST: number = 5;
 let popcatFallingInitSpeed: number = popcatFallingInitSpeedCONST; // this will increase over the span of the game
-const popcatFallingMultSpeed: number = 1.5;
+const popcatFallingMultSpeed: number = 1.2;
 
 const popcatEatingLine: number = popcatCanvasHeight - 60;
 
@@ -16,6 +16,7 @@ let highscore: number = 0;
 
 let popcatGameRunning: boolean = false;
 let popcatGameRestarted: boolean = false;
+let popcatGameWasAlreadyStarted: boolean = false;
 
 // Images:
 function newPopcatImg(path: string): HTMLImageElement {
@@ -97,6 +98,7 @@ function getRandomFallingNotFood(): FallingItem {
 // Score and Lives:
 function updateScore() {
     score++;
+    if (score > highscore) highscore = score;
     if (score % 5 == 0) {
         popcatFallingInitSpeed *= 1.1;
         popcatFallingFood.push(getRandomFallingFood());
@@ -118,7 +120,6 @@ function popcatGameHasRestarted() {
 
     // Reset lives and score:
     lives = livesCONST;
-    if (score > highscore) highscore = score;
     score = 0;
 
     // Init objects:
@@ -244,20 +245,15 @@ function popcatGame() {
 
         // Quit loop, if game is not running:
         if (!popcatGameRunning) return;
+        popcatGameWasAlreadyStarted = true;
 
         // Let items fall:
         // Respawn items and check if eaten:
         for (let i = 0; i < popcatFallingFood.length; i++) {
             updateItem(i, true);
-            popcatFallingFood[i].height += popcatFallingFood[i].speed;
-            if (popcatFallingFood[i].height > popcatCanvasHeight + 100)
-                popcatFallingFood[i] = getRandomFallingFood();
         }
         for (let i = 0; i < popcatFallingNotFood.length; i++) {
             updateItem(i, false);
-            popcatFallingNotFood[i].height += popcatFallingNotFood[i].speed;
-            if (popcatFallingNotFood[i].height > popcatCanvasHeight + 100)
-                popcatFallingNotFood[i] = getRandomFallingNotFood();
         }
 
         // Section only if mouth is open (in eating mode):
@@ -286,7 +282,50 @@ function popcatGame() {
             context.drawImage(item.image, item.sideways, item.height);
         });
 
-        // Draw eating line:
+        // Draw text:
+        let fontSpacing: number = 2;
+        let upperFontLine: number = 40;
+        context.font = "20px sans-serif";
+        context.fillStyle = "#e8e6e3";
+        // * Highscore:
+        context.textBaseline = "bottom";
+        context.textAlign = "end";
+        context.fillText(
+            highscore.toString() + " 🏆",
+            popcatCanvasWidth - fontSpacing,
+            upperFontLine - fontSpacing,
+        );
+        // * Score:
+        context.textBaseline = "top";
+        context.fillText(
+            score.toString() + " 🐟",
+            popcatCanvasWidth - fontSpacing,
+            upperFontLine + fontSpacing,
+        );
+        // * Lives:
+        context.textAlign = "start";
+        context.textBaseline = "bottom";
+        context.fillText(
+            "❤️ " + lives + " / " + livesCONST,
+            fontSpacing,
+            upperFontLine - fontSpacing,
+        );
+
+        if (!popcatGameRunning) {
+            let text: string = popcatGameWasAlreadyStarted
+                ? "Game over"
+                : "Press the button above to start";
+            context.font = "25px sans-serif";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillText(
+                text,
+                popcatCanvasWidth / 2,
+                popcatCanvasHeight / 2,
+            );
+        }
+
+        // Draw eating line (debug):
         context.beginPath();
         context.moveTo(0, popcatEatingLine);
         context.lineTo(popcatCanvasWidth, popcatEatingLine);
