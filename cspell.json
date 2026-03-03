@@ -3,6 +3,10 @@
     "nomp",
     "notfood",
     "Mult",
-    "highscore"
+    "highscore",
+    "Hitbox"
+  ],
+  "userWords": [
+    "onclick"
   ]
 }

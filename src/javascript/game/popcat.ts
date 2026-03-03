@@ -1,13 +1,19 @@
 const popcatCanvasWidth: number = 400;
-const popcatCanvasHeight: number = 500;
+const popcatCanvasHeight: number = 700;
+const idGameVersion: string = "id-game-version";
+const popcatGameVersion: string = "0.9.0";
+
 const popcatResources: string = "../resources/images/games/popcat/";
 const popcatResourcesSounds: string = "../resources/sounds/games/popcat/";
 
-const popcatFallingInitSpeedCONST: number = 5;
+const popcatFallingInitSpeedCONST: number = 2;
 let popcatFallingInitSpeed: number = popcatFallingInitSpeedCONST; // this will increase over the span of the game
-const popcatFallingMultSpeed: number = 1.2;
+const popcatFallingMultSpeed: number = 0.5;
+const popcatFallingSpeedIncreaseInterval: number = 15;
+const popcatFallingSpeedIncrease: number = 1.05;
 
 const popcatEatingLine: number = popcatCanvasHeight - 60;
+const popcatNotFoodHitboxGrace: number = 10;
 
 const livesCONST: number = 3;
 let lives: number = livesCONST;
@@ -47,6 +53,15 @@ function newPopCatSfx(path: string): HTMLAudioElement {
     return new Audio(popcatResourcesSounds + path);
 }
 let popcatSfxPop: HTMLAudioElement = newPopCatSfx("pop.ogg");
+let popcatSfxDeath: HTMLAudioElement = newPopCatSfx("death.ogg");
+let popcatSfxDistress: HTMLAudioElement = newPopCatSfx("distress.ogg");
+let popcatSfxEat: HTMLAudioElement = newPopCatSfx("eat.ogg");
+
+function playSound(sound: HTMLAudioElement) {
+    // Clone audio and play clone, so it can be played more than once at a time
+    let audio: HTMLAudioElement = new Audio(sound.src);
+    audio.play();
+}
 
 // Items:
 class FallingItem {
@@ -60,14 +75,14 @@ let popcatFallingFood: FallingItem[] = [];
 let popcatFallingNotFood: FallingItem[] = [];
 
 function getRandomHeightOffset(): number {
-    return Math.random() * popcatCanvasHeight + 200;
+    return Math.random() * popcatCanvasHeight * 2 + 200;
 }
 function getRandomSpeedOffset(): number {
-    return Math.random() * popcatFallingMultSpeed;
+    return Math.random() * popcatFallingMultSpeed + 1;
 }
 
 function getRandomIndexValue<T>(list: T[]): T {
-    let index: number = Math.floor(Math.random() * (list.length - 1));
+    let index: number = Math.ceil(Math.random() * (list.length - 1)) - 1;
     return list[index];
 }
 
@@ -98,15 +113,18 @@ function getRandomFallingNotFood(): FallingItem {
 // Score and Lives:
 function updateScore() {
     score++;
+    playSound(popcatSfxEat);
     if (score > highscore) highscore = score;
-    if (score % 5 == 0) {
-        popcatFallingInitSpeed *= 1.1;
+    if (score % popcatFallingSpeedIncreaseInterval == 0) {
+        popcatFallingInitSpeed *= popcatFallingSpeedIncrease;
         popcatFallingFood.push(getRandomFallingFood());
         popcatFallingNotFood.push(getRandomFallingNotFood());
     }
 }
 function updateLives() {
     lives--;
+    if (lives > 0) playSound(popcatSfxDistress);
+    else playSound(popcatSfxDeath);
 }
 
 // Init:
@@ -158,29 +176,23 @@ function popcatGame() {
     // Events:
     // * Open mouth:
     canvas.addEventListener("mousedown", (e) => {
-        catMouthOpenLastFrame = catMouthOpen;
         catMouthOpen = true;
     });
     canvas.addEventListener("touchstart", (e) => {
-        catMouthOpenLastFrame = catMouthOpen;
         catMouthOpen = true;
     });
 
     // * Close mouth:
     canvas.addEventListener("mouseup", (e) => {
-        catMouthOpenLastFrame = catMouthOpen;
         catMouthOpen = false;
     });
     canvas.addEventListener("touchend", (e) => {
-        catMouthOpenLastFrame = catMouthOpen;
         catMouthOpen = false;
     });
     canvas.addEventListener("mouseout", (e) => {
-        catMouthOpenLastFrame = catMouthOpen;
         catMouthOpen = false;
     });
     canvas.addEventListener("touchcancel", (e) => {
-        catMouthOpenLastFrame = catMouthOpen;
         catMouthOpen = false;
     });
 
@@ -189,9 +201,10 @@ function popcatGame() {
             return isFood ? getRandomFallingFood() : getRandomFallingNotFood();
         }
         function isInEatingRange(): boolean {
+            let grace: number = isFood ? 0 : popcatNotFoodHitboxGrace;
             return (
-                item.height <= popcatEatingLine &&
-                item.height + item.image.height >= popcatEatingLine
+                item.height <= popcatEatingLine - grace &&
+                item.height + item.image.height >= popcatEatingLine + grace
             );
         }
 
@@ -237,8 +250,9 @@ function popcatGame() {
 
         // Play pop sound (here because it should be able to be played when not in game):
         if (catMouthOpen && !catMouthOpenLastFrame) {
-            popcatSfxPop.play();
+            playSound(popcatSfxPop);
         }
+        catMouthOpenLastFrame = catMouthOpen;
 
         // Quit game if no lives:
         if (lives <= 0) popcatGameRunning = false;
@@ -257,7 +271,6 @@ function popcatGame() {
         }
 
         // Section only if mouth is open (in eating mode):
-        if (!catMouthOpen) return;
     }
 
     function render() {
@@ -340,6 +353,13 @@ function popcatGame() {
     main();
 }
 
+function setGameVersion() {
+    let element: HTMLElement | null = document.getElementById(idGameVersion);
+    if (element == null) return;
+    element.innerHTML = "v" + popcatGameVersion;
+}
+
 window.onload = () => {
     popcatGame();
+    setGameVersion();
 };

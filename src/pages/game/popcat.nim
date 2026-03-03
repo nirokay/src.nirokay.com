@@ -4,7 +4,8 @@ import generator
 
 const
     canvasWidth: int = 400
-    canvasHeight: int = 500
+    canvasHeight: int = 700
+    idGameVersion: string = "id-game-version"
 
 var html: HtmlDocument = newHtmlUniversalPage(
     "Pop Cat",
@@ -18,10 +19,19 @@ html.addToHead(
 )
 
 html.add(
-    article(
+    header(
+        h1(html "Popcat"),
+        p(
+            html "Catch falling food and avoid non-food items!",
+            br(),
+            small(html "Game version"),
+            small(html "v?.?.?").setId(idGameVersion)
+        ),
         `div`(
             button("button", onclick = "popcatGameHasRestarted();", html "(Re-)Start game").setId("id-button-start-game")
         ).setClass(classFlexContainer),
+    ),
+    article(
         `div`(
             newHtmlElement("canvas").add(
                 "width" <=> $canvasWidth,
