@@ -15,7 +15,7 @@ var html: HtmlDocument = newHtmlUniversalPage(
 
 html.addToHead(
     importScript(true, "../javascript/game/popcat.js"),
-    ogImage("../resources/images/games/popcat/cat/open.png")
+    ogImage("../resources/images/games/popcat/cat/nomp.png")
 )
 
 html.add(
