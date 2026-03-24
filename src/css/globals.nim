@@ -5,6 +5,23 @@ export classes, colours
 var globalCssTemplate*: CssStylesheet = GENERATOR.newCssStylesheet("---global-css---")
 
 globalCssTemplate.add(
+    "#id-init-leaderboard #id-leaderboard-table"{
+        "margin" := "auto"
+    },
+    "#id-leaderboard-table"{
+        "margin" := "auto"
+    },
+    "#id-leaderboard-username-div"{
+        "margin" := "auto",
+        "text-align" := "center"
+    },
+    "#id-leaderboard-status-div"{
+        "margin" := "auto",
+        "text-align" := "center"
+    }
+)
+
+globalCssTemplate.add(
     # --- Global: -------------------------------------------------------------
     "html"{
         "color" := colourText,

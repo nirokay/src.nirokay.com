@@ -15,6 +15,7 @@ var html: HtmlDocument = newHtmlUniversalPage(
 
 html.addToHead(
     importScript(true, "../javascript/game/popcat.js"),
+    importScript(true, "../javascript/game/leaderboards.js"),
     ogImage("../resources/images/games/popcat/cat/nomp.png")
 )
 
@@ -27,6 +28,7 @@ html.add(
             small(html "Game version"),
             small(html "v?.?.?").setId(idGameVersion)
         ),
+        `div`().setId("id-init-leaderboard"),
         `div`(
             button("button", onclick = "popcatGameHasRestarted();", html "(Re-)Start game").setId("id-button-start-game")
         ).setClass(classFlexContainer),
