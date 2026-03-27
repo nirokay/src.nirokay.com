@@ -40,20 +40,30 @@ function getLeaderboardTableContentFrom(json: string): string {
         // Generate HTML:
         data.data.forEach((entry, index) => {
             let lines: string[] = [];
-            function td(text: string) {
-                lines.push("<td>" + text + "</td>");
+            function td(text: string, attrs: string = "") {
+                let attributes: string = attrs;
+                if (attributes != "") attributes = " " + attributes;
+                lines.push("<td" + attributes + ">" + text + "</td>");
             }
             lines.push("<tr>");
-            let name: string = "";
-            if (name.length <= 16) {
-                name = entry.name;
-            } else {
-                name = entry.name.slice(0, 16) + "...";
+            let name: string =
+                entry.name == "<i>anonymous</i>"
+                    ? decodeURI(entry.name)
+                    : decodeURI(entry.name)
+                          .replace("<", "&lt;")
+                          .replace(">", "&gt;");
+            if (entry.name.length >= 32) {
+                name = name.slice(0, 32) + "...";
             }
 
-            td("<b>" + (index + 1) + ".</b> " + name);
+            let date = new Date(entry.timestamp);
+
+            td(
+                "<b>" + (index + 1) + ".</b> " + name,
+                "title='" + encodeURI(entry.name) + "'",
+            );
             td(entry.score == 0 ? "" : entry.score.toString());
-            td(entry.version);
+            td(entry.version, "title='" + date.toLocaleString() + "'");
             lines.push("</tr>");
             result.push(lines.join("")); // reduces elements in result
         });
