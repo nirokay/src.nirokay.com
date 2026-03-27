@@ -189,6 +189,7 @@ async function leaderboardsPostRequest(score: number) {
 
     let request: RequestInfo = new Request(getLeaderboardPostUrl(), {
         method: "POST",
+        mode: "no-cors",
         headers: headers,
         body: JSON.stringify(data),
     });
