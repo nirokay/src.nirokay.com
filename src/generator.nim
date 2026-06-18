@@ -11,10 +11,6 @@ proc metaPropertyContent*(property: string, content: string): HtmlElement = newH
     "property" <=> property,
     "content" <=> content
 ])
-proc og*(property: string, content: string): HtmlElement = metaPropertyContent("og:" & property, content)
-proc ogTitle*(content: string): HtmlElement = og("title", content)
-proc ogDescription*(content: string): HtmlElement = og("description", content)
-proc ogImage*(content: string): HtmlElement = og("image", content)
 
 proc join*(elements: seq[HtmlElement], sep: HtmlElement): seq[HtmlElement] =
     ## Joins `HtmlElement`s by an `HtmlElement` as separator

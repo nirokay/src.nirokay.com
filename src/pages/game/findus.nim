@@ -108,7 +108,7 @@ for language in Language:
                     questionType = typingShort,
                     id = idCreditCardStealer
                 ),
-                button("button", html $strings.response.submit).add("onclick" <=> "submitForm();")
+                button("button", "submitForm();", html $strings.response.submit)
             )
         )
     )

@@ -11,4 +11,4 @@ bin           = @["webpagebuilder"]
 # Dependencies
 
 requires "nim >= 2.0.0"
-requires "cattag >= 0.1.9"
+requires "cattag >= 0.1.10"

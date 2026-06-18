@@ -1,4 +1,3 @@
-import std/[os, strutils]
 import ../../css/styles
 import generator
 
