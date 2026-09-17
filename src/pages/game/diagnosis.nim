@@ -108,7 +108,7 @@ proc newQuestion(id, text: string, inputAttrs: seq[Attribute] = @[]): HtmlElemen
         label().add(
             input("checkbox", id).add(inputAttrs),
             html text
-        ).add("id" <=> id)
+        ).add("for" <=> id)
     )
 
 proc newButton(text: string, action: string): HtmlElement =

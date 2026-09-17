@@ -5,6 +5,11 @@ import resources, snippets, css/[colours, classes]
 import css/globals except newCssStyleSheet
 export snippets
 
+const doNotGenerateTopBarEntry: seq[string] = @[
+    "index",
+    "404",
+    "403"
+]
 
 # Implement these in cattag eventually:
 proc metaPropertyContent*(property: string, content: string): HtmlElement = newHtmlElement("meta", @[
@@ -104,7 +109,7 @@ proc getTopBar(html: HtmlDocument): HtmlElement =
     let pathComponents: seq[string] = html.file.split("/")
     if pathComponents.len() != 0:
         var subUrl: string = pathComponents[0].split(".")[0]
-        if subUrl notin ["index", "404"]:
+        if subUrl notin doNotGenerateTopBarEntry:
             if subUrl == "game": subUrl = "games"
             items.add newElem("/" & subUrl & ".html", subUrl.capitalizeAscii())
 

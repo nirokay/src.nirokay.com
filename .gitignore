@@ -10,3 +10,6 @@ env.sh
 
 # Project:
 .vscode/
+nimble.develop
+nimble.paths
+nimbledeps

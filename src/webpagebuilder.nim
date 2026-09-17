@@ -7,14 +7,14 @@ import pages/[
     links,
     projects,
     games,
-    fourOhFour
+    errorPages
 ]
 export
     index,
     links,
     projects,
     games,
-    fourOhFour
+    errorPages
 
 import css/[
     styles
